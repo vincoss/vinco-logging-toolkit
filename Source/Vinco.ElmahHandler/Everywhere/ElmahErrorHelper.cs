@@ -5,7 +5,7 @@ using System.Web;
 using System.Collections.Specialized;
 
 
-namespace Vinco.ElmahHandler
+namespace Elmah.Everywhere
 {
     public class ElmahErrorHelper
     {

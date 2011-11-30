@@ -6,7 +6,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 
 
-namespace Vinco.ElmahHandler.ServiceModel
+namespace Elmah.Everywhere.ServiceModel
 {
     public class ServiceHttpErrorBehaviorAttribute : Attribute, IServiceBehavior
     {

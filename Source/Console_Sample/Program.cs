@@ -15,10 +15,12 @@ namespace Console_Sample
     {
         static void Main(string[] args)
         {
+            var uri = new Uri("http://localhost:11079/_harvest", UriKind.Absolute);
+
             // Configure
             HttpHandler handler = new HttpHandler
             {
-                RequestUri = new Uri("http://localhost:50003/error/put", UriKind.Absolute)
+                RequestUri = uri
             };
             ExceptionHandler.SetWritter(new HttpExceptionWritter(handler));
             ExceptionHandler.SetParameters(new ExceptionParameters

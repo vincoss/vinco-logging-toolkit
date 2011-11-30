@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\Silverlight_Sample.xap" />
+    <Content Include="MvcDiagnostics.aspx" />
     <Content Include="Silverlight_SampleTestPage.aspx" />
     <Content Include="Silverlight_SampleTestPage.html" />
     <Content Include="Silverlight.js" />
@@ -108,12 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Vinco.ElmahHandler\Vinco.ElmahHandler.csproj">
-      <Project>{319DD6E1-E5EB-4896-9055-BF486FC9C0EF}</Project>
-      <Name>Vinco.ElmahHandler</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

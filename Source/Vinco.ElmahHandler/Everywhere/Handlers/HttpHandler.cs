@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 
 
-namespace Vinco.ElmahHandler.Handlers
+namespace Elmah.Everywhere.Handlers
 {
     public class HttpHandler
     {

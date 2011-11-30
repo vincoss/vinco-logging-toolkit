@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-namespace Vinco.ElmahHandler
+
+namespace Elmah.Everywhere
 {
     // TODO: Silverlight may have problem with reflection
 

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Web;
-using Vinco.ElmahHandler.Handlers;
-using Vinco.ElmahHandler.Diagnostics;
 using System.Configuration;
+using Elmah.Everywhere.Handlers;
+using Elmah.Everywhere.Diagnostics;
 
 
-namespace Vinco.ElmahHandler.Web
+namespace Elmah.Everywhere.Web
 {
     public class ErrorHandlerConfiguratorModule : IHttpModule
     {

@@ -4,11 +4,10 @@ using System.Text;
 using System.Globalization;
 using System.Diagnostics;
 using System.Collections.Generic;
+using Elmah.Everywhere.Handlers;
 
-using Vinco.ElmahHandler.Handlers;
 
-
-namespace Vinco.ElmahHandler.Diagnostics
+namespace Elmah.Everywhere.Diagnostics
 {
     public sealed class ExceptionHandler
     {

@@ -3,10 +3,8 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Channels;
 using System.Collections.Generic;
 
-using Vinco.ElmahHandler.Handlers;
 
-
-namespace Vinco.ElmahHandler.ServiceModel
+namespace Elmah.Everywhere.ServiceModel
 {
     public class HttpErrorHandler : IErrorHandler
     {
@@ -23,7 +21,7 @@ namespace Vinco.ElmahHandler.ServiceModel
             {
                 return;
             }
-            Vinco.ElmahHandler.Diagnostics.ExceptionHandler.Report(error, null);
+            Diagnostics.ExceptionHandler.Report(error, null);
         }
 
         #endregion

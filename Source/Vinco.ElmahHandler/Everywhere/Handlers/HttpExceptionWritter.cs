@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Collections;
 
 
-namespace Vinco.ElmahHandler.Handlers
+namespace Elmah.Everywhere.Handlers
 {
     public class HttpExceptionWritter : ExceptionWritter
     {

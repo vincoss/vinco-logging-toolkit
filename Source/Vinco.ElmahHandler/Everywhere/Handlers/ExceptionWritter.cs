@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace Vinco.ElmahHandler.Handlers
+namespace Elmah.Everywhere.Handlers
 {
     public abstract class ExceptionWritter
     {

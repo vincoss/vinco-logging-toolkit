@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace Vinco.ElmahHandler
+namespace Elmah.Everywhere
 {
     public class ExceptionParameters
     {
