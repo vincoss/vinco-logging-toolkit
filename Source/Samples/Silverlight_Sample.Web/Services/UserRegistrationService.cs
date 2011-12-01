@@ -8,8 +8,7 @@
     using System.Web.Profile;
     using System.Web.Security;
     using Silverlight_Sample.Web.Resources;
-
-    using Vinco.ElmahHandler.ServiceModel;
+    using Elmah.Everywhere.ServiceModel;
 
 
     // TODO: Switch to a secure endpoint when deploying the application.

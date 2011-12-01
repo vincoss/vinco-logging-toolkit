@@ -1,33 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Dynamic;
-
-using System.Collections.Specialized;
-using System.Text.RegularExpressions;
-
-using Vinco.ElmahHandler;
+using Elmah.Everywhere.Web;
 
 
-namespace WebSite.Controllers
+namespace Elmah.Everywhere.Controllers
 {
     // TODO: 
     // Validate mandatory properties
     // Encrypt and encode data
 
-    public class ErrorHarvesterController : Controller
+    public class HomeController : Controller
     {
         private readonly ElmahErrorHelper _elmahErrorHelper;
 
-        public ErrorHarvesterController() : this(new ElmahErrorHelper())
+        public HomeController() : this(new ElmahErrorHelper())
         { 
         }
 
-        public ErrorHarvesterController(ElmahErrorHelper elmahErrorHelper)
+        public HomeController(ElmahErrorHelper elmahErrorHelper)
         {
             _elmahErrorHelper = elmahErrorHelper;
+        }
+
+        [HttpGet]
+        //[Authorize]
+        public ActionResult Index(string type)
+        {
+            return new ElmahResult(type);
         }
 
         [HttpPost]
@@ -54,10 +54,10 @@ namespace WebSite.Controllers
         [NonAction]
         private bool TokenValid(string token)
         {
-            if(string.IsNullOrWhiteSpace(token))
-            {
-                return false;
-            }
+            //if(string.IsNullOrWhiteSpace(token))
+            //{
+            //    return false;
+            //}
 
             // TODO: Validate token here
             // Possible host

@@ -4,7 +4,7 @@ using Elmah;
 using System.Web;
 
 
-namespace Elmah.Everywhere
+namespace Elmah.Everywhere.Web
 {
     public class ElmahResult : ActionResult
     {
@@ -25,7 +25,7 @@ namespace Elmah.Everywhere
                 string pathInfo = string.Format("/{0}", _resouceType);
                 context.HttpContext.RewritePath(resourcePath, pathInfo, context.HttpContext.Request.QueryString.ToString());
             }
-
+            
             var application = (HttpApplication)context.HttpContext.GetService(typeof(HttpApplication));
             var httpContext = application.Context;
 

@@ -4,10 +4,9 @@
     using System.Runtime.Serialization;
     using System.ServiceModel.DomainServices.Client.ApplicationServices;
     using System.Windows;
-    using System.Windows.Controls;
-    using Vinco.ElmahHandler.Handlers;
-    using Vinco.ElmahHandler.Diagnostics;
-    using Vinco.ElmahHandler;
+    using Elmah.Everywhere.Handlers;
+    using Elmah.Everywhere.Diagnostics;
+    using Elmah.Everywhere;
 
     /// <summary>
     /// Main <see cref="Application"/> class.
@@ -35,7 +34,7 @@
         {
             HttpHandler handler = new HttpHandler
             {
-                RequestUri = new Uri("http://localhost:50003/error/put", UriKind.Absolute)
+                RequestUri = new Uri("http://localhost:11079/home/put", UriKind.Absolute)
             };
             ExceptionHandler.SetWritter(new HttpExceptionWritter(handler));
             ExceptionHandler.SetParameters(new ExceptionParameters

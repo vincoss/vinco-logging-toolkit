@@ -48,7 +48,7 @@
         {
             e.Handled = true;
 
-            Vinco.ElmahHandler.Diagnostics.ExceptionHandler.Report(e.Exception, null);
+            Elmah.Everywhere.Diagnostics.ExceptionHandler.Report(e.Exception, null);
 
             ErrorWindow.CreateNew(e.Exception);
         }

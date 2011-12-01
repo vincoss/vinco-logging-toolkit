@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elmah.Everywhere.Handlers;
+using Elmah.Everywhere.Diagnostics;
+using Elmah.Everywhere;
 
-using Vinco.ElmahHandler.Handlers;
-using Vinco.ElmahHandler.Diagnostics;
-using Vinco.ElmahHandler;
 
 
 
@@ -15,7 +15,7 @@ namespace Console_Sample
     {
         static void Main(string[] args)
         {
-            var uri = new Uri("http://localhost:11079/_harvest", UriKind.Absolute);
+            var uri = new Uri("http://localhost:11079/home/put", UriKind.Absolute);
 
             // Configure
             HttpHandler handler = new HttpHandler

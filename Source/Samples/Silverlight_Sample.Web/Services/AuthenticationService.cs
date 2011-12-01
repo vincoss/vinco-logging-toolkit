@@ -5,8 +5,7 @@
     using System.ServiceModel.DomainServices.Server;
     using System.ServiceModel.DomainServices.Server.ApplicationServices;
     using System.Threading;
-
-    using Vinco.ElmahHandler.ServiceModel;
+    using Elmah.Everywhere.ServiceModel;
 
 
     // TODO: Switch to a secure endpoint when deploying the application.

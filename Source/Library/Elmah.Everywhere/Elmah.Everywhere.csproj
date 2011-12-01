@@ -12,6 +12,7 @@
     <AssemblyName>Elmah.Everywhere</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -66,10 +66,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Everywhere\Controllers\ElmahController.cs" />
+    <Compile Include="Everywhere\Controllers\HomeController.cs" />
     <Compile Include="Everywhere\Diagnostics\ExceptionHandler.cs" />
     <Compile Include="Everywhere\ElmahErrorHelper.cs" />
-    <Compile Include="Everywhere\ElmahResult.cs" />
+    <Compile Include="Everywhere\Web\ElmahResult.cs" />
     <Compile Include="Everywhere\ServiceModel\HttpErrorHandler.cs" />
     <Compile Include="Everywhere\ExceptionParameters.cs" />
     <Compile Include="Everywhere\FormHelper.cs" />
