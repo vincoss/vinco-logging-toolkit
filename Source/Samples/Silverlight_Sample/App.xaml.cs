@@ -34,7 +34,7 @@
         {
             HttpHandler handler = new HttpHandler
             {
-                RequestUri = new Uri("http://localhost:11079/home/put", UriKind.Absolute)
+                RequestUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
             };
             ExceptionHandler.SetWritter(new HttpExceptionWritter(handler));
             ExceptionHandler.SetParameters(new ExceptionParameters

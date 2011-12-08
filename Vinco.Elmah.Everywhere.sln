@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight_Sample.Web", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_Sample", "Source\Samples\Wpf_Sample\Wpf_Sample.csproj", "{436CD003-3447-42F1-AA10-66E16CE1FD15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.Everywhere.Test", "Source\Test\Elmah.Everywhere.Test\Elmah.Everywhere.Test.csproj", "{BBDDB842-F323-4C51-9A6D-6589D3C03F61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah", "C:\Users\Fero\Downloads\ELMAH-1.2-src\src\Solutions\2010\Elmah.csproj", "{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +105,26 @@ Global
 		{436CD003-3447-42F1-AA10-66E16CE1FD15}.Release|Mixed Platforms.Build.0 = Release|x86
 		{436CD003-3447-42F1-AA10-66E16CE1FD15}.Release|x86.ActiveCfg = Release|x86
 		{436CD003-3447-42F1-AA10-66E16CE1FD15}.Release|x86.Build.0 = Release|x86
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Release|x86.ActiveCfg = Release|Any CPU
+		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,5 +136,6 @@ Global
 		{436CD003-3447-42F1-AA10-66E16CE1FD15} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
 		{319DD6E1-E5EB-4896-9055-BF486FC9C0EF} = {B9C2B82C-F879-42CE-9F56-CE42E48EAC9D}
 		{128D46AE-97A3-4A95-8ACA-B4C9BB473FAC} = {B9C2B82C-F879-42CE-9F56-CE42E48EAC9D}
+		{BBDDB842-F323-4C51-9A6D-6589D3C03F61} = {73C52C63-BDF4-4F31-A2F7-7DB71444CD66}
 	EndGlobalSection
 EndGlobal

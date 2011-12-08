@@ -1,47 +1,23 @@
 ﻿using System;
-using Elmah;
 using System.Diagnostics;
 using System.Web;
-using System.Collections.Specialized;
 
 
 namespace Elmah.Everywhere
 {
     public class ElmahErrorHelper
     {
-        public event ErrorLoggedEventHandler Logged;
-        public event ExceptionFilterEventHandler Filtering;
-
-        protected virtual ErrorLog GetErrorLog(HttpContext context)
+        public void LogException(ErrorInfo errorInfo)
         {
-            return ErrorLog.GetDefault(context);
+            if (errorInfo == null)
+            {
+                throw new ArgumentNullException("errorInfo");
+            }
+            Error error = ToError(errorInfo);
+            LogInternal(error);
         }
 
-        public virtual void LogException(dynamic errorProperties, HttpContext context)
-        {
-            if (errorProperties == null)
-            {
-                throw new ArgumentNullException("errorProperties");
-            }
-            ErrorLogEntry entry = null;
-            try
-            {
-                Error error = ToError(errorProperties);
-                ErrorLog errorLog = this.GetErrorLog(context);
-                string str = errorLog.Log(error);
-                entry = new ErrorLogEntry(errorLog, str, error);
-            }
-            catch (Exception exception2)
-            {
-                Trace.WriteLine(exception2);
-            }
-            if (entry != null)
-            {
-                this.OnLogged(new ErrorLoggedEventArgs(entry));
-            }
-        }
-
-        public virtual void LogException(Exception exception, HttpContext context)
+        public void LogException(Exception exception, HttpContext context)
         {
             if (exception == null)
             {
@@ -51,18 +27,26 @@ namespace Elmah.Everywhere
             this.OnFiltering(args);
             if (!args.Dismissed)
             {
-                ErrorLogEntry entry = null;
-                try
-                {
-                    Error error = new Error(exception, context);
-                    ErrorLog errorLog = this.GetErrorLog(context);
-                    string str = errorLog.Log(error);
-                    entry = new ErrorLogEntry(errorLog, str, error);
-                }
-                catch (Exception exception2)
-                {
-                    Trace.WriteLine(exception2);
-                }
+                Error error = new Error(exception, context);
+                LogInternal(error);
+            }
+        }
+
+        protected virtual void LogInternal(Error error)
+        {
+            ErrorLogEntry entry = null;
+            try
+            {
+                ErrorLog errorLog = ErrorLog.GetDefault(HttpContext.Current);
+                string errorId = errorLog.Log(error);
+                entry = new ErrorLogEntry(errorLog, errorId, error);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
                 if (entry != null)
                 {
                     this.OnLogged(new ErrorLoggedEventArgs(entry));
@@ -70,7 +54,7 @@ namespace Elmah.Everywhere
             }
         }
 
-        protected virtual void OnFiltering(ExceptionFilterEventArgs args)
+        protected void OnFiltering(ExceptionFilterEventArgs args)
         {
             ExceptionFilterEventHandler filtering = this.Filtering;
             if (filtering != null)
@@ -79,7 +63,7 @@ namespace Elmah.Everywhere
             }
         }
 
-        protected virtual void OnLogged(ErrorLoggedEventArgs args)
+        protected void OnLogged(ErrorLoggedEventArgs args)
         {
             ErrorLoggedEventHandler logged = this.Logged;
             if (logged != null)
@@ -88,17 +72,22 @@ namespace Elmah.Everywhere
             }
         }
 
-        private Error ToError(dynamic properties)
+        private static Error ToError(ErrorInfo properties)
         {
-            Error error = new Error();
-            error.ApplicationName = properties.ApplicationName;
-            error.HostName = properties.HostName;
-            error.Type = properties.Type;
-            error.Source = properties.Source;
-            error.Message = properties.Message;
-            error.Detail = properties.Detail;
-            error.Time = properties.Time;
-            return error;
+            return new Error
+                            {
+                                ApplicationName = properties.ApplicationName,
+                                HostName = properties.HostName,
+                                Type = properties.Type,
+                                Source = properties.Source,
+                                Message = properties.Message,
+                                Detail = properties.Error,
+                                Time = properties.Date
+                            };
         }
+
+        public event ErrorLoggedEventHandler Logged;
+        public event ExceptionFilterEventHandler Filtering;
+
     }
 }

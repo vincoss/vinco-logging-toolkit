@@ -15,7 +15,7 @@ namespace Console_Sample
     {
         static void Main(string[] args)
         {
-            var uri = new Uri("http://localhost:11079/home/put", UriKind.Absolute);
+            var uri = new Uri("http://localhost:11079/error/log", UriKind.Absolute);
 
             // Configure
             HttpHandler handler = new HttpHandler
@@ -25,7 +25,7 @@ namespace Console_Sample
             ExceptionHandler.SetWritter(new HttpExceptionWritter(handler));
             ExceptionHandler.SetParameters(new ExceptionParameters
             {
-                Token = null,
+                Token = "Test-Token",
                 ApplicationName = "Exceptions-Handler",
                 Host = "Console-Sample"
             });

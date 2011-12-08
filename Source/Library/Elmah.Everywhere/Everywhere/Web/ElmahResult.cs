@@ -19,7 +19,7 @@ namespace Elmah.Everywhere.Web
         {
             var httpHandlerFactory = new ErrorLogPageFactory();
 
-            if (!string.IsNullOrEmpty(_resouceType))
+            if (string.IsNullOrWhiteSpace(_resouceType) == false)
             {
                 string resourcePath = GetResourcePath(context);
                 string pathInfo = string.Format("/{0}", _resouceType);
@@ -33,7 +33,7 @@ namespace Elmah.Everywhere.Web
             if (httpHandler is IHttpAsyncHandler)
             {
                 var asyncHttpHandler = (IHttpAsyncHandler)httpHandler;
-                asyncHttpHandler.BeginProcessRequest(httpContext, (r) => { }, null);
+                asyncHttpHandler.BeginProcessRequest(httpContext, (x) => { }, null);
             }
             else
             {
@@ -43,7 +43,7 @@ namespace Elmah.Everywhere.Web
 
         private string GetResourcePath(ControllerContext context)
         {
-            return _resouceType != "stylesheet" ? context.HttpContext.Request.Path.Replace(String.Format("/{0}", _resouceType), string.Empty) : context.HttpContext.Request.Path;
+            return _resouceType != "stylesheet" ? context.HttpContext.Request.Path.Replace(string.Format("/{0}", _resouceType), string.Empty) : context.HttpContext.Request.Path;
         }
     }
 }

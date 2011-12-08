@@ -52,7 +52,7 @@ namespace Elmah.Everywhere.Handlers
 #endif
                 Message = baseException.Message,
                 Error = exceptionErrorText,
-                Date = DateTime.Now,
+                Date = DateTime.UtcNow,
             };
             string postData = FormHelper.FormData(data);
             _handler.Post(postData);
