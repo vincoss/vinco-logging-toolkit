@@ -32,7 +32,7 @@ namespace Elmah.Everywhere.Test
         {
             public Error Error;
 
-            protected override void LogInternal(Error error)
+            protected override void LogInternal(Error error, object context)
             {
                 Error = error;
             }

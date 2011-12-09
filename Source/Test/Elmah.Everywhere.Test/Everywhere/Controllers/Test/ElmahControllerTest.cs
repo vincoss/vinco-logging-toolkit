@@ -1,12 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Xunit;
-using Moq;
-
 using Elmah.Everywhere.Web;
 
 
@@ -31,7 +25,7 @@ namespace Elmah.Everywhere.Controllers.Test
             ElmahController controller = new ElmahController();
 
             // Act
-            ElmahResult result = controller.Index(null) as ElmahResult;
+            ElmahResult result = controller.Index() as ElmahResult;
 
             // Assert
             Assert.NotNull(result);

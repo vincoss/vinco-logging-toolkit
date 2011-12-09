@@ -9,9 +9,9 @@ namespace Elmah.Everywhere.Controllers
     //[Authorize(Roles = "Administrator")]
     public class ElmahController : Controller
     {
-        public ActionResult Index(string type)
+        public ActionResult Index()
         {
-            return new ElmahResult(type);
+            return new ElmahResult(null);
         }
 
         public ActionResult Detail()

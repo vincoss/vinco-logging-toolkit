@@ -32,17 +32,20 @@
 
         private static void SetUpExceptionHandler()
         {
-            HttpHandler handler = new HttpHandler
+            // Configure
+            var writter = new HttpExceptionWritter
             {
                 RequestUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
             };
-            ExceptionHandler.SetWritter(new HttpExceptionWritter(handler));
-            ExceptionHandler.SetParameters(new ExceptionParameters
+
+            Uri uri = Application.Current.Host.Source;
+            var defaults = new ExceptionDefaults
             {
-                Token = null,
-                ApplicationName = "Exceptions-Handler",
-                Host = "Silverlight-Client"
-            });
+                Token = "Test-Token",
+                ApplicationName = "Silverlight-Sample",
+                Host = string.Format("{0}{1}{2}:{3}", uri.Scheme, Uri.SchemeDelimiter, uri.Host, uri.Port)
+            };
+            ExceptionHandler.WithParameters(defaults, writter);
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

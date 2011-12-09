@@ -29,31 +29,31 @@ namespace Elmah.Everywhere.Controllers.Test
         public void Put_Returns_HttpStatusCodeResult_200_Test()
         {
             // Arrange
-            Mock<ElmahErrorHelper> helper = new Mock<ElmahErrorHelper>();
+            TestableElmahErrorHelper helper = new TestableElmahErrorHelper();
             Mock<IErrorService> service = new Mock<IErrorService>();
 
             service.Setup(x => x.ValidateToken(It.IsAny<string>())).Returns(true);
             service.Setup(x => x.ValidateErrorInfo(It.IsAny<ErrorInfo>())).Returns(true);
 
-            ErrorController controller = new ErrorController(helper.Object, service.Object);
+            ErrorController controller = new ErrorController(helper, service.Object);
 
             // Act
             HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
 
             // Assert
             Assert.Equal(200, result.StatusCode);
+            Assert.NotNull(helper.Error);
         }
 
         [Fact]
         public void Put_Returns_HttpStatusCodeResult_403_Test()
         {
             // Arrange
-            Mock<ElmahErrorHelper> helper = new Mock<ElmahErrorHelper>();
             Mock<IErrorService> service = new Mock<IErrorService>();
 
             service.Setup(x => x.ValidateToken(It.IsAny<string>())).Returns(false);
 
-            ErrorController controller = new ErrorController(helper.Object, service.Object);
+            ErrorController controller = new ErrorController(new TestableElmahErrorHelper(), service.Object);
 
             // Act
             HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
@@ -66,18 +66,27 @@ namespace Elmah.Everywhere.Controllers.Test
         public void Put_Returns_HttpStatusCodeResult_412_Test()
         {
             // Arrange
-            Mock<ElmahErrorHelper> helper = new Mock<ElmahErrorHelper>();
             Mock<IErrorService> service = new Mock<IErrorService>();
 
             service.Setup(x => x.ValidateToken(It.IsAny<string>())).Returns(true);
 
-            ErrorController controller = new ErrorController(helper.Object, service.Object);
+            ErrorController controller = new ErrorController(new TestableElmahErrorHelper(), service.Object);
 
             // Act
             HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
 
             // Assert
             Assert.Equal(412, result.StatusCode);
+        }
+
+        class TestableElmahErrorHelper : ElmahErrorHelper
+        {
+            public Error Error;
+
+            protected override void LogInternal(Error error, object context)
+            {
+                Error = error;
+            }
         }
     }
 }

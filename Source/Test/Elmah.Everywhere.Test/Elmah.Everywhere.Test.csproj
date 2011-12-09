@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Everywhere\Controllers\Test\ElmahControllerTest.cs" />
     <Compile Include="Everywhere\Controllers\Test\ErrorControllerTest.cs" />
+    <Compile Include="Everywhere\Diagnostics\ExceptionHandlerTest.cs" />
     <Compile Include="Everywhere\Test\ElmahErrorHelperTest.cs" />
     <Compile Include="Everywhere\Test\ErrorServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -20,17 +20,20 @@ namespace Elmah.Everywhere.Web
                 {
                     if (!_initialized)
                     {
-                        HttpHandler handler = new HttpHandler
+                        var writter = new HttpExceptionWritter
                         {
                             RequestUri = new Uri(GetValueFromConfig("ErrorHandlerRequestUri", true), UriKind.Absolute)
                         };
-                        ExceptionHandler.SetWritter(new HttpExceptionWritter(handler));
-                        ExceptionHandler.SetParameters(new ExceptionParameters
+
+                        var defaults = new ExceptionDefaults
                         {
                             Token = null,
                             ApplicationName = GetValueFromConfig("ApplicationName", false),
                             Host = GetValueFromConfig("ErrorHandlerHost", false)
-                        });
+                        };
+
+                        ExceptionHandler.WithParameters(defaults, writter);
+
                         _initialized = true;
                     }
                 }

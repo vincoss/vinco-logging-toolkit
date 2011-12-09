@@ -1,26 +1,13 @@
 ﻿using System;
+using System.Net;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
-using System.Collections;
 
 
 namespace Elmah.Everywhere.Handlers
 {
-    public class HttpExceptionWritter : ExceptionWritter
+    public class HttpExceptionWritter : ExceptionWritterBase
     {
-        private readonly HttpHandler _handler;
-
-        public HttpExceptionWritter(HttpHandler handler)
-        {
-            if (handler == null)
-            {
-                throw new ArgumentNullException("handler");
-            }
-            _handler = handler;
-        }
-
-        public override void Write(Exception exception, ExceptionParameters parameters, IDictionary<string, object> propeties)
+        public override void Write(Exception exception, ExceptionDefaults parameters, IDictionary<string, object> propeties)
         {
             if (exception == null)
             {
@@ -30,6 +17,10 @@ namespace Elmah.Everywhere.Handlers
             {
                 throw new ArgumentNullException("parameters");
             }
+            if(propeties == null)
+            {
+                throw new ArgumentNullException("propeties");
+            }
 
             Exception baseException = exception.GetBaseException();
 
@@ -38,77 +29,59 @@ namespace Elmah.Everywhere.Handlers
             string exceptionData = GetExceptionData(exception.Data);
             string exceptionErrorText = AggregateErrorText(exceptionString, propertiesData, exceptionData);
 
-            var data = new
-            {
-                Token = parameters.Token,
-                ApplicationName = parameters.ApplicationName,
-                Host = parameters.Host,
-                Type = baseException.GetType().FullName,
+            ErrorInfo data = new ErrorInfo()
+                                 {
+                                     Token = parameters.Token,
+                                     ApplicationName = parameters.ApplicationName,
+                                     Host = parameters.Host,
+                                     Type = baseException.GetType().FullName,
 
 #if SILVERLIGHT
-                Source = parameters.Host,
+                                                     Source = parameters.Host,
 #else
-                Source = baseException.Source,
+                                     Source = baseException.Source,
 #endif
-                Message = baseException.Message,
-                Error = exceptionErrorText,
-                Date = DateTime.UtcNow,
-            };
+                                     Message = baseException.Message,
+                                     Error = exceptionErrorText,
+                                     Date = DateTime.UtcNow,
+                                 };
             string postData = FormHelper.FormData(data);
-            _handler.Post(postData);
+            this.Post(postData);
         }
 
-        private static string AggregateErrorText(params string[] items)
+        protected virtual void Post(string message)
         {
-            if (items == null || items.Length == 0)
+            if (string.IsNullOrWhiteSpace(message))
             {
-                throw new ArgumentNullException("items");
+                throw new ArgumentNullException("message");
             }
-            StringBuilder sb = new StringBuilder();
-            foreach (string str in items)
+            try
             {
-                if (!string.IsNullOrWhiteSpace(str))
-                {
-                    sb.AppendLine(str);
-                }
+                WebClient webClient = new WebClient();
+                webClient.Headers["Content-Type"] = "application/x-www-form-urlencoded";
+                webClient.UploadStringCompleted += WebClient_UploadStringCompleted;
+                webClient.UploadStringAsync(RequestUri, "POST", message, null);
             }
-            return sb.ToString();
+            catch (Exception exception)
+            {
+                Exception = exception;
+            }
         }
 
-        private static string GetExceptionData(IDictionary exceptionData)
+        private void WebClient_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine();
-            sb.Append("Exception-Dump-Report:");
-
-            if (exceptionData != null && exceptionData.Count > 0)
+            if (e.Error != null)
             {
-                foreach (var key in exceptionData.Keys)
-                {
-                    sb.AppendLine();
-                    sb.AppendFormat(CultureInfo.InvariantCulture, "{0}: {1}", key, exceptionData[key]);
-                }
+                Exception = e.Error;
             }
-            return sb.ToString();
         }
 
-        private static string GetPropertiesData(IDictionary<string, object> exceptionData)
-        {
-            StringBuilder sb = new StringBuilder();
+        #region Properties
 
-            sb.AppendLine();
-            sb.Append("Properties-Dump-Report:");
+        public Uri RequestUri { get; set; }
 
-            if (exceptionData != null && exceptionData.Count > 0)
-            {
-                foreach (var key in exceptionData.Keys)
-                {
-                    sb.AppendLine();
-                    sb.AppendFormat(CultureInfo.InvariantCulture, "{0}: {1}", key, exceptionData[key]);
-                }
-            }
-            return sb.ToString();
-        }
+        public Exception Exception { get; private set; }
+
+        #endregion
     }
 }

@@ -26,7 +26,7 @@ namespace Elmah.Everywhere.Controllers
             {
                 if (_errorService.ValidateErrorInfo(model))
                 {
-                    _elmahErrorHelper.LogException(model); // TODO:
+                    _elmahErrorHelper.LogException(model);
                     return new HttpStatusCodeResult(200);
                 }
                 return new HttpStatusCodeResult(412);

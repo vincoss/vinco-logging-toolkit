@@ -9,7 +9,7 @@ namespace Elmah.Everywhere
 
         public string ApplicationName { get; set; }
 
-        public string HostName { get; set; }
+        public string Host { get; set; }
 
         public string Type { get; set; }
 

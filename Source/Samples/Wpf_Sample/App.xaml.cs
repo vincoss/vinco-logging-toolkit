@@ -24,17 +24,19 @@ namespace Wpf_Sample
         private static void SetUpExceptionHandler()
         {
             // Configure
-            HttpHandler handler = new HttpHandler
+            var writter = new HttpExceptionWritter
             {
                 RequestUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
             };
-            ExceptionHandler.SetWritter(new HttpExceptionWritter(handler));
-            ExceptionHandler.SetParameters(new ExceptionParameters
+
+            var defaults = new ExceptionDefaults
             {
-                Token = null,
-                ApplicationName = "Exceptions-Handler",
-                Host = "Wpf-Client"
-            });
+                Token = "Test-Token",
+                ApplicationName = "Wpf-Sample",
+                Host = Environment.MachineName
+            };
+
+            ExceptionHandler.WithParameters(defaults, writter);
 
             ExceptionHandler.Attach(AppDomain.CurrentDomain);
         }

@@ -15,20 +15,20 @@ namespace Console_Sample
     {
         static void Main(string[] args)
         {
-            var uri = new Uri("http://localhost:11079/error/log", UriKind.Absolute);
-
             // Configure
-            HttpHandler handler = new HttpHandler
-            {
-                RequestUri = uri
-            };
-            ExceptionHandler.SetWritter(new HttpExceptionWritter(handler));
-            ExceptionHandler.SetParameters(new ExceptionParameters
-            {
-                Token = "Test-Token",
-                ApplicationName = "Exceptions-Handler",
-                Host = "Console-Sample"
-            });
+            var writter = new HttpExceptionWritter
+                              {
+                                  RequestUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
+                              };
+
+            var defaults = new ExceptionDefaults
+                               {
+                                   Token = "Test-Token",
+                                   ApplicationName = "Console-Sample",
+                                   Host = Environment.MachineName
+                               };
+
+            ExceptionHandler.WithParameters(defaults, writter);
 
             // Create exception and sample data.
             Exception exception = GetSampleException();

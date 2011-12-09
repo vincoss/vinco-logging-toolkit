@@ -5,14 +5,15 @@ using System.Globalization;
 using System.Diagnostics;
 using System.Collections.Generic;
 using Elmah.Everywhere.Handlers;
+using Elmah.Properties;
 
 
 namespace Elmah.Everywhere.Diagnostics
 {
     public sealed class ExceptionHandler
     {
-        private static ExceptionWritter _writter;
-        private static ExceptionParameters _parameters;
+        private static ExceptionWritterBase _writter;
+        private static ExceptionDefaults _parameters;
 
         static ExceptionHandler()
         {
@@ -23,16 +24,11 @@ namespace Elmah.Everywhere.Diagnostics
 
         private static void AppDomain_UnhandledException(object sender, UnhandledExceptionEventArgs args)
         {
-            if (IsEnabled)
-            {
-                Exception exceptionObject = (Exception)args.ExceptionObject;
-                Report(exceptionObject, null);
-            }
+            Report((Exception)args.ExceptionObject, null);
         }
 
         private static string GetDumpReport()
         {
-            DateTime now = DateTime.Now;
             StringBuilder builder = new StringBuilder();
             builder.AppendLine();
 
@@ -49,13 +45,13 @@ namespace Elmah.Everywhere.Diagnostics
 
 #endif
 
-            builder.AppendFormat(CultureInfo.InvariantCulture, "Version: {0}", new AssemblyName(typeof(ExceptionHandler).Assembly.FullName).Version.ToString());
+            builder.AppendFormat(CultureInfo.InvariantCulture, "Version: {0}", new AssemblyName(typeof (ExceptionHandler).Assembly.FullName).Version);
             builder.AppendLine();
 
-            builder.AppendFormat(CultureInfo.InvariantCulture, "Operating System Version: {0}", Environment.OSVersion.ToString());
+            builder.AppendFormat(CultureInfo.InvariantCulture, "Operating System Version: {0}", Environment.OSVersion);
             builder.AppendLine();
 
-            builder.AppendFormat(CultureInfo.InvariantCulture, "Common Language Runtime Version: {0}", Environment.Version.ToString());
+            builder.AppendFormat(CultureInfo.InvariantCulture, "Common Language Runtime Version: {0}", Environment.Version);
             builder.AppendLine();
 
 #if SILVERLIGHT
@@ -98,13 +94,14 @@ namespace Elmah.Everywhere.Diagnostics
 
         #endregion
 
+#if !SILVERLIGHT
         public static void Attach(AppDomain domain)
         {
             if (domain == null)
             {
                 throw new ArgumentNullException("domain");
             }
-            domain.UnhandledException += new UnhandledExceptionEventHandler(ExceptionHandler.AppDomain_UnhandledException);
+            domain.UnhandledException += AppDomain_UnhandledException;
         }
 
         public static void Detach(AppDomain domain)
@@ -113,25 +110,22 @@ namespace Elmah.Everywhere.Diagnostics
             {
                 throw new ArgumentNullException("domain");
             }
-            domain.UnhandledException -= new UnhandledExceptionEventHandler(ExceptionHandler.AppDomain_UnhandledException);
+            domain.UnhandledException -= AppDomain_UnhandledException;
         }
+#endif
 
-        public static void SetWritter(ExceptionWritter writter)
-        {
-            if (writter == null)
-            {
-                throw new ArgumentNullException("writter");
-            }
-            _writter = writter;
-        }
-
-        public static void SetParameters(ExceptionParameters parameters)
+        public static void WithParameters(ExceptionDefaults parameters, ExceptionWritterBase writter)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException("parameters");
             }
+            if (writter == null)
+            {
+                throw new ArgumentNullException("writter");
+            }
             _parameters = parameters;
+            _writter = writter;
         }
 
         public static void Report(Exception exception, IDictionary<string, object> propeties)
@@ -142,8 +136,11 @@ namespace Elmah.Everywhere.Diagnostics
             }
             if (IsEnabled)
             {
-                exception.Data.Add("Data-Dump", GetDumpReport());
-
+                if (propeties == null)
+                {
+                    propeties = new Dictionary<string, object>();
+                }
+                exception.Data.Add(Strings.Data_Dump, GetDumpReport());
                 _writter.Write(exception, _parameters, propeties);
             }
         }

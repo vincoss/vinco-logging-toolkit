@@ -14,7 +14,7 @@ namespace Elmah.Everywhere
                 throw new ArgumentNullException("errorInfo");
             }
             Error error = ToError(errorInfo);
-            LogInternal(error);
+            LogInternal(error, null);
         }
 
         public void LogException(Exception exception, HttpContext context)
@@ -28,16 +28,16 @@ namespace Elmah.Everywhere
             if (!args.Dismissed)
             {
                 Error error = new Error(exception, context);
-                LogInternal(error);
+                LogInternal(error, context);
             }
         }
 
-        protected virtual void LogInternal(Error error)
+        protected virtual void LogInternal(Error error, object context)
         {
             ErrorLogEntry entry = null;
             try
             {
-                ErrorLog errorLog = ErrorLog.GetDefault(HttpContext.Current);
+                ErrorLog errorLog = ErrorLog.GetDefault((HttpContext)context); 
                 string errorId = errorLog.Log(error);
                 entry = new ErrorLogEntry(errorLog, errorId, error);
             }
@@ -77,7 +77,7 @@ namespace Elmah.Everywhere
             return new Error
                             {
                                 ApplicationName = properties.ApplicationName,
-                                HostName = properties.HostName,
+                                HostName = properties.Host,
                                 Type = properties.Type,
                                 Source = properties.Source,
                                 Message = properties.Message,
@@ -87,6 +87,7 @@ namespace Elmah.Everywhere
         }
 
         public event ErrorLoggedEventHandler Logged;
+
         public event ExceptionFilterEventHandler Filtering;
 
     }
