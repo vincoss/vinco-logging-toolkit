@@ -47,6 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -63,18 +64,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Everywhere\Controllers\AccountController.cs" />
     <Compile Include="Everywhere\Controllers\ElmahController.cs" />
     <Compile Include="Everywhere\Controllers\ErrorController.cs" />
     <Compile Include="Everywhere\Diagnostics\ExceptionHandler.cs" />
     <Compile Include="Everywhere\ElmahErrorHelper.cs" />
     <Compile Include="Everywhere\ErrorInfo.cs" />
     <Compile Include="Everywhere\ErrorService.cs" />
+    <Compile Include="Everywhere\Models\LogOnModel.cs" />
     <Compile Include="Everywhere\Web\ElmahResult.cs" />
     <Compile Include="Everywhere\ServiceModel\HttpErrorHandler.cs" />
     <Compile Include="Everywhere\ExceptionDefaults.cs" />
-    <Compile Include="Everywhere\FormHelper.cs" />
-    <Compile Include="Everywhere\Handlers\ExceptionWritterBase.cs" />
-    <Compile Include="Everywhere\Handlers\HttpExceptionWritter.cs" />
+    <Compile Include="Everywhere\ExceptionWritterBase.cs" />
+    <Compile Include="Everywhere\HttpExceptionWritter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Everywhere\ServiceModel\ServiceHttpErrorBehaviorAttribute.cs" />
     <Compile Include="Everywhere\Web\ErrorHandlerConfiguratorModule.cs" />

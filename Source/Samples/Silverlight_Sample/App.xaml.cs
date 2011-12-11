@@ -4,7 +4,6 @@
     using System.Runtime.Serialization;
     using System.ServiceModel.DomainServices.Client.ApplicationServices;
     using System.Windows;
-    using Elmah.Everywhere.Handlers;
     using Elmah.Everywhere.Diagnostics;
     using Elmah.Everywhere;
 

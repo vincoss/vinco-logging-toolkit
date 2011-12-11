@@ -41,11 +41,21 @@ namespace Elmah.Everywhere.Test
             // Arrange
             ErrorService service = new ErrorService();
 
+            ErrorInfo info = new ErrorInfo
+                                 {
+                                     ApplicationName = "ApplicationName",
+                                     Host = "Host",
+                                     Type = "Type",
+                                     Source = "Source",
+                                     Message = "Message",
+                                     Error = "Error"
+                                 };
+
             // Act
-            bool result = service.ValidateErrorInfo(null);
+            bool result = service.ValidateErrorInfo(info);
 
             // Assert
-            Assert.True(false);
+            Assert.True(result);
         }
 
 
@@ -56,10 +66,10 @@ namespace Elmah.Everywhere.Test
             ErrorService service = new ErrorService();
 
             // Act
-            bool result = service.ValidateErrorInfo(null);
+            bool result = service.ValidateErrorInfo(new ErrorInfo());
 
             // Assert
-            Assert.False(true);
+            Assert.False(result);
         }
     }
 }

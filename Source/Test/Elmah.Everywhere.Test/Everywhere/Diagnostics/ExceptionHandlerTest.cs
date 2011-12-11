@@ -1,8 +1,5 @@
 ﻿using System;
-using Elmah.Everywhere.Handlers;
 using Xunit;
-using Moq;
-using System.Collections.Generic;
 
 
 namespace Elmah.Everywhere.Diagnostics
@@ -30,9 +27,7 @@ namespace Elmah.Everywhere.Diagnostics
             ExceptionHandler.Report(exception, null);
 
             // Assert
-            Assert.NotNull(writter.Exception);
-            Assert.NotNull(writter.Parameters);
-            Assert.NotNull(writter.Properties);
+            Assert.NotNull(writter.Error);
         }
 
         [Fact]
@@ -51,22 +46,16 @@ namespace Elmah.Everywhere.Diagnostics
             ExceptionHandler.IsEnabled = true;
 
             // Assert
-            Assert.Null(writter.Exception);
-            Assert.Null(writter.Parameters);
-            Assert.Null(writter.Properties);
+            Assert.Null(writter.Error);
         }
 
         class TestableExceptionWritter : ExceptionWritterBase
         {
-            public Exception Exception;
-            public ExceptionDefaults Parameters;
-            public IDictionary<string, object> Properties;
+            public ErrorInfo Error;
 
-            public override void Write(Exception exception, ExceptionDefaults parameters, IDictionary<string, object> propeties)
+            protected override void Write(ErrorInfo error)
             {
-                Exception = exception;
-                Parameters = parameters;
-                Properties = propeties;
+                Error = error;
             }
         }
     }

@@ -78,6 +78,8 @@
     <Compile Include="Everywhere\Diagnostics\ExceptionHandlerTest.cs" />
     <Compile Include="Everywhere\Test\ElmahErrorHelperTest.cs" />
     <Compile Include="Everywhere\Test\ErrorServiceTest.cs" />
+    <Compile Include="Everywhere\Test\ExceptionWritterBaseTest.cs" />
+    <Compile Include="Everywhere\Test\HttpExceptionWritterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

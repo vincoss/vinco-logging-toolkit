@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
-using Elmah.Everywhere.Handlers;
 using Elmah.Everywhere.Diagnostics;
 using Elmah.Everywhere;
 

@@ -63,9 +63,9 @@ namespace Elmah.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Data-Dump:.
         /// </summary>
-        internal static string Data_Dump {
+        internal static string Dump_Report {
             get {
-                return ResourceManager.GetString("Data_Dump", resourceCulture);
+                return ResourceManager.GetString("Dump_Report", resourceCulture);
             }
         }
     }

@@ -4,8 +4,6 @@ using System.Text;
 using System.Globalization;
 using System.Diagnostics;
 using System.Collections.Generic;
-using Elmah.Everywhere.Handlers;
-using Elmah.Properties;
 
 
 namespace Elmah.Everywhere.Diagnostics
@@ -29,35 +27,50 @@ namespace Elmah.Everywhere.Diagnostics
 
         private static string GetDumpReport()
         {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine();
+            const string str = "\r\n";
+            var builder = new StringBuilder();
 
-            builder.AppendFormat(CultureInfo.InvariantCulture, "Date: {0}", DateTime.Now.ToString());
-            builder.AppendLine();
+            builder.Append("Date:                            ");
+            builder.Append(DateTime.Now);
+            builder.Append(str);
+
+            builder.Append("Culture:                         ");
+            builder.Append(CultureInfo.CurrentCulture.Name);
+            builder.Append(str);
 
 #if !SILVERLIGHT
 
-            builder.AppendFormat(CultureInfo.InvariantCulture, "User: {0}", Environment.UserName);
-            builder.AppendLine();
+            builder.Append("User:                            ");
+            builder.Append(Environment.UserName);
+            builder.Append(str);
 
-            builder.AppendFormat(CultureInfo.InvariantCulture, "MachineName: {0}", Environment.MachineName);
-            builder.AppendLine();
+            builder.Append("MachineName:                     ");
+            builder.Append(Environment.MachineName);
+            builder.Append(str);
+
+            builder.Append("App up time:                     ");
+            builder.Append((DateTime.Now - Process.GetCurrentProcess().StartTime));
+            builder.Append(str);
 
 #endif
+            builder.Append("Version:                         ");
+            builder.Append(new AssemblyName(typeof(ExceptionHandler).Assembly.FullName).Version);
+            builder.Append(str);
 
-            builder.AppendFormat(CultureInfo.InvariantCulture, "Version: {0}", new AssemblyName(typeof (ExceptionHandler).Assembly.FullName).Version);
-            builder.AppendLine();
+            builder.Append("Operating System Version:        ");
+            builder.Append(Environment.OSVersion);
+            builder.Append(str);
 
-            builder.AppendFormat(CultureInfo.InvariantCulture, "Operating System Version: {0}", Environment.OSVersion);
-            builder.AppendLine();
-
-            builder.AppendFormat(CultureInfo.InvariantCulture, "Common Language Runtime Version: {0}", Environment.Version);
-            builder.AppendLine();
+            builder.Append("Common Language Runtime Version: ");
+            builder.Append(Environment.Version);
+            builder.Append(str);
 
 #if SILVERLIGHT
             // TODO: Silverlight info here
 #else
             // Get asembly list
+            builder.AppendLine();
+            builder.AppendLine("AppDomain Assemblies:");
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly assembly in assemblies)
             {
@@ -140,8 +153,7 @@ namespace Elmah.Everywhere.Diagnostics
                 {
                     propeties = new Dictionary<string, object>();
                 }
-                exception.Data.Add(Strings.Data_Dump, GetDumpReport());
-                _writter.Write(exception, _parameters, propeties);
+                _writter.Report(exception, _parameters, propeties, GetDumpReport());
             }
         }
 

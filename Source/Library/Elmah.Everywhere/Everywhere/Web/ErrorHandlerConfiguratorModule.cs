@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web;
 using System.Configuration;
-using Elmah.Everywhere.Handlers;
 using Elmah.Everywhere.Diagnostics;
 
 
@@ -10,7 +9,7 @@ namespace Elmah.Everywhere.Web
     public class ErrorHandlerConfiguratorModule : IHttpModule
     {
         private static bool _initialized;
-        private static object _lockObject = new object();
+        private readonly object _lockObject = new object();
 
         public void Init(HttpApplication context)
         {
@@ -27,13 +26,11 @@ namespace Elmah.Everywhere.Web
 
                         var defaults = new ExceptionDefaults
                         {
-                            Token = null,
+                            Token = GetValueFromConfig("Token", false),
                             ApplicationName = GetValueFromConfig("ApplicationName", false),
                             Host = GetValueFromConfig("ErrorHandlerHost", false)
                         };
-
                         ExceptionHandler.WithParameters(defaults, writter);
-
                         _initialized = true;
                     }
                 }
@@ -52,7 +49,7 @@ namespace Elmah.Everywhere.Web
                 throw new ArgumentNullException("propertyName");
             }
             string value = ConfigurationManager.AppSettings[propertyName];
-            if ((value == null || value.Length == 0) && throwIfMissing)
+            if (string.IsNullOrWhiteSpace(value) && throwIfMissing)
             {
                 throw new ArgumentNullException(string.Format("Missing_Configuration_Property_Value : {0}", new object[] { propertyName }));
             }
