@@ -25,8 +25,7 @@ namespace Elmah.Everywhere.ServiceModel
 
         public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
-            IErrorHandler errorHandler;
-            errorHandler = (IErrorHandler)Activator.CreateInstance(_errorHandlerType);
+            IErrorHandler errorHandler = (IErrorHandler)Activator.CreateInstance(_errorHandlerType);
 
             foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers)
             {

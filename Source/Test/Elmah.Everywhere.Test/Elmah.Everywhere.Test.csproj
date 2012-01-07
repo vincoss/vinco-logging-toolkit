@@ -50,7 +50,7 @@
   <ItemGroup>
     <Reference Include="Elmah, Version=1.2.13605.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Assemblies\Elmah.dll</HintPath>
+      <HintPath>..\..\..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\..\Assemblies\Moq\Moq.dll</HintPath>
@@ -73,9 +73,10 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Everywhere\Controllers\Test\AccountControllerTest.cs" />
     <Compile Include="Everywhere\Controllers\Test\ElmahControllerTest.cs" />
     <Compile Include="Everywhere\Controllers\Test\ErrorControllerTest.cs" />
-    <Compile Include="Everywhere\Diagnostics\ExceptionHandlerTest.cs" />
+    <Compile Include="Everywhere\Diagnostics\Test\ExceptionHandlerTest.cs" />
     <Compile Include="Everywhere\Test\ElmahErrorHelperTest.cs" />
     <Compile Include="Everywhere\Test\ErrorServiceTest.cs" />
     <Compile Include="Everywhere\Test\ExceptionWritterBaseTest.cs" />

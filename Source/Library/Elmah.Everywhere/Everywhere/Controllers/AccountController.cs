@@ -9,6 +9,8 @@ using Elmah.Everywhere.Models;
 
 namespace Elmah.Everywhere.Controllers
 {
+    // TODO:
+    //[RequireHttps]
     public class AccountController : Controller
     {
         public ActionResult LogOn()
@@ -24,10 +26,10 @@ namespace Elmah.Everywhere.Controllers
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/") && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
-                        return Redirect(returnUrl);
+                        //return Redirect(returnUrl); // TODO:
+                        return RedirectToAction("", "Elmah");
                     }
                     else
                     {

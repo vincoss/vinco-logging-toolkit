@@ -153,7 +153,8 @@ namespace Elmah.Everywhere.Diagnostics
                 {
                     propeties = new Dictionary<string, object>();
                 }
-                _writter.Report(exception, _parameters, propeties, GetDumpReport());
+                string report = GetDumpReport();
+                _writter.Report(exception, _parameters, propeties, report);
             }
         }
 

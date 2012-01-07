@@ -17,15 +17,11 @@ namespace Elmah.Everywhere.Test
 
             ErrorInfo info = new ErrorInfo();
 
-            // TODO: add error details
-
             // Act
             helper.LogException(info);
 
             // Assert
             Assert.NotNull(helper.Error);
-
-            // TODO: Check error details
         }
 
         class TestableElmahErrorHelper : ElmahErrorHelper

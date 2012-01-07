@@ -29,7 +29,7 @@ namespace Console_Sample
 
             // Create exception and sample data.
             Exception exception = GetSampleException();
-            //exception.Data.Add("Some-Key", "Some-Value");
+            exception.Data.Add("Some-Key", "Some-Value");
 
             IDictionary<string, object> properties = new Dictionary<string, object>();
             properties.Add("Test", "Value 1");

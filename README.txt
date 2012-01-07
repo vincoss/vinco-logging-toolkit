@@ -1,0 +1,1 @@
+Elmah Everywhere is an extension to ELMAH (Error Logging Modules and Handlers for ASP.NET) that can be used from wide range of applications. Such as Silverlight, Win Forms, Console, WPF and WCF.

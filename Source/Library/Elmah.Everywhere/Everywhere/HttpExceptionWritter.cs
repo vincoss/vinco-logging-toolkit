@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace Elmah.Everywhere
             string postData = FormData(error);
             if (string.IsNullOrWhiteSpace(postData))
             {
-                throw new ArgumentNullException("postData");
+                throw new ArgumentNullException("error");
             }
             try
             {
@@ -34,6 +35,7 @@ namespace Elmah.Everywhere
             {
                 Exception = exception;
             }
+
         }
 
         private void WebClient_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -64,7 +66,7 @@ namespace Elmah.Everywhere
                         if(pair.Value != null)
                         {
                             string value = pair.Value.ToString();
-                            sb.Append(HttpUtility.HtmlEncode(value));
+                            sb.Append(value);
                         }
                     }
                     return sb.ToString();

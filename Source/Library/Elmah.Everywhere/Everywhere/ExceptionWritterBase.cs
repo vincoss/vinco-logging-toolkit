@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using Elmah.Properties;
+using System.Net;
 
 
 namespace Elmah.Everywhere
