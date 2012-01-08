@@ -1,3 +1,6 @@
-Elmah Everywhere is an extension to ELMAH (Error Logging Modules and Handlers for ASP.NET). 
+An exception logging library for .NET, Silverlight, WPF, ASP.NET MVC and WCF that uses an ELMAH (Error Logging Modules and Handlers for ASP.NET).
 
-Elmah Everywhere can be used from wide range of applications such as Silverlight, Win Forms, Console, WPF and WCF.
+Default Loging details.
+
+UserName:	admin
+Password:	p@ssword
