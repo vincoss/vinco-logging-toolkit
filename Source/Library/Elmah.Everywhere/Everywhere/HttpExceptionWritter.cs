@@ -35,7 +35,6 @@ namespace Elmah.Everywhere
             {
                 Exception = exception;
             }
-
         }
 
         private void WebClient_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -66,7 +65,7 @@ namespace Elmah.Everywhere
                         if(pair.Value != null)
                         {
                             string value = pair.Value.ToString();
-                            sb.Append(value);
+                            sb.Append(HttpUtility.UrlEncode(value));
                         }
                     }
                     return sb.ToString();

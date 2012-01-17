@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="D:\_Sites\ErrorLog" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="Web.config" publishTime="01/17/2012 14:48:28" />
+    <file relUrl="bin/Elmah.dll" publishTime="01/06/2012 13:00:07" />
+    <file relUrl="packages.config" publishTime="01/06/2012 13:00:19" />
+    <file relUrl="bin/WebSite.pdb" publishTime="01/17/2012 14:47:58" />
+    <file relUrl="Scripts/jquery-1.5.1.min.js" publishTime="01/06/2012 12:12:22" />
+    <file relUrl="App_Data/ElmahErrorDb.mdf" publishTime="01/07/2012 23:46:13" />
+    <file relUrl="bin/Elmah.Everywhere.dll" publishTime="01/17/2012 14:47:53" />
+    <file relUrl="Scripts/jquery.validate.min.js" publishTime="01/06/2012 12:12:22" />
+    <file relUrl="App_Data/ASPNETDB_log.ldf" publishTime="01/07/2012 16:03:55" />
+    <file relUrl="bin/WebSite.dll" publishTime="01/17/2012 14:47:58" />
+    <file relUrl="clientaccesspolicy.xml" publishTime="05/29/2011 14:05:13" />
+    <file relUrl="Views/Web.config" publishTime="01/07/2012 09:05:33" />
+    <file relUrl="Views/Account/LogOn.cshtml" publishTime="01/06/2012 12:35:42" />
+    <file relUrl="crossdomain.xml" publishTime="05/29/2011 13:44:50" />
+    <file relUrl="App_Data/ASPNETDB.MDF" publishTime="01/07/2012 16:03:55" />
+    <file relUrl="Global.asax" publishTime="05/28/2011 19:16:47" />
+    <file relUrl="App_Data/ElmahErrorDb_log.ldf" publishTime="01/07/2012 23:46:13" />
+    <file relUrl="MvcDiagnostics.aspx" publishTime="12/31/2011 17:27:04" />
+    <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="01/06/2012 12:12:22" />
+    <file relUrl="bin/Elmah.Everywhere.pdb" publishTime="01/17/2012 14:47:53" />
+  </publishProfile>
+</publishData>

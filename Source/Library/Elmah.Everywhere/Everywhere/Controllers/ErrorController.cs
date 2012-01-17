@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 namespace Elmah.Everywhere.Controllers
 {
+    // TODO: Should allow only HTTPS
     public class ErrorController : Controller
     {
         private readonly IErrorService _errorService;

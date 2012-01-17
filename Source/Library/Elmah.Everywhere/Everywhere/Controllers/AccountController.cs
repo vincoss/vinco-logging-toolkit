@@ -5,12 +5,12 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 using Elmah.Everywhere.Models;
+using Elmah.Everywhere.Web;
 
 
 namespace Elmah.Everywhere.Controllers
 {
-    // TODO:
-    //[RequireHttps]
+    [CustomRequireHttps]
     public class AccountController : Controller
     {
         public ActionResult LogOn()
@@ -29,11 +29,13 @@ namespace Elmah.Everywhere.Controllers
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/") && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
                         //return Redirect(returnUrl); // TODO:
-                        return RedirectToAction("", "Elmah");
+                        return Redirect("/elmah");
                     }
                     else
                     {
-                        return RedirectToAction("", "Elmah");
+                        // TODO:
+                        //return RedirectToAction("", "Elmah");
+                        return Redirect("/elmah");
                     }
                 }
                 else

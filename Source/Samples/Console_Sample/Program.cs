@@ -33,10 +33,10 @@ namespace Console_Sample
 
             IDictionary<string, object> properties = new Dictionary<string, object>();
             properties.Add("Test", "Value 1");
+            properties.Add("&Key=", "Value 1");
 
             // Report exception
-            ExceptionHandler.Report(exception, null);
-
+            ExceptionHandler.Report(exception, properties);
 
             Console.WriteLine("Done...");
             Console.Read();

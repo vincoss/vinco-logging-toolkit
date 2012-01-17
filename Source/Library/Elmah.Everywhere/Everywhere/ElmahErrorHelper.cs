@@ -75,15 +75,15 @@ namespace Elmah.Everywhere
         private static Error ToError(ErrorInfo properties)
         {
             return new Error
-                            {
-                                ApplicationName = properties.ApplicationName,
-                                HostName = properties.Host,
-                                Type = properties.Type,
-                                Source = properties.Source,
-                                Message = properties.Message,
-                                Detail = properties.Error,
-                                Time = properties.Date
-                            };
+            {
+                ApplicationName =properties.ApplicationName,
+                HostName = properties.Host,
+                Type = properties.Type,
+                Source = properties.Source,
+                Message = properties.Message,
+                Detail = properties.Error,
+                Time = properties.Date
+            };
         }
 
         public event ErrorLoggedEventHandler Logged;

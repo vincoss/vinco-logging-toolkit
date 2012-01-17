@@ -76,6 +76,7 @@
     <Compile Include="Everywhere\ErrorInfo.cs" />
     <Compile Include="Everywhere\ErrorService.cs" />
     <Compile Include="Everywhere\Models\LogOnModel.cs" />
+    <Compile Include="Everywhere\Web\CustomRequireHttps.cs" />
     <Compile Include="Everywhere\Web\ElmahResult.cs" />
     <Compile Include="Everywhere\ServiceModel\HttpErrorHandler.cs" />
     <Compile Include="Everywhere\ExceptionDefaults.cs" />
@@ -121,7 +122,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UpdateAssemblyVersion="False" BuildVersion_BuildVersioningStyle="Increment.Increment.Increment.TimeStamp" />
+      <UserProperties BuildVersion_BuildVersioningStyle="Increment.Increment.Increment.TimeStamp" BuildVersion_UpdateAssemblyVersion="False" BuildVersion_UpdateFileVersion="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
