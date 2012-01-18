@@ -10,7 +10,7 @@ using Elmah.Everywhere.Web;
 
 namespace Elmah.Everywhere.Controllers
 {
-    [CustomRequireHttps]
+    //[CustomRequireHttps]
     public class AccountController : Controller
     {
         public ActionResult LogOn()
