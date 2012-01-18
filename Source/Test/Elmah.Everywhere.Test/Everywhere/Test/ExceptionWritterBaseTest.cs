@@ -43,7 +43,7 @@ namespace Elmah.Everywhere.Test
         {
             public ErrorInfo Error;
 
-            protected override void Write(ErrorInfo error)
+            public override void Write(ErrorInfo error)
             {
                 Error = error;
             }

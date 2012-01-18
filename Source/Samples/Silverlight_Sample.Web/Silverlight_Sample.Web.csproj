@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Elmah">
-      <HintPath>..\..\Assembly\Elmah.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -66,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\Silverlight_Sample.xap" />
+    <Content Include="Global.asax" />
+    <Content Include="MakeError.aspx" />
     <Content Include="MvcDiagnostics.aspx" />
     <Content Include="Silverlight_SampleTestPage.aspx" />
     <Content Include="Silverlight_SampleTestPage.html" />
@@ -79,7 +78,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="MakeError.aspx.cs">
+      <DependentUpon>MakeError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MakeError.aspx.designer.cs">
+      <DependentUpon>MakeError.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\ValidationErrorResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -114,6 +123,10 @@
     <ProjectReference Include="..\..\Library\Elmah.Everywhere\Elmah.Everywhere.csproj">
       <Project>{319DD6E1-E5EB-4896-9055-BF486FC9C0EF}</Project>
       <Name>Elmah.Everywhere</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\_DevelopmentTools\Exception &amp; Logging\ELMAH-1.2-sp1-src\src\Solutions\2010\Elmah.csproj">
+      <Project>{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}</Project>
+      <Name>Elmah</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

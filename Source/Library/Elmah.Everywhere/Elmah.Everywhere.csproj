@@ -46,10 +46,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Elmah, Version=1.2.14318.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -75,6 +71,7 @@
     <Compile Include="Everywhere\ElmahErrorHelper.cs" />
     <Compile Include="Everywhere\ErrorInfo.cs" />
     <Compile Include="Everywhere\ErrorService.cs" />
+    <Compile Include="Everywhere\EverywhereErrorLog.cs" />
     <Compile Include="Everywhere\Models\LogOnModel.cs" />
     <Compile Include="Everywhere\Web\CustomRequireHttps.cs" />
     <Compile Include="Everywhere\Web\ElmahResult.cs" />
@@ -119,10 +116,16 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="E:\_DevelopmentTools\Exception &amp; Logging\ELMAH-1.2-sp1-src\src\Solutions\2010\Elmah.csproj">
+      <Project>{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}</Project>
+      <Name>Elmah</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="Increment.Increment.Increment.TimeStamp" BuildVersion_UpdateAssemblyVersion="False" BuildVersion_UpdateFileVersion="False" />
+      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UpdateAssemblyVersion="False" BuildVersion_BuildVersioningStyle="Increment.Increment.Increment.TimeStamp" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

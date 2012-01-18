@@ -17,7 +17,7 @@ namespace Elmah.Everywhere
 {
     public class HttpExceptionWritter : ExceptionWritterBase
     {
-        protected override void Write(ErrorInfo error)
+        public override void Write(ErrorInfo error)
         {
             string postData = FormData(error);
             if (string.IsNullOrWhiteSpace(postData))
@@ -26,15 +26,31 @@ namespace Elmah.Everywhere
             }
             try
             {
-                WebClient webClient = new WebClient();
-                webClient.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-                webClient.UploadStringCompleted += WebClient_UploadStringCompleted;
-                webClient.UploadStringAsync(RequestUri, "POST", postData, null);
+#if SILVERLIGHT
+                InternalWriteAsync(postData);
+#else
+                WebClient webClient = CreateWebClient();
+                string end = webClient.UploadString(RequestUri, postData); // TODO: response check
+#endif
             }
             catch (Exception exception)
             {
                 Exception = exception;
             }
+        }
+
+        private void InternalWriteAsync(string data)
+        {
+            WebClient webClient = CreateWebClient();
+            webClient.UploadStringCompleted += WebClient_UploadStringCompleted;
+            webClient.UploadStringAsync(RequestUri, "POST", data, null);
+        }
+
+        protected virtual WebClient CreateWebClient()
+        {
+            WebClient webClient = new WebClient();
+            webClient.Headers["Content-Type"] = "application/x-www-form-urlencoded";
+            return webClient;
         }
 
         private void WebClient_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -62,7 +78,7 @@ namespace Elmah.Everywhere
                         sb.Append(pair.Key);
                         sb.Append("=");
 
-                        if(pair.Value != null)
+                        if (pair.Value != null)
                         {
                             string value = pair.Value.ToString();
                             sb.Append(HttpUtility.UrlEncode(value));
@@ -79,7 +95,9 @@ namespace Elmah.Everywhere
             IDictionary<string, object> result = new Dictionary<string, object>();
             if (formValues != null)
             {
-                PropertyInfo[] properties = formValues.GetType().GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
+                PropertyInfo[] properties =
+                    formValues.GetType().GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public |
+                                                       BindingFlags.Instance);
                 foreach (var p in properties)
                 {
                     result.Add(p.Name, p.GetValue(formValues, null));

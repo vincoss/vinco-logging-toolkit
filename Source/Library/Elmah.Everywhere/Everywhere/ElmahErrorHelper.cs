@@ -82,7 +82,25 @@ namespace Elmah.Everywhere
                 Source = properties.Source,
                 Message = properties.Message,
                 Detail = properties.Error,
-                Time = properties.Date
+                Time = properties.Date,
+                User = properties.User,
+                StatusCode = properties.StatusCode
+            };
+        }
+
+        public static ErrorInfo ToInfo(Error error)
+        {
+            return new ErrorInfo()
+            {
+                ApplicationName = error.ApplicationName,
+                Host = error.HostName,
+                Type = error.Type,
+                Source = error.Source,
+                Message = error.Message,
+                Error = error.Detail,
+                User = error.User,
+                StatusCode = error.StatusCode,
+                Date = error.Time
             };
         }
 

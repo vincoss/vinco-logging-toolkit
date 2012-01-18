@@ -154,7 +154,24 @@ namespace Elmah.Everywhere.Diagnostics
                     propeties = new Dictionary<string, object>();
                 }
                 string report = GetDumpReport();
-                _writter.Report(exception, _parameters, propeties, report);
+                ErrorInfo error = new ErrorInfo(exception, _parameters,  propeties, report);
+                _writter.Write(error);
+                //_writter.Report(exception, _parameters, propeties, report);
+            }
+        }
+
+        public static void Report(ErrorInfo error)
+        {
+            if (error == null)
+            {
+                throw new ArgumentNullException("error");
+            }
+            if (IsEnabled)
+            {
+                error.Token = _parameters.Token;
+                string report = GetDumpReport();
+                error.AppendReport(report);
+                _writter.Write(error);
             }
         }
 

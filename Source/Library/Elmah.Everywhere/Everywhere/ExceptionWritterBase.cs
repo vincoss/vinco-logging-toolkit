@@ -11,7 +11,7 @@ namespace Elmah.Everywhere
 {
     public abstract class ExceptionWritterBase
     {
-        protected abstract void Write(ErrorInfo error);
+        public abstract void Write(ErrorInfo error);
 
         public void Report(Exception exception, ExceptionDefaults defaults, IDictionary<string, object> propeties, string dumpReport)
         {
@@ -44,23 +44,42 @@ namespace Elmah.Everywhere
             sb.AppendLine(Strings.Dump_Report);
             AppendText(sb, dumpReport);
 
-            var data = new ErrorInfo()
-            {
-                Token = defaults.Token,
-                ApplicationName = defaults.ApplicationName,
-                Host = defaults.Host,
-                Type = baseException.GetType().FullName,
+//            var data = new ErrorInfo()
+//            {
+//                Token = defaults.Token,
+//                ApplicationName = defaults.ApplicationName,
+//                Host = defaults.Host,
+//                Type = baseException.GetType().FullName,
 
-#if SILVERLIGHT
-                Source = defaults.Host,
-#else
-                Source = baseException.Source,
-#endif
-                Message = baseException.Message,
-                Error = sb.ToString(),
-                Date = DateTime.Now,
-            };
-            this.Write(data);
+//#if SILVERLIGHT
+//                Source = defaults.Host,
+//#else
+//                Source = baseException.Source,
+//#endif
+//                Message = baseException.Message,
+//                Error = sb.ToString(),
+//                Date = DateTime.Now,
+//            };
+//            if(propeties.ContainsKey("User"))
+//            {
+//                data.User = propeties["User"].ToString();
+//                if(string.IsNullOrWhiteSpace(data.User))
+//                {
+//                    #if !SILVERLIGHT
+//                    data.User = Environment.UserName;
+//                    #endif
+//                }
+//            }
+//            if (propeties.ContainsKey("StatusCode"))
+//            {
+//                int statusCode = 0;
+//                if(Int32.TryParse(propeties["StatusCode"].ToString(), out statusCode))
+//                {
+//                    data.StatusCode = statusCode;
+//                }
+//            }
+
+//            this.Write(data);
         }
 
         private static void AppendText(StringBuilder sb, string message)
