@@ -10,7 +10,7 @@ namespace Elmah.Everywhere.ServiceModel
 {
     public class ServiceHttpErrorBehaviorAttribute : Attribute, IServiceBehavior
     {
-        private Type _errorHandlerType;
+        private readonly Type _errorHandlerType;
 
         public ServiceHttpErrorBehaviorAttribute(Type errorHandlerType)
         {
@@ -26,11 +26,13 @@ namespace Elmah.Everywhere.ServiceModel
         public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
             IErrorHandler errorHandler = (IErrorHandler)Activator.CreateInstance(_errorHandlerType);
-
             foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers)
             {
-                ChannelDispatcher cd = cdb as ChannelDispatcher;
-                cd.ErrorHandlers.Add(errorHandler);
+                ChannelDispatcher caDispatcher = cdb as ChannelDispatcher;
+                if(caDispatcher != null)
+                {
+                    caDispatcher.ErrorHandlers.Add(errorHandler);
+                }
             }
         }
 
@@ -39,5 +41,4 @@ namespace Elmah.Everywhere.ServiceModel
         }
         #endregion
     }
-
 }

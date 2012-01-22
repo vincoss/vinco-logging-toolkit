@@ -1,4 +1,6 @@
-﻿namespace Silverlight_Sample
+﻿using System.Diagnostics;
+
+namespace Silverlight_Sample
 {
     using System;
     using System.Runtime.Serialization;
@@ -6,6 +8,7 @@
     using System.Windows;
     using Elmah.Everywhere.Diagnostics;
     using Elmah.Everywhere;
+using System.ServiceModel;
 
     /// <summary>
     /// Main <see cref="Application"/> class.

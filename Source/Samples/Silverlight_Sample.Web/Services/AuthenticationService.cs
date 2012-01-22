@@ -22,8 +22,12 @@
     /// Most of the functionality is already provided by the AuthenticationBase class.
     /// </summary>
     [EnableClientAccess]
-    [ServiceHttpErrorBehavior(typeof(HttpErrorHandler))]
+    //[ServiceHttpErrorBehavior(typeof(HttpErrorHandler))]
     public class AuthenticationService : AuthenticationBase<User>
     {
+        protected override void OnError(DomainServiceErrorInfo errorInfo)
+        {
+            base.OnError(errorInfo);
+        }
     }
 }

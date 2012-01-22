@@ -23,7 +23,7 @@
     /// Domain Service responsible for registering users.
     /// </summary>
     [EnableClientAccess]
-    [ServiceHttpErrorBehavior(typeof(HttpErrorHandler))]
+    //[ServiceHttpErrorBehavior(typeof(HttpErrorHandler))]
     public class UserRegistrationService : DomainService
     {
         /// <summary>
@@ -95,6 +95,11 @@
                 case MembershipCreateStatus.DuplicateEmail: return CreateUserStatus.DuplicateEmail;
                 default: return CreateUserStatus.Failure;
             }
+        }
+
+        protected override void OnError(DomainServiceErrorInfo errorInfo)
+        {
+            base.OnError(errorInfo);
         }
     }
 

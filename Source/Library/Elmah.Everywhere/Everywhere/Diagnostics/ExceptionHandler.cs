@@ -22,7 +22,7 @@ namespace Elmah.Everywhere.Diagnostics
 
         private static void AppDomain_UnhandledException(object sender, UnhandledExceptionEventArgs args)
         {
-            Report((Exception)args.ExceptionObject, null);
+            Report((Exception) args.ExceptionObject, null);
         }
 
         private static string GetDumpReport()
@@ -54,7 +54,7 @@ namespace Elmah.Everywhere.Diagnostics
 
 #endif
             builder.Append("Version:                         ");
-            builder.Append(new AssemblyName(typeof(ExceptionHandler).Assembly.FullName).Version);
+            builder.Append(new AssemblyName(typeof (ExceptionHandler).Assembly.FullName).Version);
             builder.Append(str);
 
             builder.Append("Operating System Version:        ");
@@ -154,13 +154,12 @@ namespace Elmah.Everywhere.Diagnostics
                     propeties = new Dictionary<string, object>();
                 }
                 string report = GetDumpReport();
-                ErrorInfo error = new ErrorInfo(exception, _parameters,  propeties, report);
+                ErrorInfo error = new ErrorInfo(exception, _parameters, propeties, report);
                 _writter.Write(error);
-                //_writter.Report(exception, _parameters, propeties, report);
             }
         }
 
-        public static void Report(ErrorInfo error)
+        internal static void Report(ErrorInfo error)
         {
             if (error == null)
             {
@@ -168,6 +167,12 @@ namespace Elmah.Everywhere.Diagnostics
             }
             if (IsEnabled)
             {
+                if (string.IsNullOrWhiteSpace(error.User))
+                {
+#if !SILVERLIGHT
+                    error.User = Environment.UserName;
+#endif
+                }
                 error.Token = _parameters.Token;
                 string report = GetDumpReport();
                 error.AppendReport(report);

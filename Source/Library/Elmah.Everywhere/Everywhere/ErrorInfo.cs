@@ -78,6 +78,8 @@ namespace Elmah.Everywhere
             Date = DateTime.Now;
         }
 
+     
+
         private static void AppendText(StringBuilder sb, string message)
         {
             if (!string.IsNullOrWhiteSpace(message))

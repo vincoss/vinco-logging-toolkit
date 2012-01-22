@@ -96,7 +96,7 @@
       <Project>{319DD6E1-E5EB-4896-9055-BF486FC9C0EF}</Project>
       <Name>Elmah.Everywhere</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\_DevelopmentTools\Exception &amp; Logging\ELMAH-1.2-sp1-src\src\Solutions\2010\Elmah.csproj">
+    <ProjectReference Include="E:\_Development Resources\Exceptions\Elmah\ELMAH-1.2-src\src\Solutions\2010\Elmah.csproj">
       <Project>{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}</Project>
       <Name>Elmah</Name>
     </ProjectReference>

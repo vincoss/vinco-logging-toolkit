@@ -33,14 +33,6 @@ namespace Elmah.Everywhere
             {
                 valid = false;
             }
-            if (string.IsNullOrWhiteSpace(model.Type))
-            {
-                valid = false;
-            }
-            if (string.IsNullOrWhiteSpace(model.Source))
-            {
-                valid = false;
-            }
             if (string.IsNullOrWhiteSpace(model.Message))
             {
                 valid = false;
