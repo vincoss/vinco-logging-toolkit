@@ -12,7 +12,7 @@ namespace Silverlight_Sample.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            throw new AmbiguousMatchException("Test Error...");
+            throw new Exception("Test Error...");
         }
     }
 }

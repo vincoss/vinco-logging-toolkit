@@ -5,7 +5,6 @@ using Elmah.Everywhere;
 
 
 
-
 namespace Console_Sample
 {
     class Program
