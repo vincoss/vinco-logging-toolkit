@@ -68,10 +68,14 @@
     <Compile Include="Everywhere\Controllers\ElmahController.cs" />
     <Compile Include="Everywhere\Controllers\ErrorController.cs" />
     <Compile Include="Everywhere\Diagnostics\ExceptionHandler.cs" />
+    <Compile Include="Everywhere\DumpHelper.cs" />
     <Compile Include="Everywhere\ElmahErrorHelper.cs" />
     <Compile Include="Everywhere\ErrorInfo.cs" />
     <Compile Include="Everywhere\ErrorService.cs" />
+    <Compile Include="Everywhere\ExceptionExtension.cs" />
     <Compile Include="Everywhere\HttpErrorLog.cs" />
+    <Compile Include="Everywhere\LogDetailBase.cs" />
+    <Compile Include="Everywhere\MemoryDetail.cs" />
     <Compile Include="Everywhere\Models\LogOnModel.cs" />
     <Compile Include="Everywhere\ServiceModel\ErrorBehaviorExtensionElement.cs" />
     <Compile Include="Everywhere\Web\CustomRequireHttps.cs" />

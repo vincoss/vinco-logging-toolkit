@@ -61,7 +61,7 @@ namespace Elmah.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dump report:.
+        ///   Looks up a localized string similar to *** Dump Report:.
         /// </summary>
         internal static string Dump_Report {
             get {

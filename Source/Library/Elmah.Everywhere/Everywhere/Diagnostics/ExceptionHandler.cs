@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Reflection;
-using System.Text;
-using System.Globalization;
-using System.Diagnostics;
 using System.Collections.Generic;
 
 
@@ -23,86 +19,6 @@ namespace Elmah.Everywhere.Diagnostics
         private static void AppDomain_UnhandledException(object sender, UnhandledExceptionEventArgs args)
         {
             Report((Exception) args.ExceptionObject, null);
-        }
-
-        private static string GetDumpReport()
-        {
-            const string str = "\r\n";
-            var builder = new StringBuilder();
-
-            builder.Append("Date:                            ");
-            builder.Append(DateTime.Now);
-            builder.Append(str);
-
-            builder.Append("Culture:                         ");
-            builder.Append(CultureInfo.CurrentCulture.Name);
-            builder.Append(str);
-
-#if !SILVERLIGHT
-
-            builder.Append("User:                            ");
-            builder.Append(Environment.UserName);
-            builder.Append(str);
-
-            builder.Append("MachineName:                     ");
-            builder.Append(Environment.MachineName);
-            builder.Append(str);
-
-            builder.Append("App up time:                     ");
-            builder.Append((DateTime.Now - Process.GetCurrentProcess().StartTime));
-            builder.Append(str);
-
-#endif
-            builder.Append("Version:                         ");
-            builder.Append(new AssemblyName(typeof (ExceptionHandler).Assembly.FullName).Version);
-            builder.Append(str);
-
-            builder.Append("Operating System Version:        ");
-            builder.Append(Environment.OSVersion);
-            builder.Append(str);
-
-            builder.Append("Common Language Runtime Version: ");
-            builder.Append(Environment.Version);
-            builder.Append(str);
-
-#if SILVERLIGHT
-            // TODO: Silverlight info here
-#else
-            // Get asembly list
-            builder.AppendLine();
-            builder.AppendLine("AppDomain Assemblies:");
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (Assembly assembly in assemblies)
-            {
-                builder.Append(assembly.GetName().FullName);
-                builder.AppendLine();
-            }
-            builder.AppendLine();
-
-            // Get file info
-            foreach (Assembly assembly in assemblies)
-            {
-                bool flag = false;
-                try
-                {
-                    if (assembly.Location.Length != 0)
-                    {
-                        builder.Append(FileVersionInfo.GetVersionInfo(assembly.Location).ToString());
-                        builder.AppendLine();
-                        flag = true;
-                    }
-                }
-                catch
-                {
-                }
-                if (!flag)
-                {
-                    builder.Append(assembly.ToString());
-                }
-                builder.AppendLine();
-            }
-#endif
-            return builder.ToString();
         }
 
         #endregion
@@ -149,17 +65,13 @@ namespace Elmah.Everywhere.Diagnostics
             }
             if (IsEnabled)
             {
-                if (propeties == null)
-                {
-                    propeties = new Dictionary<string, object>();
-                }
-                string report = GetDumpReport();
-                ErrorInfo error = new ErrorInfo(exception, _parameters, propeties, report);
+                var error = new ErrorInfo(exception, _parameters, propeties);
+                error.EnsureErrorDetails();
                 _writter.Write(error);
             }
         }
 
-        internal static void Report(ErrorInfo error)
+        public static void Report(ErrorInfo error)
         {
             if (error == null)
             {
@@ -167,15 +79,7 @@ namespace Elmah.Everywhere.Diagnostics
             }
             if (IsEnabled)
             {
-                if (string.IsNullOrWhiteSpace(error.User))
-                {
-#if !SILVERLIGHT
-                    error.User = Environment.UserName;
-#endif
-                }
-                error.Token = _parameters.Token;
-                string report = GetDumpReport();
-                error.AppendReport(report);
+                error.EnsureErrorDetails();
                 _writter.Write(error);
             }
         }

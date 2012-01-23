@@ -8,73 +8,47 @@ using Elmah.Properties;
 
 namespace Elmah.Everywhere
 {
+    // Add token
+    // Add user
+
     public class ErrorInfo
     {
         private readonly Guid _id;
         private readonly Exception _exception;
-        private readonly StringBuilder sb = new StringBuilder();
+        private readonly StringBuilder _sb = new StringBuilder();
+        private IDictionary<string, object> _properties;
 
         public ErrorInfo()
         {
             _id = Guid.NewGuid();
         }
 
-        public void AppendReport(string report)
-        {
-            if(string.IsNullOrWhiteSpace(report))
-            {
-                throw new ArgumentNullException("report");
-            }
-
-            AppendText(sb, this.Error);
-            sb.AppendLine();
-
-            // Dump report
-            sb.AppendLine(Strings.Dump_Report);
-            AppendText(sb, report);
-
-            this.Error = sb.ToString();
-        }
-
-        public ErrorInfo(Exception exception, ExceptionDefaults defaults, IDictionary<string, object> propeties, string report) : this()
+        public ErrorInfo(Exception exception, ExceptionDefaults defaults, IDictionary<string, object> propeties) : this()
         {
             if(exception == null)
             {
                 throw new ArgumentNullException("exception");
             }
-            if (propeties == null)
+            if(propeties != null)
             {
-                throw new ArgumentNullException("propeties");
+                foreach (var propety in propeties)
+                {
+                    this.Properties.Add(propety.Key, propety.Value);
+                }
             }
             _exception = exception;
-
-            Exception baseException = exception.GetBaseException();
-            AppendText(sb, baseException.ToString());
-
-            // Exception data
-            AppendText(sb, GetValues(exception.Data));
-            sb.AppendLine();
-
-            // Exception properties
-            AppendText(sb, GetValues(propeties));
-            sb.AppendLine();
-
-            // Dump report
-            sb.AppendLine(Strings.Dump_Report);
-            AppendText(sb, report);
 
             Token = defaults.Token;
             ApplicationName = defaults.ApplicationName;
             Host = defaults.Host;
-            Type = baseException.GetType().FullName;
+            Type = exception.GetBaseException().GetType().FullName;
 
 #if SILVERLIGHT
                 Source = defaults.Host;
 #else
-            Source = baseException.Source;
+            Source = exception.GetBaseException().Source;
 #endif
-            Message = baseException.Message;
-            Error = sb.ToString();
+            Message = exception.GetBaseException().Message;
             Date = DateTime.Now;
         }
 
@@ -144,6 +118,22 @@ namespace Elmah.Everywhere
         public Exception Exception
         {
             get { return _exception; }
+        }
+
+        public IDictionary<string, object> Properties
+        {
+            get { return _properties ?? (_properties = new Dictionary<string, object>()); }
+        }
+
+        internal void EnsureErrorDetails()
+        {
+            DumpHelper.WithException(this.Exception, _sb);
+            DumpHelper.WithExceptionData(Exception.Data, _sb);
+            DumpHelper.WithProperties(Properties, _sb);
+            DumpHelper.WithDetail(_sb);
+            DumpHelper.WithMemory(_sb);
+            DumpHelper.WithAssembly(_sb);
+            Error = _sb.ToString();
         }
     }
 }
