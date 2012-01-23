@@ -6,9 +6,14 @@ namespace Elmah.Everywhere
 {
     public static class ExceptionExtension
     {
+        /// <summary>
+        /// Gets exception detail including inner exceptions.
+        /// </summary>
+        /// <param name="exception">Exception to get detail.</param>
+        /// <returns>Exception detail.</returns>
         public static string GetExceptionString(this Exception exception)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             if (exception != null)
             {
                 string className;

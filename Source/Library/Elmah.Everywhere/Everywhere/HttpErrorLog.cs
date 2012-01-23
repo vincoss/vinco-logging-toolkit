@@ -34,7 +34,7 @@ namespace Elmah.Everywhere
             {
                 throw new ArgumentNullException("error");
             }
-            ErrorInfo info = ElmahErrorHelper.ToInfo(error);
+            ErrorInfo info = ElmahErrorHelper.ToErrorInfo(error);
             ExceptionHandler.Report(info);
             return info.Id.ToString();
         }

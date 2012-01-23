@@ -23,8 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_Sample", "Source\Sample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.Everywhere.Test", "Source\Test\Elmah.Everywhere.Test\Elmah.Everywhere.Test.csproj", "{BBDDB842-F323-4C51-9A6D-6589D3C03F61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah", "E:\_Development Resources\Exceptions\Elmah\ELMAH-1.2-src\src\Solutions\2010\Elmah.csproj", "{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,16 +113,6 @@ Global
 		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BBDDB842-F323-4C51-9A6D-6589D3C03F61}.Release|x86.ActiveCfg = Release|Any CPU
-		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

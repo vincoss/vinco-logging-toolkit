@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Elmah.Everywhere
 {
-    public class MemoryDetail : LogDetailBase
+    public class MemoryDetail
     {
-        public override void Append(StringBuilder sb)
+        public void Append(StringBuilder sb)
         {
             var memorystatusex = new MemoryStatusEx();
             if (GlobalMemoryStatusEx(memorystatusex))
@@ -43,7 +43,7 @@ namespace Elmah.Everywhere
 
         #endregion
 
-        public override string Name
+        public string Name
         {
             get { return "MemoryDetail"; }
         }

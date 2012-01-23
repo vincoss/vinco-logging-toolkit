@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Elmah, Version=1.2.13605.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -95,10 +99,6 @@
     <ProjectReference Include="..\Library\Elmah.Everywhere\Elmah.Everywhere.csproj">
       <Project>{319DD6E1-E5EB-4896-9055-BF486FC9C0EF}</Project>
       <Name>Elmah.Everywhere</Name>
-    </ProjectReference>
-    <ProjectReference Include="E:\_Development Resources\Exceptions\Elmah\ELMAH-1.2-src\src\Solutions\2010\Elmah.csproj">
-      <Project>{C92DC151-A0BA-4A5E-A20E-620EC9C06AFF}</Project>
-      <Name>Elmah</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

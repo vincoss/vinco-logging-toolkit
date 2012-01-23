@@ -5,6 +5,10 @@ using Elmah.Everywhere.Web;
 
 namespace Elmah.Everywhere.Controllers
 {
+    // TODO: Should allow only administrators
+    // Should run under HTTPS
+
+    // [CustomRequireHttps]
     //[Authorize(Roles = "Administrator")]
     [Authorize]
     public class ElmahController : Controller

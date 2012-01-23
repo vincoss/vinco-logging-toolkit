@@ -76,7 +76,7 @@ namespace Elmah.Everywhere
         {
             return new Error
             {
-                ApplicationName =properties.ApplicationName,
+                ApplicationName = properties.ApplicationName,
                 HostName = properties.Host,
                 Type = properties.Type,
                 Source = properties.Source,
@@ -88,7 +88,7 @@ namespace Elmah.Everywhere
             };
         }
 
-        public static ErrorInfo ToInfo(Error error)
+        public static ErrorInfo ToErrorInfo(Error error)
         {
             return new ErrorInfo()
             {

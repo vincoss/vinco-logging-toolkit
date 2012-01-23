@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Collections;
-using System.Globalization;
-using Elmah.Properties;
 
 
 namespace Elmah.Everywhere
 {
-    // Add token
-    // Add user
-
     public class ErrorInfo
     {
         private readonly Guid _id;
         private readonly Exception _exception;
-        private readonly StringBuilder _sb = new StringBuilder();
+        private readonly StringBuilder _sb;
         private IDictionary<string, object> _properties;
 
         public ErrorInfo()
         {
             _id = Guid.NewGuid();
+            _sb = new StringBuilder();
         }
 
         public ErrorInfo(Exception exception, ExceptionDefaults defaults, IDictionary<string, object> propeties) : this()
@@ -37,58 +32,21 @@ namespace Elmah.Everywhere
                 }
             }
             _exception = exception;
+            Exception baseException = exception.GetBaseException();
 
             Token = defaults.Token;
             ApplicationName = defaults.ApplicationName;
             Host = defaults.Host;
-            Type = exception.GetBaseException().GetType().FullName;
+            Type = baseException.GetType().FullName;
 
 #if SILVERLIGHT
                 Source = defaults.Host;
 #else
-            Source = exception.GetBaseException().Source;
+            Source = baseException.Source;
 #endif
-            Message = exception.GetBaseException().Message;
+            Message = baseException.Message;
             Date = DateTime.Now;
         }
-
-     
-
-        private static void AppendText(StringBuilder sb, string message)
-        {
-            if (!string.IsNullOrWhiteSpace(message))
-            {
-                sb.AppendLine(message);
-            }
-        }
-
-        private static string GetValues(IDictionary exceptionData)
-        {
-            var sb = new StringBuilder();
-            if (exceptionData != null && exceptionData.Count > 0)
-            {
-                foreach (var key in exceptionData.Keys)
-                {
-                    sb.AppendLine();
-                    sb.AppendFormat(CultureInfo.InvariantCulture, "{0}: {1}", key, exceptionData[key]);
-                }
-            }
-            return sb.ToString();
-        }
-
-        private static string GetValues(IDictionary<string, object> propertiesData)
-        {
-            var sb = new StringBuilder();
-            if (propertiesData != null && propertiesData.Count > 0)
-            {
-                foreach (var key in propertiesData.Keys)
-                {
-                    sb.AppendLine();
-                    sb.AppendFormat(CultureInfo.InvariantCulture, "{0}: {1}", key, propertiesData[key]);
-                }
-            }
-            return sb.ToString();
-        } 
 
         public Guid Id
         {
