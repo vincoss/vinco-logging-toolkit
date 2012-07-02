@@ -36,5 +36,23 @@ namespace Elmah.Everywhere.Controllers.Test
             // Assert
             Assert.True(attributes.Any());
         }
+        
+        [Fact]
+        public void LogOn_Test()
+        {
+            Assert.True(false, "TODO: complete");
+        }
+
+        [Fact]
+        public void LogOn_Post_Test()
+        {
+            Assert.True(false, "TODO: complete");
+        }
+
+        [Fact]
+        public void LogOff_Test()
+        {
+            Assert.True(false, "TODO: complete");
+        }
     }
 }

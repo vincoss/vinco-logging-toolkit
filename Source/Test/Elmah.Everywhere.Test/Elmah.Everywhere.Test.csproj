@@ -52,6 +52,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
     </Reference>
+    <Reference Include="Elmah.Everywhere, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Elmah.Everywhere.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\..\Assemblies\Moq\Moq.dll</HintPath>
     </Reference>
@@ -59,6 +63,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Assemblies\MVC\System.Web.Mvc.dll</HintPath>
@@ -80,14 +85,9 @@
     <Compile Include="Everywhere\Test\ElmahErrorHelperTest.cs" />
     <Compile Include="Everywhere\Test\ErrorServiceTest.cs" />
     <Compile Include="Everywhere\Test\ErrorInfoTest.cs" />
+    <Compile Include="Everywhere\Test\HttpErrorLogTest.cs" />
     <Compile Include="Everywhere\Test\HttpExceptionWritterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Library\Elmah.Everywhere\Elmah.Everywhere.csproj">
-      <Project>{319DD6E1-E5EB-4896-9055-BF486FC9C0EF}</Project>
-      <Name>Elmah.Everywhere</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -112,6 +112,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

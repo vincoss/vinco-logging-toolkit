@@ -1,24 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using Elmah.Everywhere.Diagnostics;
 
 
 namespace Wpf_Sample
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -28,30 +13,22 @@ namespace Wpf_Sample
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Create exception and sample data.
-            Exception exception = GetSampleException();
-            exception.Data.Add("Some-Key", "Some-Value");
-
-            IDictionary<string, object> properties = new Dictionary<string, object>();
-            properties.Add("Test", "Value 1");
-
-            // Report exception
-            ExceptionHandler.Report(exception, properties);
+            int i = 0;
+            int result = 10 / i;
         }
 
-        public static Exception GetSampleException()
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Exception exception = null;
-            try
-            {
-                int i = 0;
-                int result = 10 / i;
-            }
-            catch (Exception ex)
-            {
-                exception = ex;
-            }
-            return exception;
+            WcfSample.SampleWcfServiceClient client = new WcfSample.SampleWcfServiceClient();
+            client.MakeErrorCompleted += (s, args) =>
+                                             {
+                                                 if(args.Error != null)
+                                                 {
+                                                     // Manual error log
+                                                     ExceptionHandler.Report(args.Error);
+                                                 }
+                                             };
+            client.MakeErrorAsync();
         }
     }
 }

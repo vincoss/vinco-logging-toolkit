@@ -6,6 +6,8 @@ using System.Web;
 
 namespace Elmah.Everywhere.Web
 {
+    // TODO:
+
     public class ElmahResult : ActionResult
     {
         private readonly string _resouceType;

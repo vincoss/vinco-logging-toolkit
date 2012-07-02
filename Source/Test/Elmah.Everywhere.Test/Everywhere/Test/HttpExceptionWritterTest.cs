@@ -1,33 +1,92 @@
 ﻿using System;
 using Xunit;
+using System.Web;
 
 
 namespace Elmah.Everywhere.Test
 {
-    // TODO: Fix me proplem with ID
     public class HttpExceptionWritterTest
     {
         [Fact]
         public void FormData_Test()
         {
             // Arrange
-            ErrorInfo info = new ErrorInfo
-                                 {
-                                     Token = "1",
-                                     ApplicationName = "2",
-                                     Host = "3",
-                                     Type = "4",
-                                     Source = "5",
-                                     Message = "6",
-                                     Error = "7",
-                                     Date = DateTime.MinValue
-                                 };
+            var entity = new { first = "value 1", second = "value 2" };
 
             // Act
-            string data = HttpExceptionWritter.FormData(info);
+            string data = HttpExceptionWritterBase.FormData(entity, HttpUtility.UrlEncode);
 
             // Assert
-            Assert.Equal<string>("Id=de9a9d10-0ec5-4b18-8781-8b0854d3361f&Token=1&ApplicationName=2&Host=3&Type=4&Source=5&Message=6&Error=7&User=&StatusCode=0&Date=1%2f01%2f0001+12%3a00%3a00+AM&Exception=&Properties=System.Collections.Generic.Dictionary%602%5bSystem.String%2cSystem.Object%5d", data);
+            Assert.Equal("first=value+1&second=value+2", data);
+        }
+
+        [Fact]
+        public void Write_Throws_If_Token_Is_Null_Test()
+        {
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => new HttpExceptionWritter().Write(null, new ErrorInfo(new Exception())));
+        }
+
+        [Fact]
+        public void Write_Throws_If_Error_Is_Null_Test()
+        {
+            Assert.Throws<ArgumentNullException>(() => new HttpExceptionWritter().Write("Test-Token", null));
+        }
+
+        [Fact]
+        public void Write_Test()
+        {
+            // Arrange
+            TestableHttpExceptionWritter writter = new TestableHttpExceptionWritter();
+
+            ErrorInfo info = new ErrorInfo(new Exception("Test Exception"));
+
+            // Act
+            writter.Write("Test-Token", info);
+
+            // Assert
+            Assert.NotNull(writter.Data);
+        }
+
+        [Fact]
+        public void Write_Completed_Event_Called_Test()
+        {
+            // Arrange
+            bool completed = false;
+            TestableHttpExceptionWritter writter = new TestableHttpExceptionWritter();
+
+            writter.Completed += (s, e) =>
+                                     {
+                                         completed = true;
+                                     };
+
+            ErrorInfo info = new ErrorInfo(new Exception("Test Exception"));
+
+            // Act
+            writter.Write("Test-Token", info);
+
+            // Assert
+            Assert.True(completed);
+        }
+
+        [Fact]
+        public void Write_Exception_Not_Null_If_Error_Occurs_Test()
+        {
+            TestableHttpExceptionWritter writter = new TestableHttpExceptionWritter();
+            ErrorInfo info = new ErrorInfo(new Exception("Test Exception"));
+            writter.Throw = true;
+
+            // Act
+            writter.Write("Test-Token", info);
+
+            // Assert
+            Assert.NotNull(writter.Exception);
+        }
+
+        class TestableHttpExceptionWritter : HttpExceptionWritter
+        {
+            public bool Throw { get; set; }
+            public string Data { get; private set; }
         }
     }
 }

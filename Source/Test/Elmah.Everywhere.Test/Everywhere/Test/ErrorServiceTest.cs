@@ -48,7 +48,7 @@ namespace Elmah.Everywhere.Test
                                      Type = "Type",
                                      Source = "Source",
                                      Message = "Message",
-                                     Error = "Error"
+                                     Detail = "Error"
                                  };
 
             // Act
@@ -57,7 +57,6 @@ namespace Elmah.Everywhere.Test
             // Assert
             Assert.True(result);
         }
-
 
         [Fact]
         public void ValidateErrorInfo_Returns_False_Test()

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Text;
 
 
 namespace Elmah.Everywhere.Controllers
 {
-    // TODO: Should allow only HTTPS
-
+    //[CustomRequireHttps]
     public class ErrorController : Controller
     {
         private readonly IErrorService _errorService;
@@ -22,13 +22,16 @@ namespace Elmah.Everywhere.Controllers
         }
 
         [HttpPost]
-        public ActionResult Log(ErrorInfo model)
+        public ActionResult Log(string token, string error)
         {
-            if (_errorService.ValidateToken(model.Token))
+            if (_errorService.ValidateToken(token))
             {
-                if (_errorService.ValidateErrorInfo(model))
+                var bytes = Convert.FromBase64String(error);
+                var xml = Encoding.UTF8.GetString(bytes);
+                var info = Utils.Utility.DeserializeXml(xml);
+                if (_errorService.ValidateErrorInfo(info))
                 {
-                    _elmahErrorHelper.LogException(model);
+                    _elmahErrorHelper.LogException(info);
                     return new HttpStatusCodeResult(200);
                 }
                 return new HttpStatusCodeResult(412);

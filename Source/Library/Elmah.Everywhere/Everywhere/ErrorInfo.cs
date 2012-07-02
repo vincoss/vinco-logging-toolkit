@@ -1,61 +1,137 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
+using System.Globalization;
+
+using Elmah.Everywhere.Utils;
+using Elmah.Everywhere.Appenders;
 
 
 namespace Elmah.Everywhere
 {
+    [DebuggerDisplay("Message : {Message}")]
     public class ErrorInfo
     {
-        private readonly Guid _id;
-        private readonly Exception _exception;
-        private readonly StringBuilder _sb;
-        private IDictionary<string, object> _properties;
+        private string _id;
+        private List<DetailInfo> _details;
 
         public ErrorInfo()
         {
-            _id = Guid.NewGuid();
-            _sb = new StringBuilder();
         }
 
-        public ErrorInfo(Exception exception, ExceptionDefaults defaults, IDictionary<string, object> propeties) : this()
+        public ErrorInfo(Exception exception)
         {
-            if(exception == null)
+            if (exception == null)
             {
                 throw new ArgumentNullException("exception");
             }
-            if(propeties != null)
-            {
-                foreach (var propety in propeties)
-                {
-                    this.Properties.Add(propety.Key, propety.Value);
-                }
-            }
-            _exception = exception;
-            Exception baseException = exception.GetBaseException();
+            _id = Guid.NewGuid().ToString();
+            Exception = exception;
+            Exception baseException = Exception.GetBaseException();
 
-            Token = defaults.Token;
-            ApplicationName = defaults.ApplicationName;
-            Host = defaults.Host;
             Type = baseException.GetType().FullName;
 
-#if SILVERLIGHT
-                Source = defaults.Host;
-#else
+#if !SILVERLIGHT
             Source = baseException.Source;
 #endif
+            Detail = exception.GetExceptionString();
             Message = baseException.Message;
             Date = DateTime.Now;
         }
 
-        public Guid Id
+        #region Public methods
+
+        public void AddDetail(string detailName, string key, string value)
         {
-            get { return _id; }
+            AddDetail(detailName, new Dictionary<string, string>());
+            var detail = this.Details.Single(x => string.Equals(x.Name, detailName, StringComparison.OrdinalIgnoreCase));
+            detail.Items.Add(new KeyValuePair<string, string>(key, value));
         }
 
-        public string Token { get; set; }
+        public void AddDetail(string detailName, IEnumerable<KeyValuePair<string, string>> pairs)
+        {
+            if (Details.Any(x => string.Equals(x.Name, detailName, StringComparison.OrdinalIgnoreCase)) == false)
+            {
+                var detail = new DetailInfo(detailName, new List<KeyValuePair<string, string>>(pairs));
+                _details.Add(detail);
+            }
+        }
 
-        public string ApplicationName { get; set; }
+        public string BuildMessage()
+        {
+            var sb = new StringBuilder();
+            sb.Append(this.Detail);
+
+            foreach (var detail in this.Details)
+            {
+                if (sb.Length > 0)
+                {
+                    sb.Append(Constants.NEW_LINE);
+                    sb.Append(Constants.NEW_LINE);
+                }
+
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}", Constants.HEADER_PREFIX, detail.Name));
+                sb.AppendLine();
+
+                foreach (var pair in detail.Items)
+                {
+                    sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}: {1}", pair.Key, pair.Value));
+                }
+            }
+            return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.Message;
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void EnsureAppenders()
+        {
+            if (Appenders == null)
+            {
+                return;
+            }
+            var appenders = (from x in Appenders
+                             let a = Activator.CreateInstance(x) as BaseAppender
+                             where a != null
+                             orderby a.Order
+                             select a).ToList();
+
+            foreach (var appender in appenders)
+            {
+                try
+                {
+                    appender.Append(this);
+                }
+                catch (Exception ex)
+                {
+#if !SILVERLIGHT
+                    Trace.WriteLine(ex); // TODO:
+#endif
+                }
+            }
+        }
+
+        #endregion
+
+        #region Public properties
+
+        public string Id
+        {
+            get
+            {
+                EnsureAppenders();
+                return _id;
+            }
+            internal set { _id = value; }
+        }
 
         public string Host { get; set; }
 
@@ -65,7 +141,9 @@ namespace Elmah.Everywhere
 
         public string Message { get; set; }
 
-        public string Error { get; set; }
+        public string Detail { get; set; }
+
+        public string ApplicationName { get; set; }
 
         public string User { get; set; }
 
@@ -73,25 +151,42 @@ namespace Elmah.Everywhere
 
         public DateTime Date { get; set; }
 
-        public Exception Exception
+        public Exception Exception { get; private set; }
+
+        public IEnumerable<DetailInfo> Details
         {
-            get { return _exception; }
+            get { return _details ?? (_details = new List<DetailInfo>()); }
         }
 
-        public IDictionary<string, object> Properties
+        public IEnumerable<Type> Appenders { get; set; }
+
+        public IDictionary<string, object> Properties { get; set; }
+
+        #endregion
+
+        #region Nested types
+
+        [DebuggerDisplay("Name : {Name}")]
+        public class DetailInfo
         {
-            get { return _properties ?? (_properties = new Dictionary<string, object>()); }
+            public DetailInfo(string name, IList<KeyValuePair<string, string>> pairs)
+            {
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    throw new ArgumentNullException("name");
+                }
+                if (pairs == null)
+                {
+                    throw new ArgumentNullException("pairs");
+                }
+                Name = name;
+                Items = pairs;
+            }
+
+            public string Name { get; private set; }
+            public IList<KeyValuePair<string, string>> Items { get; private set; }
         }
 
-        internal void EnsureErrorDetails()
-        {
-            DumpHelper.WithException(this.Exception, _sb);
-            DumpHelper.WithExceptionData(Exception.Data, _sb);
-            DumpHelper.WithProperties(Properties, _sb);
-            DumpHelper.WithDetail(_sb);
-            DumpHelper.WithMemory(_sb);
-            DumpHelper.WithAssembly(_sb);
-            Error = _sb.ToString();
-        }
+        #endregion
     }
 }

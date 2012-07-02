@@ -13,6 +13,12 @@ namespace WebSite
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            this.Error += new System.EventHandler(MvcApplication_Error);
+        }
+
+        void MvcApplication_Error(object sender, System.EventArgs e)
+        {
         }
 
         public static void RegisterRoutes(RouteCollection routes)

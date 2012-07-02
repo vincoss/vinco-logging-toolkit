@@ -1,39 +1,33 @@
 ﻿using System;
-using System.ServiceModel.DomainServices.Client.ApplicationServices;
 using System.Windows;
-using Elmah.Everywhere.Diagnostics;
+
 using Elmah.Everywhere;
+using Elmah.Everywhere.Diagnostics;
+using Elmah.Everywhere.Appenders;
+using System.Collections.Generic;
 
 
 namespace Silverlight_Sample
 {
-    /// <summary>
-    /// Main <see cref="Application"/> class.
-    /// </summary>
     public partial class App : Application
     {
-        /// <summary>
-        /// Creates a new <see cref="App"/> instance.
-        /// </summary>
         public App()
         {
             SetUpExceptionHandler();
 
-            InitializeComponent();
+            this.Startup += this.Application_Startup;
+            this.Exit += this.Application_Exit;
+            this.UnhandledException += this.Application_UnhandledException;
 
-            // Create a WebContext and add it to the ApplicationLifetimeObjects collection.
-            // This will then be available as WebContext.Current.
-            WebContext webContext = new WebContext();
-            webContext.Authentication = new FormsAuthentication();
-            //webContext.Authentication = new WindowsAuthentication();
-            this.ApplicationLifetimeObjects.Add(webContext);
+            InitializeComponent();
         }
 
         private static void SetUpExceptionHandler()
         {
             // Configure
-            var writter = new HttpExceptionWritter
+            var writter = new ClientHttpExceptionWritter
             {
+                // NOTE: Possible to pass URI by startup arguments.
                 RequestUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
             };
 
@@ -44,55 +38,59 @@ namespace Silverlight_Sample
                 ApplicationName = "Silverlight-Sample",
                 Host = string.Format("{0}{1}{2}:{3}", uri.Scheme, Uri.SchemeDelimiter, uri.Host, uri.Port)
             };
-            ExceptionHandler.WithParameters(defaults, writter);
+
+            var appenders = new List<Type>
+                       {
+                           typeof (PropertiesAppender),
+                           typeof (DetailAppender),
+                           typeof (AssemblyAppender)
+                       };
+
+
+            ExceptionHandler.WithParameters(defaults, writter, appenders);
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            // This will enable you to bind controls in XAML to WebContext.Current properties.
-            this.Resources.Add("WebContext", WebContext.Current);
-
-            // This will automatically authenticate a user when using Windows authentication or when the user chose "Keep me signed in" on a previous login attempt.
-            WebContext.Current.Authentication.LoadUser(this.Application_UserLoaded, null);
-
-            // Show some UI to the user while LoadUser is in progress
-            this.InitializeRootVisual();
+            this.RootVisual = new MainPage();
         }
 
-        /// <summary>
-        /// Invoked when the <see cref="LoadUserOperation"/> completes.
-        /// Use this event handler to switch from the "loading UI" you created in <see cref="InitializeRootVisual"/> to the "application UI".
-        /// </summary>
-        private void Application_UserLoaded(LoadUserOperation operation)
+        private void Application_Exit(object sender, EventArgs e)
         {
-        }
 
-        /// <summary>
-        /// Initializes the <see cref="Application.RootVisual"/> property.
-        /// The initial UI will be displayed before the LoadUser operation has completed.
-        /// The LoadUser operation will cause user to be logged in automatically if using Windows authentication or if the user had selected the "Keep me signed in" option on a previous login.
-        /// </summary>
-        protected virtual void InitializeRootVisual()
-        {
-            Silverlight_Sample.Controls.BusyIndicator busyIndicator = new Silverlight_Sample.Controls.BusyIndicator();
-            busyIndicator.Content = new MainPage();
-            busyIndicator.HorizontalContentAlignment = HorizontalAlignment.Stretch;
-            busyIndicator.VerticalContentAlignment = VerticalAlignment.Stretch;
-
-            this.RootVisual = busyIndicator;
         }
 
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             ExceptionHandler.Report(e.ExceptionObject, null);
 
-            // If the app is running outside of the debugger then report the exception using a ChildWindow control.
+            // If the app is running outside of the debugger then report the exception using
+            // the browser's exception mechanism. On IE this will display it a yellow alert 
+            // icon in the status bar and Firefox will display a script error.
             if (!System.Diagnostics.Debugger.IsAttached)
             {
-                // NOTE: This will allow the application to continue running after an exception has been thrown but not handled. 
-                // For production applications this error handling should be replaced with something that will report the error to the website and stop the application.
+
+                // NOTE: This will allow the application to continue running after an exception has been thrown
+                // but not handled. 
+                // For production applications this error handling should be replaced with something that will 
+                // report the error to the website and stop the application.
                 e.Handled = true;
-                ErrorWindow.CreateNew(e.ExceptionObject);
+                Deployment.Current.Dispatcher.BeginInvoke(delegate { ReportErrorToDOM(e); });
+            }
+        }
+
+        private void ReportErrorToDOM(ApplicationUnhandledExceptionEventArgs e)
+        {
+            try
+            {
+                string errorMsg = e.ExceptionObject.Message + e.ExceptionObject.StackTrace;
+                errorMsg = errorMsg.Replace('"', '\'').Replace("\r\n", @"\n");
+
+                System.Windows.Browser.HtmlPage.Window.Eval("throw new Error(\"Unhandled Error in Silverlight Application " + errorMsg + "\");");
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Report(ex);
             }
         }
     }

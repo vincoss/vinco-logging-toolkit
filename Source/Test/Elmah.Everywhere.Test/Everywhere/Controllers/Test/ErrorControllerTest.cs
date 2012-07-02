@@ -15,7 +15,7 @@ namespace Elmah.Everywhere.Controllers.Test
         {
             // Act
             // Arrange
-            Expression<Func<ErrorController, ActionResult>> expression = x => x.Log(null);
+            Expression<Func<ErrorController, ActionResult>> expression = x => x.Log(null, null);
             var methodCallExpression = (MethodCallExpression)expression.Body;
 
             // Act
@@ -37,12 +37,13 @@ namespace Elmah.Everywhere.Controllers.Test
 
             ErrorController controller = new ErrorController(helper, service.Object);
 
-            // Act
-            HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
+            //// Act
+            //HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
 
-            // Assert
-            Assert.Equal(200, result.StatusCode);
-            Assert.NotNull(helper.Error);
+            //// Assert
+            //Assert.Equal(200, result.StatusCode);
+            //Assert.NotNull(helper.Error);
+            Assert.True(false);
         }
 
         [Fact]
@@ -55,11 +56,12 @@ namespace Elmah.Everywhere.Controllers.Test
 
             ErrorController controller = new ErrorController(new TestableElmahErrorHelper(), service.Object);
 
-            // Act
-            HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
+            //// Act
+            //HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
 
-            // Assert
-            Assert.Equal(403, result.StatusCode);
+            //// Assert
+            //Assert.Equal(403, result.StatusCode);
+            Assert.True(false);
         }
 
         [Fact]
@@ -72,11 +74,12 @@ namespace Elmah.Everywhere.Controllers.Test
 
             ErrorController controller = new ErrorController(new TestableElmahErrorHelper(), service.Object);
 
-            // Act
-            HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
+            //// Act
+            //HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
 
-            // Assert
-            Assert.Equal(412, result.StatusCode);
+            //// Assert
+            //Assert.Equal(412, result.StatusCode);
+            Assert.True(false);
         }
 
         class TestableElmahErrorHelper : ElmahErrorHelper

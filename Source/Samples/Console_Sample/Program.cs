@@ -4,44 +4,44 @@ using Elmah.Everywhere.Diagnostics;
 using Elmah.Everywhere;
 
 
-
 namespace Console_Sample
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Configure
-            var writter = new HttpExceptionWritter
-                              {
-                                  RequestUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
-                              };
+            // Configure error handler from code
+            CodeSetupExceptionHandler();
+            
+            // Create sample exception and properties
+            Exception exception = CreateSampleException();
+            IDictionary<string, object> properties = CreateSampleProperties();
 
-            var defaults = new ExceptionDefaults
-                               {
-                                   Token = "Test-Token",
-                                   ApplicationName = "Console-Sample",
-                                   Host = Environment.MachineName
-                               };
-
-            ExceptionHandler.WithParameters(defaults, writter);
-
-            // Create exception and sample data.
-            Exception exception = GetSampleException();
-            exception.Data.Add("Some-Key", "Some-Value");
-
-            IDictionary<string, object> properties = new Dictionary<string, object>();
-            properties.Add("Test", "Value 1");
-            properties.Add("&Key=", "Value 1");
-
-            // Report exception
+            // Manual report exception
             ExceptionHandler.Report(exception, properties);
 
             Console.WriteLine("Done...");
             Console.Read();
         }
 
-        public static Exception GetSampleException()
+        private static void CodeSetupExceptionHandler()
+        {
+            var writter = new HttpExceptionWritter
+            {
+                RequestUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
+            };
+
+            var defaults = new ExceptionDefaults
+            {
+                Token = "Test-Token",
+                ApplicationName = "Console-Sample",
+                Host = Environment.MachineName
+            };
+
+            ExceptionHandler.WithParameters(defaults, writter);
+        }
+
+        private static Exception CreateSampleException()
         {
             Exception exception = null;
             try
@@ -53,7 +53,19 @@ namespace Console_Sample
             {
                 exception = ex;
             }
+
+            // Add some exception data.
+            exception.Data.Add("Some-Key", "Some-Value");
+
             return exception;
+        }
+
+        private static IDictionary<string, object> CreateSampleProperties()
+        {
+            IDictionary<string, object> properties = new Dictionary<string, object>();
+            properties.Add("Test", "Value 1");
+            properties.Add("Key", "Value 1");
+            return properties;
         }
     }
 }

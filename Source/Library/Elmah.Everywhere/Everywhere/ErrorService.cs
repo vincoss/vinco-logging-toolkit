@@ -37,7 +37,7 @@ namespace Elmah.Everywhere
             {
                 valid = false;
             }
-            if (string.IsNullOrWhiteSpace(model.Error))
+            if (string.IsNullOrWhiteSpace(model.Detail))
             {
                 valid = false;
             }

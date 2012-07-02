@@ -60,48 +60,73 @@
     };
 
     // Diagnostics routines
-    private class DiagnosticsResults {
-        public DiagnosticsResults() {
+    private class DiagnosticsResults
+    {
+        public DiagnosticsResults()
+        {
             EnvironmentInformation = GetEnvironmentInformation();
-            AllAssemblies = BuildManager.GetReferencedAssemblies().OfType<Assembly>().Concat(AppDomain.CurrentDomain.GetAssemblies()).Distinct().OrderBy(o => o.FullName).ToArray();
-            LoadedMvcCoreAssemblies = AllAssemblies.Where(IsMvcAssembly).Select<Assembly, LoadedAssemblyInfo<MvcCoreAssemblyInfo>>(GetMvcAssemblyInformation).ToArray();
-            LoadedMvcFuturesAssemblies = AllAssemblies.Where(IsMvcFuturesAssembly).Select<Assembly, LoadedAssemblyInfo<MvcFuturesAssemblyInfo>>(GetFuturesAssemblyInformation).ToArray();
+            AllAssemblies =
+                BuildManager.GetReferencedAssemblies().OfType<Assembly>().Concat(AppDomain.CurrentDomain.GetAssemblies())
+                    .Distinct().OrderBy(o => o.FullName).ToArray();
+            LoadedMvcCoreAssemblies =
+                AllAssemblies.Where(IsMvcAssembly).Select<Assembly, LoadedAssemblyInfo<MvcCoreAssemblyInfo>>(
+                    GetMvcAssemblyInformation).ToArray();
+            LoadedMvcFuturesAssemblies =
+                AllAssemblies.Where(IsMvcFuturesAssembly).Select<Assembly, LoadedAssemblyInfo<MvcFuturesAssemblyInfo>>(
+                    GetFuturesAssemblyInformation).ToArray();
 
-            IsFuturesConflict = (LoadedMvcCoreAssemblies.Length == 1 && LoadedMvcFuturesAssemblies.Length == 1 && LoadedMvcCoreAssemblies[0].MvcAssemblyInfo.FuturesVersion != LoadedMvcFuturesAssemblies[0].MvcAssemblyInfo.Version);
-            IsError = (LoadedMvcCoreAssemblies.Length != 1) || (LoadedMvcFuturesAssemblies.Length > 1) || IsFuturesConflict;
+            IsFuturesConflict = (LoadedMvcCoreAssemblies.Length == 1 && LoadedMvcFuturesAssemblies.Length == 1 &&
+                                 LoadedMvcCoreAssemblies[0].MvcAssemblyInfo.FuturesVersion !=
+                                 LoadedMvcFuturesAssemblies[0].MvcAssemblyInfo.Version);
+            IsError = (LoadedMvcCoreAssemblies.Length != 1) || (LoadedMvcFuturesAssemblies.Length > 1) ||
+                      IsFuturesConflict;
         }
 
-        private static EnvironmentInformation GetEnvironmentInformation() {
+        private static EnvironmentInformation GetEnvironmentInformation()
+        {
             string iisVersion = HttpContext.Current.Request.ServerVariables["SERVER_SOFTWARE"];
-            if (String.IsNullOrEmpty(iisVersion)) {
+            if (String.IsNullOrEmpty(iisVersion))
+            {
                 iisVersion = "Unknown";
             }
 
             string processName = "Unknown";
-            try {
+            try
+            {
                 // late binding so that LinkDemands are not triggered
-                object currentProcess = typeof(Process).GetMethod("GetCurrentProcess", Type.EmptyTypes).Invoke(null, null);
-                object processModule = typeof(Process).GetProperty("MainModule").GetValue(currentProcess, null);
-                processName = (string)typeof(ProcessModule).GetProperty("ModuleName").GetValue(processModule, null);
+                object currentProcess = typeof (Process).GetMethod("GetCurrentProcess", Type.EmptyTypes).Invoke(null,
+                                                                                                                null);
+                object processModule = typeof (Process).GetProperty("MainModule").GetValue(currentProcess, null);
+                processName = (string) typeof (ProcessModule).GetProperty("ModuleName").GetValue(processModule, null);
             }
-            catch { } // swallow exceptions
+            catch
+            {
+            } // swallow exceptions
 
-            return new EnvironmentInformation() {
-                OperatingSystem = Environment.OSVersion,
-                NetFrameworkVersion = Environment.Version,
-                NetFrameworkBitness = IntPtr.Size * 8,
-                ServerSoftware = (iisVersion == "Unknown" && processName != null && processName.StartsWith("WebDev.WebServer", StringComparison.OrdinalIgnoreCase)) ? "Visual Studio web server" : iisVersion,
-                WorkerProcess = processName,
-                IsIntegrated = HttpRuntime.UsingIntegratedPipeline
-            };
+            return new EnvironmentInformation()
+                       {
+                           OperatingSystem = Environment.OSVersion,
+                           NetFrameworkVersion = Environment.Version,
+                           NetFrameworkBitness = IntPtr.Size*8,
+                           ServerSoftware =
+                               (iisVersion == "Unknown" && processName != null &&
+                                processName.StartsWith("WebDev.WebServer", StringComparison.OrdinalIgnoreCase))
+                                   ? "Visual Studio web server"
+                                   : iisVersion,
+                           WorkerProcess = processName,
+                           IsIntegrated = HttpRuntime.UsingIntegratedPipeline
+                       };
         }
 
-        private static void PopulateLoadedAssemblyBaseInformation(LoadedAssemblyInfoBase assemblyInfo, Assembly assembly) {
+        private static void PopulateLoadedAssemblyBaseInformation(LoadedAssemblyInfoBase assemblyInfo, Assembly assembly)
+        {
             string codeBase = "Unknown";
-            try {
+            try
+            {
                 codeBase = assembly.CodeBase;
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 // can't read code base in medium trust, so just skip
             }
 
@@ -112,55 +137,72 @@
             assemblyInfo.FullName = assembly.FullName;
         }
 
-        private static LoadedAssemblyInfo<MvcCoreAssemblyInfo> GetMvcAssemblyInformation(Assembly assembly) {
-            AssemblyFileVersionAttribute fileVersionAttr = assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), true /* inherit */).OfType<AssemblyFileVersionAttribute>().FirstOrDefault();
+        private static LoadedAssemblyInfo<MvcCoreAssemblyInfo> GetMvcAssemblyInformation(Assembly assembly)
+        {
+            AssemblyFileVersionAttribute fileVersionAttr =
+                assembly.GetCustomAttributes(typeof (AssemblyFileVersionAttribute), true /* inherit */).OfType
+                    <AssemblyFileVersionAttribute>().FirstOrDefault();
 
             string actualVersion = (fileVersionAttr != null) ? fileVersionAttr.Version : "no version";
             string friendlyName = "Unknown version";
-            MvcCoreAssemblyInfo matchingCore = _mvcCoreAssemblyHistory.Where(c => String.Equals(actualVersion, c.Version)).FirstOrDefault();
+            MvcCoreAssemblyInfo matchingCore =
+                _mvcCoreAssemblyHistory.Where(c => String.Equals(actualVersion, c.Version)).FirstOrDefault();
 
-            if (matchingCore == null) {
-                matchingCore = new MvcCoreAssemblyInfo() {
-                    Name = friendlyName,
-                    Version = actualVersion
-                };
+            if (matchingCore == null)
+            {
+                matchingCore = new MvcCoreAssemblyInfo()
+                                   {
+                                       Name = friendlyName,
+                                       Version = actualVersion
+                                   };
             }
 
-            LoadedAssemblyInfo<MvcCoreAssemblyInfo> assemblyInfo = new LoadedAssemblyInfo<MvcCoreAssemblyInfo>() {
-                MvcAssemblyInfo = matchingCore
-            };
+            LoadedAssemblyInfo<MvcCoreAssemblyInfo> assemblyInfo = new LoadedAssemblyInfo<MvcCoreAssemblyInfo>()
+                                                                       {
+                                                                           MvcAssemblyInfo = matchingCore
+                                                                       };
             PopulateLoadedAssemblyBaseInformation(assemblyInfo, assembly);
             return assemblyInfo;
         }
 
-        private static LoadedAssemblyInfo<MvcFuturesAssemblyInfo> GetFuturesAssemblyInformation(Assembly assembly) {
-            AssemblyFileVersionAttribute fileVersionAttr = assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), true /* inherit */).OfType<AssemblyFileVersionAttribute>().FirstOrDefault();
+        private static LoadedAssemblyInfo<MvcFuturesAssemblyInfo> GetFuturesAssemblyInformation(Assembly assembly)
+        {
+            AssemblyFileVersionAttribute fileVersionAttr =
+                assembly.GetCustomAttributes(typeof (AssemblyFileVersionAttribute), true /* inherit */).OfType
+                    <AssemblyFileVersionAttribute>().FirstOrDefault();
 
             string actualVersion = (fileVersionAttr != null) ? fileVersionAttr.Version : "no version";
             string friendlyName = "Unknown version";
-            MvcFuturesAssemblyInfo matchingCore = _mvcFuturesAssemblyHistory.Where(c => String.Equals(actualVersion, c.Version)).FirstOrDefault();
+            MvcFuturesAssemblyInfo matchingCore =
+                _mvcFuturesAssemblyHistory.Where(c => String.Equals(actualVersion, c.Version)).FirstOrDefault();
 
-            if (matchingCore == null) {
-                matchingCore = new MvcFuturesAssemblyInfo() {
-                    Name = friendlyName,
-                    Version = actualVersion
-                };
+            if (matchingCore == null)
+            {
+                matchingCore = new MvcFuturesAssemblyInfo()
+                                   {
+                                       Name = friendlyName,
+                                       Version = actualVersion
+                                   };
             }
 
-            LoadedAssemblyInfo<MvcFuturesAssemblyInfo> assemblyInfo = new LoadedAssemblyInfo<MvcFuturesAssemblyInfo>() {
-                MvcAssemblyInfo = matchingCore
-            };
+            LoadedAssemblyInfo<MvcFuturesAssemblyInfo> assemblyInfo = new LoadedAssemblyInfo<MvcFuturesAssemblyInfo>()
+                                                                          {
+                                                                              MvcAssemblyInfo = matchingCore
+                                                                          };
             PopulateLoadedAssemblyBaseInformation(assemblyInfo, assembly);
             return assemblyInfo;
         }
 
-        private static bool IsMvcAssembly(Assembly assembly) {
+        private static bool IsMvcAssembly(Assembly assembly)
+        {
             return (String.Equals(assembly.ManifestModule.Name, "System.Web.Mvc.dll", StringComparison.OrdinalIgnoreCase)
-                || (assembly.GetType("System.Web.Mvc.Controller", false /* throwOnError */) != null));
+                    || (assembly.GetType("System.Web.Mvc.Controller", false /* throwOnError */) != null));
         }
 
-        private static bool IsMvcFuturesAssembly(Assembly assembly) {
-            return (String.Equals(assembly.ManifestModule.Name, "Microsoft.Web.Mvc.dll", StringComparison.OrdinalIgnoreCase));
+        private static bool IsMvcFuturesAssembly(Assembly assembly)
+        {
+            return
+                (String.Equals(assembly.ManifestModule.Name, "Microsoft.Web.Mvc.dll", StringComparison.OrdinalIgnoreCase));
         }
 
         public readonly EnvironmentInformation EnvironmentInformation;
@@ -191,7 +233,8 @@
         }
     }
 
-    private class LoadedAssemblyInfoBase {
+    private class LoadedAssemblyInfoBase
+    {
         public MvcAssemblyInfoBase MvcAssemblyInfo;
         public string FullName;
         public string CodeBase;
@@ -202,49 +245,67 @@
         public string FuturesVersion;
     }
 
-    private class MvcFuturesAssemblyInfo : MvcAssemblyInfoBase {
+    private class MvcFuturesAssemblyInfo : MvcAssemblyInfoBase
+    {
         public string DownloadUrl;
     }
 
-    private class MvcAssemblyInfoBase {
+    private class MvcAssemblyInfoBase
+    {
         public string Version;
         public string Name;
     }
 
-    private static MvcFuturesAssemblyInfo GetOrCreateFuturesAssemblyInfo(string futuresVersion) {
-        MvcFuturesAssemblyInfo futuresInfo = _mvcFuturesAssemblyHistory.FirstOrDefault(o => String.Equals(futuresVersion, o.Version, StringComparison.OrdinalIgnoreCase));
-        return (futuresInfo != null) ? futuresInfo : new MvcFuturesAssemblyInfo() { Name = "ASP.NET MVC Futures", Version = futuresVersion };
+    private static MvcFuturesAssemblyInfo GetOrCreateFuturesAssemblyInfo(string futuresVersion)
+    {
+        MvcFuturesAssemblyInfo futuresInfo =
+            _mvcFuturesAssemblyHistory.FirstOrDefault(
+                o => String.Equals(futuresVersion, o.Version, StringComparison.OrdinalIgnoreCase));
+        return (futuresInfo != null)
+                   ? futuresInfo
+                   : new MvcFuturesAssemblyInfo() {Name = "ASP.NET MVC Futures", Version = futuresVersion};
     }
 
-    private static string AE(object input) {
+    private static string AE(object input)
+    {
         return HttpUtility.HtmlAttributeEncode(Convert.ToString(input, CultureInfo.InvariantCulture));
     }
 
-    private static string E(object input) {
+    private static string E(object input)
+    {
         return HttpUtility.HtmlEncode(Convert.ToString(input, CultureInfo.InvariantCulture));
     }
 
-    private static string IsAppDomainHomogenous(AppDomain appDomain) {
+    private static string IsAppDomainHomogenous(AppDomain appDomain)
+    {
         // AppDomain.IsHomogenous didn't exist prior to .NET 4, so use Reflection to look it up
-        PropertyInfo pInfo = typeof(AppDomain).GetProperty("IsHomogenous");
-        if (pInfo == null) {
+        PropertyInfo pInfo = typeof (AppDomain).GetProperty("IsHomogenous");
+        if (pInfo == null)
+        {
             return "unknown";
         }
 
         // MethodInfo.Invoke demands ReflectionPermission when the target is AppDomain, but since target method is transparent we can instantiate a Delegate instead
-        return Convert.ToString(((Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), appDomain, pInfo.GetGetMethod()))());
+        return
+            Convert.ToString(
+                ((Func<bool>) Delegate.CreateDelegate(typeof (Func<bool>), appDomain, pInfo.GetGetMethod()))());
     }
 
-    private static string IsAssemblyFullTrust(Assembly assembly) {
+    private static string IsAssemblyFullTrust(Assembly assembly)
+    {
         // Assembly.IsFullyTrusted didn't exist prior to .NET 4, so use Reflection to look it up
-        PropertyInfo pInfo = typeof(Assembly).GetProperty("IsFullyTrusted");
-        if (pInfo == null) {
+        PropertyInfo pInfo = typeof (Assembly).GetProperty("IsFullyTrusted");
+        if (pInfo == null)
+        {
             return "unknown";
         }
 
         // MethodInfo.Invoke demands ReflectionPermission when the target is Assembly, but since target method is transparent we can instantiate a Delegate instead
-        return Convert.ToString(((Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), assembly, pInfo.GetGetMethod()))());
+        return
+            Convert.ToString(
+                ((Func<bool>) Delegate.CreateDelegate(typeof (Func<bool>), assembly, pInfo.GetGetMethod()))());
     }
+
 </script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

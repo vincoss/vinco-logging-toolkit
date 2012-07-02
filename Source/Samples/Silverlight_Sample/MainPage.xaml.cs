@@ -1,56 +1,53 @@
-﻿namespace Silverlight_Sample
-{
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Navigation;
-    using Silverlight_Sample.LoginUI;
-    using System;
+﻿using System.Windows;
+using System.Windows.Controls;
+using WcfRia_HostWebSite.Services;
+using Elmah.Everywhere.Diagnostics;
 
-    /// <summary>
-    /// <see cref="UserControl"/> class providing the main UI for the application.
-    /// </summary>
+
+namespace Silverlight_Sample
+{
     public partial class MainPage : UserControl
     {
-        /// <summary>
-        /// Creates a new <see cref="MainPage"/> instance.
-        /// </summary>
         public MainPage()
         {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// After the Frame navigates, ensure the <see cref="HyperlinkButton"/> representing the current page is selected
-        /// </summary>
-        private void ContentFrame_Navigated(object sender, NavigationEventArgs e)
+        private void btnMessage_Click(object sender, RoutedEventArgs e)
         {
-            foreach (UIElement child in LinksStackPanel.Children)
-            {
-                HyperlinkButton hb = child as HyperlinkButton;
-                if (hb != null && hb.NavigateUri != null)
-                {
-                    if (hb.NavigateUri.ToString().Equals(e.Uri.ToString()))
-                    {
-                        VisualStateManager.GoToState(hb, "ActiveLink", true);
-                    }
-                    else
-                    {
-                        VisualStateManager.GoToState(hb, "InactiveLink", true);
-                    }
-                }
-            }
+            new SampleWcfRiaContext().GetMessage("World!!!", (operation) =>
+                                                                 {
+                                                                     string message = null;
+                                                                     if (operation.Error != null)
+                                                                     {
+                                                                         message = operation.Error.ToString();
+                                                                     }
+                                                                     else
+                                                                     {
+                                                                         message = operation.Value;
+                                                                     }
+                                                                     tblMessage.Text = message;
+                                                                 }, null);
         }
 
-        /// <summary>
-        /// If an error occurs during navigation, show an error window
-        /// </summary>
-        private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void btnError_Click(object sender, RoutedEventArgs e)
         {
-            e.Handled = true;
+            new SampleWcfRiaContext().MakeError((operation)=>
+                                                    {
+                                                        string message = "All good!!!";
+                                                        if (operation.Error != null)
+                                                        {
+                                                            message = operation.Error.ToString();
+                                                        }
+                                                        tblMessage.Text = message;
+                                                    }, null);
+           
+        }
 
-            Elmah.Everywhere.Diagnostics.ExceptionHandler.Report(e.Exception, null);
-
-            ErrorWindow.CreateNew(e.Exception);
+        private void btnClientError_Click(object sender, RoutedEventArgs e)
+        {
+            int i = 0;
+            int result = 10 / i;
         }
     }
 }

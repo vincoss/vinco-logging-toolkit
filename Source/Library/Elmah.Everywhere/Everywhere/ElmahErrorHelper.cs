@@ -1,19 +1,21 @@
 ﻿using System;
+using System.Linq;
 using System.Diagnostics;
 using System.Web;
+using System.Collections.Specialized;
 
 
 namespace Elmah.Everywhere
 {
     public class ElmahErrorHelper
     {
-        public void LogException(ErrorInfo errorInfo)
+        public void LogException(ErrorInfo info)
         {
-            if (errorInfo == null)
+            if (info == null)
             {
-                throw new ArgumentNullException("errorInfo");
+                throw new ArgumentNullException("info");
             }
-            Error error = ToError(errorInfo);
+            Error error = ToError(info);
             LogInternal(error, null);
         }
 
@@ -23,13 +25,18 @@ namespace Elmah.Everywhere
             {
                 throw new ArgumentNullException("exception");
             }
-            ExceptionFilterEventArgs args = new ExceptionFilterEventArgs(exception, context);
-            this.OnFiltering(args);
-            if (!args.Dismissed)
+            if(context == null)
             {
-                Error error = new Error(exception, context);
-                LogInternal(error, context);
+                throw new ArgumentNullException("context");
             }
+            var args = new ExceptionFilterEventArgs(exception, context);
+            this.OnFiltering(args);
+            if (args.Dismissed)
+            {
+                return;
+            }
+            var error = new Error(exception, context);
+            LogInternal(error, context);
         }
 
         protected virtual void LogInternal(Error error, object context)
@@ -37,7 +44,7 @@ namespace Elmah.Everywhere
             ErrorLogEntry entry = null;
             try
             {
-                ErrorLog errorLog = ErrorLog.GetDefault((HttpContext)context); 
+                var errorLog = ErrorLog.GetDefault((HttpContext)context); 
                 string errorId = errorLog.Log(error);
                 entry = new ErrorLogEntry(errorLog, errorId, error);
             }
@@ -72,36 +79,39 @@ namespace Elmah.Everywhere
             }
         }
 
-        private static Error ToError(ErrorInfo properties)
+        public static Error ToError(ErrorInfo info)
         {
-            return new Error
+            var error = new Error
             {
-                ApplicationName = properties.ApplicationName,
-                HostName = properties.Host,
-                Type = properties.Type,
-                Source = properties.Source,
-                Message = properties.Message,
-                Detail = properties.Error,
-                Time = properties.Date,
-                User = properties.User,
-                StatusCode = properties.StatusCode
+                ApplicationName = info.ApplicationName,
+                HostName = info.Host,
+                Type = info.Type,
+                Source = info.Source,
+                Message = info.Message,
+                Detail = info.BuildMessage(),
+                Time = info.Date,
+                User = info.User,
+                StatusCode = info.StatusCode
             };
+
+            CopyToCollections(info, error.Cookies, "Cookies");
+            CopyToCollections(info, error.Form, "Form");
+            CopyToCollections(info, error.QueryString, "QueryString");
+            CopyToCollections(info, error.ServerVariables, "ServerVariables");
+
+            return error;
         }
 
-        public static ErrorInfo ToErrorInfo(Error error)
+        private static void CopyToCollections(ErrorInfo info, NameValueCollection collection, string collectionName)
         {
-            return new ErrorInfo()
+            var detail = info.Details.SingleOrDefault(x => x.Name == collectionName);
+            if(detail != null)
             {
-                ApplicationName = error.ApplicationName,
-                Host = error.HostName,
-                Type = error.Type,
-                Source = error.Source,
-                Message = error.Message,
-                Error = error.Detail,
-                User = error.User,
-                StatusCode = error.StatusCode,
-                Date = error.Time
-            };
+                foreach (var pair in detail.Items)
+                {
+                    collection.Add(pair.Key, pair.Value);
+                }
+            }
         }
 
         public event ErrorLoggedEventHandler Logged;

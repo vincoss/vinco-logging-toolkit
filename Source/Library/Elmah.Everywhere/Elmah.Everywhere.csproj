@@ -50,6 +50,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -68,28 +72,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Everywhere\Appenders\AssemblyAppender.cs" />
+    <Compile Include="Everywhere\Appenders\BaseAppender.cs" />
+    <Compile Include="Everywhere\Appenders\DetailAppender.cs" />
+    <Compile Include="Everywhere\Appenders\HttpAppender.cs" />
+    <Compile Include="Everywhere\Appenders\MemoryAppender.cs" />
+    <Compile Include="Everywhere\Appenders\PropertiesAppender.cs" />
+    <Compile Include="Everywhere\Configuration\EverywhereConfigurationSection.cs" />
+    <Compile Include="Everywhere\Constants.cs" />
     <Compile Include="Everywhere\Controllers\AccountController.cs" />
     <Compile Include="Everywhere\Controllers\ElmahController.cs" />
     <Compile Include="Everywhere\Controllers\ErrorController.cs" />
     <Compile Include="Everywhere\Diagnostics\ExceptionHandler.cs" />
-    <Compile Include="Everywhere\DumpHelper.cs" />
     <Compile Include="Everywhere\ElmahErrorHelper.cs" />
     <Compile Include="Everywhere\ErrorInfo.cs" />
     <Compile Include="Everywhere\ErrorService.cs" />
-    <Compile Include="Everywhere\ExceptionExtension.cs" />
     <Compile Include="Everywhere\HttpErrorLog.cs" />
-    <Compile Include="Everywhere\MemoryDetail.cs" />
+    <Compile Include="Everywhere\HttpExceptionWritterBase.cs" />
     <Compile Include="Everywhere\Models\LogOnModel.cs" />
     <Compile Include="Everywhere\ServiceModel\ErrorBehaviorExtensionElement.cs" />
+    <Compile Include="Everywhere\Utils\Utility.cs" />
     <Compile Include="Everywhere\Web\CustomRequireHttps.cs" />
     <Compile Include="Everywhere\Web\ElmahResult.cs" />
     <Compile Include="Everywhere\ServiceModel\HttpErrorHandler.cs" />
     <Compile Include="Everywhere\ExceptionDefaults.cs" />
     <Compile Include="Everywhere\ExceptionWritterBase.cs" />
     <Compile Include="Everywhere\HttpExceptionWritter.cs" />
+    <Compile Include="Everywhere\Web\Starter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Everywhere\ServiceModel\ServiceHttpErrorBehaviorAttribute.cs" />
-    <Compile Include="Everywhere\Web\ErrorHandlerConfiguratorModule.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -130,6 +141,9 @@
       <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UpdateAssemblyVersion="False" BuildVersion_BuildVersioningStyle="Increment.Increment.Increment.TimeStamp" />
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y $(ProjectDir)$(OutDir)$(TargetFileName) $(SolutionDir)Bin\</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

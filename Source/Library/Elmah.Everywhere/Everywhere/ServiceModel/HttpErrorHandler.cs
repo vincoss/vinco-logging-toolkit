@@ -12,29 +12,27 @@ using System.Xml.Linq;
 
 namespace Elmah.Everywhere.ServiceModel
 {
-    // TODO: Possible to attach http details if HttpContext is not null
-
     public class HttpErrorHandler : IErrorHandler
     {
         #region IErrorHandler Members
 
         public bool HandleError(Exception error)
         {
-            return false;
-        }
-
-        public void ProvideFault(Exception error, MessageVersion version, ref Message fault)
-        {
             if (error == null)
             {
-                return;
+                return false;
             }
-            if(error is FaultException)
+            if (error is FaultException)
             {
                 var sb = new StringBuilder();
                 AppendFaultExceptionDetail(error, sb);
             }
             Diagnostics.ExceptionHandler.Report(error, null);
+            return false;
+        }
+
+        public void ProvideFault(Exception error, MessageVersion version, ref Message fault)
+        {
         }
         
         #endregion
