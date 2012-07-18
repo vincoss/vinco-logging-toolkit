@@ -39,3 +39,4 @@ aspnet_client
 httpd.parse.errors
 *.mdf
 *.ldf
+Deploy/

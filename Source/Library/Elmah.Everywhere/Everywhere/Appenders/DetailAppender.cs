@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using Elmah.Everywhere.Diagnostics;
 using System.Diagnostics;
+using System.Threading;
 
 
 namespace Elmah.Everywhere.Appenders
@@ -33,7 +33,7 @@ namespace Elmah.Everywhere.Appenders
             pairs.Add("Full Name", new AssemblyName(assembly.FullName).FullName);
             pairs.Add("Operating System Version", Environment.OSVersion.ToString());
             pairs.Add("Common Language Runtime Version", Environment.Version.ToString());
-            pairs.Add("Elmah.Everywhere Version", new AssemblyName(typeof(ExceptionHandler).Assembly.FullName).Version.ToString());
+            pairs.Add("Elmah.Everywhere Version", new AssemblyName(typeof(Diagnostics.ExceptionHandler).Assembly.FullName).Version.ToString());
 
             error.AddDetail(this.Name, pairs);
         }
