@@ -12,17 +12,18 @@ namespace Elmah.Everywhere.Appenders
     {
         public override void Append(ErrorInfo error)
         {
-            Assembly assembly = error.Exception.GetType().Assembly;
-
+            Assembly assembly = error.GetType().Assembly;
+           
             var pairs = new Dictionary<string, string>();
             pairs.Add("Date", DateTime.Now.ToString());
             pairs.Add("Culture", CultureInfo.CurrentCulture.Name);
 
 #if !SILVERLIGHT
 
-            pairs.Add("User", Environment.UserName);
+            pairs.Add("User", string.Format(@"{0}\{1}", Environment.UserDomainName, Environment.UserName).Trim('\\'));
             pairs.Add("Machine Name", Environment.MachineName);
-            pairs.Add("App Up Time", Process.GetCurrentProcess().StartTime.ToString());
+            pairs.Add("App Start Time", Process.GetCurrentProcess().StartTime.ToLocalTime().ToString());
+            pairs.Add("App Up Time", (DateTime.Now - Process.GetCurrentProcess().StartTime.ToLocalTime()).ToString());
             pairs.Add("Worker process", GetWorkerProcess());
             pairs.Add("AppDomain", IsAppDomainHomogenous(AppDomain.CurrentDomain));
             pairs.Add("Deployment", (assembly.GlobalAssemblyCache) ? "GAC" : "bin");
@@ -35,13 +36,6 @@ namespace Elmah.Everywhere.Appenders
             pairs.Add("Elmah.Everywhere Version", new AssemblyName(typeof(ExceptionHandler).Assembly.FullName).Version.ToString());
 
             error.AddDetail(this.Name, pairs);
-
-            error.User = GetFullUserName();
-        }
-
-        private static string GetFullUserName()
-        {
-            return string.Format(@"{0}\{1}", Environment.UserDomainName, Environment.UserName).Trim('\\');
         }
 
 #if !SILVERLIGHT

@@ -38,12 +38,5 @@ namespace Elmah.Everywhere.Configuration
             get { return ((string)base["host"]); }
             set { base["host"] = value; }
         }
-
-        [ConfigurationProperty("fileLogPath", IsRequired = true)]
-        public string FileLogPath
-        {
-            get { return ((string)base["fileLogPath"]); }
-            set { base["fileLogPath"] = value; }
-        }
     }
 }

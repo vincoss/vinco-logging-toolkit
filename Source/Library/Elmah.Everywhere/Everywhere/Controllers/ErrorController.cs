@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Elmah.Everywhere.Controllers
 {
+    // TODO: Https should be fixed
     //[CustomRequireHttps]
     public class ErrorController : Controller
     {
@@ -17,6 +18,14 @@ namespace Elmah.Everywhere.Controllers
 
         public ErrorController(ElmahErrorHelper elmahErrorHelper, IErrorService errorService)
         {
+            if (elmahErrorHelper == null)
+            {
+                throw new ArgumentNullException("elmahErrorHelper");
+            }
+            if (errorService == null)
+            {
+                throw new ArgumentNullException("errorService");
+            }
             _errorService = errorService;
             _elmahErrorHelper = elmahErrorHelper;
         }

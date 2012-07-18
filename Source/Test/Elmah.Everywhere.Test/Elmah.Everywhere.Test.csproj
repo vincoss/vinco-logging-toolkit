@@ -60,9 +60,11 @@
       <HintPath>..\..\..\Assemblies\Moq\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -78,15 +80,28 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Everywhere\Appenders\Test\AssemblyAppenderTest.cs" />
+    <Compile Include="Everywhere\Appenders\Test\DetailAppenderTest.cs" />
+    <Compile Include="Everywhere\Appenders\Test\HttpAppenderTest.cs" />
+    <Compile Include="Everywhere\Appenders\Test\MemoryAppenderTest.cs" />
+    <Compile Include="Everywhere\Appenders\Test\PropertiesAppenderTest.cs" />
+    <Compile Include="Everywhere\Configuration\Test\EverywhereConfigurationSectionTest.cs" />
     <Compile Include="Everywhere\Controllers\Test\AccountControllerTest.cs" />
     <Compile Include="Everywhere\Controllers\Test\ElmahControllerTest.cs" />
     <Compile Include="Everywhere\Controllers\Test\ErrorControllerTest.cs" />
     <Compile Include="Everywhere\Diagnostics\Test\ExceptionHandlerTest.cs" />
+    <Compile Include="Everywhere\ServiceModel\Test\ErrorBehaviorExtensionElementTest.cs" />
+    <Compile Include="Everywhere\ServiceModel\Test\HttpErrorHandlerTest.cs" />
+    <Compile Include="Everywhere\ServiceModel\Test\ServiceHttpErrorBehaviorAttributeTest.cs" />
     <Compile Include="Everywhere\Test\ElmahErrorHelperTest.cs" />
     <Compile Include="Everywhere\Test\ErrorServiceTest.cs" />
     <Compile Include="Everywhere\Test\ErrorInfoTest.cs" />
     <Compile Include="Everywhere\Test\HttpErrorLogTest.cs" />
+    <Compile Include="Everywhere\Test\HttpExceptionWritterBaseTest.cs" />
     <Compile Include="Everywhere\Test\HttpExceptionWritterTest.cs" />
+    <Compile Include="Everywhere\Test\WritterEventArgsTest.cs" />
+    <Compile Include="Everywhere\Utils\Test\UtilityTest.cs" />
+    <Compile Include="Everywhere\Web\Test\StarterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +125,11 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Elmah.Everywhere.Web;
 
 
 namespace Elmah.Everywhere.Controllers
 {
-    // TODO: Should allow only administrators
-    // Should run under HTTPS
-
+    // TODO: Https should be fixed
     // [CustomRequireHttps]
-    //[Authorize(Roles = "Administrator")]
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class ElmahController : Controller
     {
         public ActionResult Index()

@@ -14,8 +14,7 @@ namespace Elmah.Everywhere
     [DebuggerDisplay("Message : {Message}")]
     public class ErrorInfo
     {
-        private string _id;
-        private List<DetailInfo> _details;
+        private List<DetailInfo> _errorDetails;
 
         public ErrorInfo()
         {
@@ -27,7 +26,7 @@ namespace Elmah.Everywhere
             {
                 throw new ArgumentNullException("exception");
             }
-            _id = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid().ToString();
             Exception = exception;
             Exception baseException = Exception.GetBaseException();
 
@@ -46,16 +45,16 @@ namespace Elmah.Everywhere
         public void AddDetail(string detailName, string key, string value)
         {
             AddDetail(detailName, new Dictionary<string, string>());
-            var detail = this.Details.Single(x => string.Equals(x.Name, detailName, StringComparison.OrdinalIgnoreCase));
+            var detail = this.ErrorDetails.Single(x => string.Equals(x.Name, detailName, StringComparison.OrdinalIgnoreCase));
             detail.Items.Add(new KeyValuePair<string, string>(key, value));
         }
 
         public void AddDetail(string detailName, IEnumerable<KeyValuePair<string, string>> pairs)
         {
-            if (Details.Any(x => string.Equals(x.Name, detailName, StringComparison.OrdinalIgnoreCase)) == false)
+            if (ErrorDetails.Any(x => string.Equals(x.Name, detailName, StringComparison.OrdinalIgnoreCase)) == false)
             {
                 var detail = new DetailInfo(detailName, new List<KeyValuePair<string, string>>(pairs));
-                _details.Add(detail);
+                _errorDetails.Add(detail);
             }
         }
 
@@ -64,7 +63,7 @@ namespace Elmah.Everywhere
             var sb = new StringBuilder();
             sb.Append(this.Detail);
 
-            foreach (var detail in this.Details)
+            foreach (var detail in this.ErrorDetails)
             {
                 if (sb.Length > 0)
                 {
@@ -83,16 +82,7 @@ namespace Elmah.Everywhere
             return sb.ToString();
         }
 
-        public override string ToString()
-        {
-            return this.Message;
-        }
-
-        #endregion
-
-        #region Private methods
-
-        private void EnsureAppenders()
+        public void EnsureAppenders()
         {
             if (Appenders == null)
             {
@@ -113,25 +103,22 @@ namespace Elmah.Everywhere
                 catch (Exception ex)
                 {
 #if !SILVERLIGHT
-                    Trace.WriteLine(ex); // TODO:
+                    Trace.WriteLine(ex);
 #endif
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return this.Message;
         }
 
         #endregion
 
         #region Public properties
 
-        public string Id
-        {
-            get
-            {
-                EnsureAppenders();
-                return _id;
-            }
-            internal set { _id = value; }
-        }
+        public string Id { get; internal set; }
 
         public string Host { get; set; }
 
@@ -153,9 +140,16 @@ namespace Elmah.Everywhere
 
         public Exception Exception { get; private set; }
 
-        public IEnumerable<DetailInfo> Details
+        public IEnumerable<DetailInfo> ErrorDetails
         {
-            get { return _details ?? (_details = new List<DetailInfo>()); }
+            get
+            {
+                if (_errorDetails == null)
+                {
+                    _errorDetails = new List<DetailInfo>();
+                }
+                return _errorDetails;
+            }
         }
 
         public IEnumerable<Type> Appenders { get; set; }

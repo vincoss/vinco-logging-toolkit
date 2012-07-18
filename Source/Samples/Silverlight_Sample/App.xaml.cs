@@ -38,16 +38,7 @@ namespace Silverlight_Sample
                 ApplicationName = "Silverlight-Sample",
                 Host = string.Format("{0}{1}{2}:{3}", uri.Scheme, Uri.SchemeDelimiter, uri.Host, uri.Port)
             };
-
-            var appenders = new List<Type>
-                       {
-                           typeof (PropertiesAppender),
-                           typeof (DetailAppender),
-                           typeof (AssemblyAppender)
-                       };
-
-
-            ExceptionHandler.WithParameters(defaults, writter, appenders);
+            ExceptionHandler.Configure(writter, defaults);
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

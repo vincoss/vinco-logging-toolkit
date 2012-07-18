@@ -38,7 +38,7 @@ namespace Console_Sample
                 Host = Environment.MachineName
             };
 
-            ExceptionHandler.WithParameters(defaults, writter);
+            ExceptionHandler.Configure(writter, defaults);
         }
 
         private static Exception CreateSampleException()

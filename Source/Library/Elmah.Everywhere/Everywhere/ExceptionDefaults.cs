@@ -18,5 +18,10 @@ namespace Elmah.Everywhere
         /// The name of application in which this error occurred.
         /// </summary>
         public string ApplicationName { get; set; }
+
+        /// <summary>
+        /// Remote web site url to log an error.
+        /// </summary>
+        public string RemoteLogUri { get; set; }
     }
 }

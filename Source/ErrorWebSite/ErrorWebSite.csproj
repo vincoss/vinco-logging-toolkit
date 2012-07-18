@@ -77,7 +77,6 @@
     <Content Include="App_Data\ElmahErrorDb_log.ldf">
       <DependentUpon>ElmahErrorDb.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="clientaccesspolicy.xml" />
     <Content Include="crossdomain.xml" />
     <Content Include="Global.asax" />

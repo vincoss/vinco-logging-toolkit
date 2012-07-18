@@ -17,9 +17,7 @@ namespace Elmah.Everywhere
             }
             try
             {
-                var data = CreatePostData(token, error);
-                var webClient = CreateWebClient();
-                webClient.UploadString(RequestUri, "POST", data);
+                WriteInternal(CreatePostData(token, error));
             }
             catch (Exception exception)
             {
@@ -27,8 +25,14 @@ namespace Elmah.Everywhere
             }
             finally
             {
-                OnCompleted(EventArgs.Empty);
+                OnCompleted(new WritterEventArgs(error));
             }
+        }
+
+        protected virtual void WriteInternal(string data)
+        {
+            var webClient = CreateWebClient();
+            webClient.UploadString(RequestUri, "POST", data);
         }
     }
 }

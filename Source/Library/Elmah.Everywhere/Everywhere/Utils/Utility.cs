@@ -1,13 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Xml;
 using System.Xml.Linq;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Text;
 using System.Collections;
 using System.Globalization;
-using System.Configuration;
 
 
 namespace Elmah.Everywhere.Utils
@@ -32,7 +28,7 @@ namespace Elmah.Everywhere.Utils
             element.Add(CreateAttribute("StatusCode", info.StatusCode));
             element.Add(CreateAttribute("Date", info.Date));
 
-            SerializeDetailToXml(element, info.Details);
+            SerializeDetailToXml(element, info.ErrorDetails);
 
             return element.ToString();
         }

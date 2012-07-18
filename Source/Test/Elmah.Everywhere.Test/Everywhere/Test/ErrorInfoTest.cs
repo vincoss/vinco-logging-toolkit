@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using Xunit;
 using System.Linq;
+using System.Collections.Generic;
+using Xunit;
+using Elmah.Everywhere.Appenders;
 
 
 namespace Elmah.Everywhere.Test
@@ -10,7 +10,7 @@ namespace Elmah.Everywhere.Test
     public class ErrorInfoTest
     {
         [Fact]
-        public void Default_Constructor_Test()
+        public void Shall_Have_Default_Constructor_Test()
         {
             // Assert
             ErrorInfo error = new ErrorInfo();
@@ -55,7 +55,7 @@ namespace Elmah.Everywhere.Test
             ErrorInfo error = new ErrorInfo();
 
             // Assert
-            Assert.False(error.Details.Any());
+            Assert.False(error.ErrorDetails.Any());
         }
 
         [Fact]
@@ -89,7 +89,7 @@ namespace Elmah.Everywhere.Test
         }
 
         [Fact]
-        public void BuildMessage_Returns_Detail_Message_If_Details_Are_Empty_Test()
+        public void BuildMessage_Returns_Error_Detail_Message_If_ErrorDetails_Are_Empty_Test()
         {
             // Arrange
             ErrorInfo error = new ErrorInfo(new Exception());
@@ -138,12 +138,74 @@ namespace Elmah.Everywhere.Test
             error.AddDetail("Test", "Key", "Value");
 
             // Act
-            ErrorInfo.DetailInfo detail = error.Details.First();
+            ErrorInfo.DetailInfo detail = error.ErrorDetails.First();
 
             // Assert
             Assert.Equal("Test", detail.Name);
             Assert.Equal("Key", detail.Items[0].Key);
             Assert.Equal("Value", detail.Items[0].Value);
+        }
+
+        [Fact]
+        public void ShouldAppend_Appender_Data_Test()
+        {
+            // Arrange
+            var appenders = new List<Type>
+                                {
+                                    typeof(FirstAppender),
+                                    typeof(SecondAppender)
+                                };
+
+            ErrorInfo error = new ErrorInfo(new Exception("Test-Exception"));
+            error.Appenders = appenders;
+            error.EnsureAppenders();
+
+            // Act
+            string detail = error.BuildMessage();
+
+            // Assert
+            Assert.True(detail.Contains("FirstAppender"));
+            Assert.True(detail.Contains("SecondAppender"));
+            Assert.True(detail.Contains("FirstKey"));
+            Assert.True(detail.Contains("FirstValue"));
+            Assert.True(detail.Contains("SecondKey"));
+            Assert.True(detail.Contains("SecondValue"));
+        }
+
+        public class FirstAppender : BaseAppender
+        {
+            public override void Append(ErrorInfo error)
+            {
+                error.AddDetail(this.Name, "FirstKey", "FirstValue");
+            }
+
+            public override int Order
+            {
+                get { return 0; }
+            }
+
+            public override string Name
+            {
+                get { return "FirstAppender"; }
+            }
+        }
+
+        public class SecondAppender : BaseAppender
+        {
+            public override void Append(ErrorInfo error)
+            {
+                error.AddDetail(this.Name, "SecondKey", "SecondValue");
+            }
+
+            public override int Order
+            {
+                get { return 1; }
+            }
+
+            public override string Name
+            {
+                get { return "SecondAppender"; }
+            }
         }
     }
 }

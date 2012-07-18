@@ -8,6 +8,7 @@ using System.IO;
 using System.Xml;
 using System.Reflection;
 using System.Xml.Linq;
+using Elmah.Everywhere.Diagnostics;
 
 
 namespace Elmah.Everywhere.ServiceModel

@@ -44,10 +44,10 @@ namespace Elmah.Everywhere.Test
             Assert.Equal(info.User, error.User);
             Assert.Equal(info.StatusCode, error.StatusCode);
 
-            CompareCollections(info.Details.Single(x => x.Name == "Cookies").Items, error.Cookies);
-            CompareCollections(info.Details.Single(x => x.Name == "Form").Items, error.Form);
-            CompareCollections(info.Details.Single(x => x.Name == "QueryString").Items, error.QueryString);
-            CompareCollections(info.Details.Single(x => x.Name == "ServerVariables").Items, error.ServerVariables);
+            CompareCollections(info.ErrorDetails.Single(x => x.Name == "Cookies").Items, error.Cookies);
+            CompareCollections(info.ErrorDetails.Single(x => x.Name == "Form").Items, error.Form);
+            CompareCollections(info.ErrorDetails.Single(x => x.Name == "QueryString").Items, error.QueryString);
+            CompareCollections(info.ErrorDetails.Single(x => x.Name == "ServerVariables").Items, error.ServerVariables);
         }
 
         private static void CompareCollections(IEnumerable<KeyValuePair<string,string>> info, NameValueCollection error)

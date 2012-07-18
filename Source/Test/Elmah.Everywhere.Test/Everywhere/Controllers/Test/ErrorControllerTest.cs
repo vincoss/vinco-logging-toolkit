@@ -4,6 +4,9 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using Moq;
 using Xunit;
+using Elmah.Everywhere.Utils;
+using System.Text;
+using Elmah.Everywhere.Web;
 
 
 namespace Elmah.Everywhere.Controllers.Test
@@ -11,7 +14,17 @@ namespace Elmah.Everywhere.Controllers.Test
     public class ErrorControllerTest
     {
         [Fact]
-        public void Put_Has_HttpPostAttribute_Test()
+        public void Has_RequireHttpsAttribute_Test()
+        {
+            // Act
+            var attributes = typeof(ErrorController).GetCustomAttributes(typeof(CustomRequireHttpsAttribute), false);
+
+            // Assert
+            Assert.True(attributes.Any());
+        }
+
+        [Fact]
+        public void Log_Has_HttpPostAttribute_Test()
         {
             // Act
             // Arrange
@@ -26,7 +39,7 @@ namespace Elmah.Everywhere.Controllers.Test
         }
 
         [Fact]
-        public void Put_Returns_HttpStatusCodeResult_200_Test()
+        public void Log_Returns_HttpStatusCodeResult_200_Test()
         {
             // Arrange
             TestableElmahErrorHelper helper = new TestableElmahErrorHelper();
@@ -37,13 +50,17 @@ namespace Elmah.Everywhere.Controllers.Test
 
             ErrorController controller = new ErrorController(helper, service.Object);
 
-            //// Act
-            //HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
+            ErrorInfo info = new ErrorInfo(new Exception("Test-Exception"));
 
-            //// Assert
-            //Assert.Equal(200, result.StatusCode);
-            //Assert.NotNull(helper.Error);
-            Assert.True(false);
+            string xml = Utility.SerializeXml(info);
+            string error = Convert.ToBase64String(Encoding.UTF8.GetBytes(xml));
+
+            // Act
+            HttpStatusCodeResult result = controller.Log("Test-Token", error) as HttpStatusCodeResult;
+
+            // Assert
+            Assert.Equal(200, result.StatusCode);
+            Assert.NotNull(helper.Error);
         }
 
         [Fact]
@@ -56,12 +73,11 @@ namespace Elmah.Everywhere.Controllers.Test
 
             ErrorController controller = new ErrorController(new TestableElmahErrorHelper(), service.Object);
 
-            //// Act
-            //HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
+            // Act
+            HttpStatusCodeResult result = controller.Log("", null) as HttpStatusCodeResult;
 
-            //// Assert
-            //Assert.Equal(403, result.StatusCode);
-            Assert.True(false);
+            // Assert
+            Assert.Equal(403, result.StatusCode);
         }
 
         [Fact]
@@ -74,12 +90,16 @@ namespace Elmah.Everywhere.Controllers.Test
 
             ErrorController controller = new ErrorController(new TestableElmahErrorHelper(), service.Object);
 
-            //// Act
-            //HttpStatusCodeResult result = controller.Log(new ErrorInfo()) as HttpStatusCodeResult;
+            ErrorInfo info = new ErrorInfo(new Exception("Test-Exception"));
 
-            //// Assert
-            //Assert.Equal(412, result.StatusCode);
-            Assert.True(false);
+            string xml = Utility.SerializeXml(info);
+            string error = Convert.ToBase64String(Encoding.UTF8.GetBytes(xml));
+
+            // Act
+            HttpStatusCodeResult result = controller.Log("Test-Token", error) as HttpStatusCodeResult;
+
+            // Assert
+            Assert.Equal(412, result.StatusCode);
         }
 
         class TestableElmahErrorHelper : ElmahErrorHelper

@@ -5,11 +5,11 @@ namespace Elmah.Everywhere
 {
     public abstract class ExceptionWritterBase
     {
-        public event EventHandler Completed;
+        public event EventHandler<WritterEventArgs> Completed;
 
         public abstract void Write(string token, ErrorInfo error);
 
-        protected virtual void OnCompleted(EventArgs e)
+        protected void OnCompleted(WritterEventArgs e)
         {
             if (Completed != null)
             {

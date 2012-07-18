@@ -14,6 +14,10 @@ namespace Elmah.Everywhere.ServiceModel
 
         public ServiceHttpErrorBehaviorAttribute(Type errorHandlerType)
         {
+            if (errorHandlerType == null)
+            {
+                throw new ArgumentNullException("errorHandlerType");
+            }
             this._errorHandlerType = errorHandlerType;
         }
 

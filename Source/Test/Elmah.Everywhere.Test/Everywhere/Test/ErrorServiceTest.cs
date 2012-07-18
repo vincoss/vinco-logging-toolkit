@@ -45,8 +45,6 @@ namespace Elmah.Everywhere.Test
                                  {
                                      ApplicationName = "ApplicationName",
                                      Host = "Host",
-                                     Type = "Type",
-                                     Source = "Source",
                                      Message = "Message",
                                      Detail = "Error"
                                  };

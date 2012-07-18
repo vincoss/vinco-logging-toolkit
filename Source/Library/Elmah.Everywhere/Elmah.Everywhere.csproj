@@ -99,6 +99,7 @@
     <Compile Include="Everywhere\ExceptionWritterBase.cs" />
     <Compile Include="Everywhere\HttpExceptionWritter.cs" />
     <Compile Include="Everywhere\Web\Starter.cs" />
+    <Compile Include="Everywhere\WritterEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Everywhere\ServiceModel\ServiceHttpErrorBehaviorAttribute.cs" />
     <Compile Include="Properties\Strings.Designer.cs">

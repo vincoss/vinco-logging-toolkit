@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web;
+﻿using System.Web;
 using Elmah.Everywhere.Web;
 using Elmah.Everywhere.Diagnostics;
 
@@ -12,7 +11,7 @@ namespace Elmah.Everywhere.Web
         public static void Start()
         {
             // Configure error handler from configuration file
-            ExceptionHandler.WithParameters(new HttpExceptionWritter());
+            ExceptionHandler.ConfigureFromConfigurationFile(new HttpExceptionWritter());
         }
     }
 }

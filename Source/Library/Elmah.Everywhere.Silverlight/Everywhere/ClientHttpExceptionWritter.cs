@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 
 
 namespace Elmah.Everywhere
@@ -19,24 +18,22 @@ namespace Elmah.Everywhere
             try
             {
                 var webClient = CreateWebClient();
-                webClient.UploadStringCompleted += WebClient_UploadStringCompleted;
+                webClient.UploadStringCompleted += (s, e) =>
+                                                       {
+                                                           if (e.Error != null)
+                                                           {
+                                                               this.Exception = e.Error;
+                                                           } 
+                                                           OnCompleted(new WritterEventArgs(error));
+                                                       };
                 string postData = CreatePostData(token, error);
                 webClient.UploadStringAsync(RequestUri, "POST", postData, null);
             }
             catch (Exception exception)
             {
                 Exception = exception;
-                OnCompleted(EventArgs.Empty);
+                OnCompleted(new WritterEventArgs(error));
             }
-        }
-
-        private void WebClient_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                this.Exception = e.Error;
-            }
-            OnCompleted(EventArgs.Empty);
         }
     }
 }

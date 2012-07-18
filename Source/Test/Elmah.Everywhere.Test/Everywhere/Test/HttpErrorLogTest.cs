@@ -22,6 +22,27 @@ namespace Elmah.Everywhere.Test
         }
 
         [Fact]
+        public void GetError_Throws()
+        {
+            // Assert
+            Assert.Throws<NotSupportedException>(() => { new HttpErrorLog(new HybridDictionary()).GetError(null); });
+        }
+
+        [Fact]
+        public void GetErrors_Throws()
+        {
+            // Assert
+            Assert.Throws<NotSupportedException>(() => { new HttpErrorLog(new HybridDictionary()).GetErrors(0, 0, null); });
+        }
+
+        [Fact]
+        public void Log_Throws_Test()
+        {
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => { new HttpErrorLog(new HybridDictionary()).Log(null); });
+        }
+
+        [Fact]
         public void Log_Test()
         {
             // Arrange
@@ -29,10 +50,12 @@ namespace Elmah.Everywhere.Test
                                                {
                                                    ApplicationName = "Test-Application",
                                                    Host = "HttpErrorLogTest",
-                                                   Token = "Test-Token"
+                                                   Token = "Test-Token",
+                                                   RemoteLogUri = "http://www.faulthub.org/"
+                                                   
                                                };
             TestableHttpExceptionWritter writter = new TestableHttpExceptionWritter();
-            ExceptionHandler.WithParameters(parameters, writter);
+            ExceptionHandler.Configure(writter, parameters);
             HttpErrorLog log = new HttpErrorLog(new HybridDictionary());
 
             // Act
@@ -44,6 +67,9 @@ namespace Elmah.Everywhere.Test
 
         class TestableHttpExceptionWritter : HttpExceptionWritter
         {
+            protected override void WriteInternal(string data)
+            {
+            }
         }
     }
 }

@@ -102,6 +102,9 @@
     <Compile Include="..\Elmah.Everywhere\Everywhere\Utils\Utility.cs">
       <Link>Everywhere\Utils\Utility.cs</Link>
     </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\WritterEventArgs.cs">
+      <Link>Everywhere\WritterEventArgs.cs</Link>
+    </Compile>
     <Compile Include="Everywhere\Appenders\AssemblyAppender.cs" />
     <Compile Include="Everywhere\ClientHttpExceptionWritter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

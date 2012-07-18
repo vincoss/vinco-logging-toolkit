@@ -13,6 +13,7 @@ namespace Elmah.Everywhere.Appenders
         public override void Append(ErrorInfo error)
         {
             HttpContextBase httpContext = GetContext();
+
             if (httpContext != null)
             {
                 var pairs = new Dictionary<string, string>();
@@ -35,12 +36,16 @@ namespace Elmah.Everywhere.Appenders
                     error.StatusCode = httpException.GetHttpCode();
                 }
 
-                error.User = "";
                 IPrincipal webUser = httpContext.User;
                 if (webUser != null && webUser.Identity.Name.Length > 0)
                 {
                     error.User = webUser.Identity.Name;
                 }
+            }
+
+            if (string.IsNullOrWhiteSpace(error.User))
+            {
+                error.User = string.Format(@"{0}\{1}", Environment.UserDomainName, Environment.UserName).Trim('\\');
             }
         }
 

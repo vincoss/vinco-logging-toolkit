@@ -5,6 +5,7 @@ using Elmah.Everywhere.Models;
 
 namespace Elmah.Everywhere.Controllers
 {
+    // TODO: Https should be fixed:
     //[CustomRequireHttps]
     public class AccountController : Controller
     {
@@ -18,34 +19,48 @@ namespace Elmah.Everywhere.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                if (ValidateUser(model.UserName, model.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/") && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    SetAuthCookie(model.UserName, model.RememberMe);
+                    if (LocalUrl(returnUrl))
                     {
-                        //return Redirect(returnUrl); // TODO:
-                        return Redirect("/elmah");
+                        return Redirect(returnUrl);
                     }
-                    else
-                    {
-                        // TODO:
-                        //return RedirectToAction("", "Elmah");
-                        return Redirect("/elmah");
-                    }
+                    return RedirectToAction("", "Elmah");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
+                ModelState.AddModelError("", "The user name or password provided is incorrect.");
             }
             return View(model);
         }
 
         public ActionResult LogOff()
         {
-            FormsAuthentication.SignOut();
-
+            this.SignOutInternal();
             return RedirectToAction("", "Elmah");
+        }
+
+        private bool LocalUrl(string returnUrl)
+        {
+            if(string.IsNullOrWhiteSpace(returnUrl))
+            {
+                return false;
+            }
+            return Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/") && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\");
+        }
+
+        protected virtual void SignOutInternal()
+        {
+            FormsAuthentication.SignOut();
+        }
+
+        protected virtual bool ValidateUser(string userName, string passowrd)
+        {
+            return Membership.ValidateUser(userName, passowrd);
+        }
+
+        protected virtual void SetAuthCookie(string userName, bool remember)
+        {
+            FormsAuthentication.SetAuthCookie(userName, remember);
         }
     }
 }

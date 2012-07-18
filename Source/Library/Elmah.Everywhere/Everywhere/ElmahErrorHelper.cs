@@ -104,7 +104,7 @@ namespace Elmah.Everywhere
 
         private static void CopyToCollections(ErrorInfo info, NameValueCollection collection, string collectionName)
         {
-            var detail = info.Details.SingleOrDefault(x => x.Name == collectionName);
+            var detail = info.ErrorDetails.SingleOrDefault(x => x.Name == collectionName);
             if(detail != null)
             {
                 foreach (var pair in detail.Items)

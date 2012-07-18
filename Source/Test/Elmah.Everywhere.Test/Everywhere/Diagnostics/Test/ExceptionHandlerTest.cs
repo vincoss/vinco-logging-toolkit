@@ -1,20 +1,16 @@
 ﻿using System;
+using System.Linq;
 using Xunit;
 using Moq;
+using Elmah.Everywhere.Configuration;
 
 
 namespace Elmah.Everywhere.Diagnostics.Test
 {
-    // TODO:
     public class ExceptionHandlerTest
     {
-        public ExceptionHandlerTest()
-        {
-            ExceptionHandler.IsEnabled = true;
-        }
-
         [Fact]
-        public void IsEnabled_Should_Be_True_Test()
+        public void IsEnabled_Test()
         {
             // Assert
             Assert.True(ExceptionHandler.IsEnabled);
@@ -35,17 +31,45 @@ namespace Elmah.Everywhere.Diagnostics.Test
         }
 
         [Fact]
-        public void WithParameters_Throws_If_Parameters_Is_Null_Test()
+        public void Configure_Test()
         {
+            // Arrange
+            TestableExceptionWritter writter = new TestableExceptionWritter();
+
+            // Act
+            ExceptionHandler.ConfigureFromConfigurationFile(writter);
+           
             // Assert
-            Assert.Throws<ArgumentNullException>(() => ExceptionHandler.WithParameters(null, new HttpExceptionWritter()));
+            Assert.Equal("http://localhost:11079/error/log", writter.RequestUri.ToString());
         }
 
         [Fact]
-        public void WithParameters_Throws_If_Writer_Is_Null_Test()
+        public void Configure_Thows_If_Section_Is_Null_Test()
         {
+            EverywhereConfigurationSection section = null;
+
             // Assert
-            Assert.Throws<ArgumentNullException>(() => ExceptionHandler.WithParameters(new ExceptionDefaults(), null));
+            Assert.Throws<ArgumentNullException>(() => { ExceptionHandler.Configure(null, section); });
+        }
+
+        [Fact]
+        public void Configure_Thows_If_Writter_Is_Null_Test()
+        {
+            HttpExceptionWritter writter = null;
+            ExceptionDefaults defaults = new ExceptionDefaults();
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => { ExceptionHandler.Configure(writter, defaults); });
+        }
+
+        [Fact]
+        public void Configure_Thows_If_Parameters_Is_Null_Test()
+        {
+            HttpExceptionWritter writter = new HttpExceptionWritter();
+            ExceptionDefaults defaults = null;
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => { ExceptionHandler.Configure(writter, defaults); });
         }
 
         [Fact]
@@ -59,14 +83,20 @@ namespace Elmah.Everywhere.Diagnostics.Test
         public void Should_Not_Report_If_Disabled_Test()
         {
             // Arrange
-            ExceptionDefaults parameters = new ExceptionDefaults();
+            ExceptionDefaults parameters = new ExceptionDefaults
+                                               {
+                                                   RemoteLogUri = "http://localhost:11079/error/log"
+                                               };
             TestableExceptionWritter writter = new TestableExceptionWritter();
 
             ExceptionHandler.IsEnabled = false;
-            ExceptionHandler.WithParameters(parameters, writter);
+            ExceptionHandler.Configure(writter, parameters);
 
             // Act
             ExceptionHandler.Report(new Exception(), null);
+
+            // Reset to default
+            ExceptionHandler.IsEnabled = true;
 
             // Assert
             Assert.Null(writter.Error);
@@ -76,10 +106,14 @@ namespace Elmah.Everywhere.Diagnostics.Test
         public void Should_Report_If_Enabled_Test()
         {
             // Arrange
-            ExceptionDefaults defaults = new ExceptionDefaults();
+            ExceptionDefaults parameters = new ExceptionDefaults
+                                               {
+                                                   Token = "Test-Token",
+                                                   RemoteLogUri = "http://localhost:11079/error/log"
+                                               };
             TestableExceptionWritter writter = new TestableExceptionWritter();
 
-            ExceptionHandler.WithParameters(defaults, writter);
+            ExceptionHandler.Configure(writter, parameters);
 
             // Act
             ExceptionHandler.Report(new Exception(), null);
@@ -88,13 +122,51 @@ namespace Elmah.Everywhere.Diagnostics.Test
             Assert.NotNull(writter.Error);
         }
 
-        class TestableExceptionWritter : ExceptionWritterBase
+        [Fact]
+        public void Should_Call_Completed_Event_Test()
         {
-            public ErrorInfo Error;
-
-            public override void Write(string token, ErrorInfo error)
+            // Arrange
+            ExceptionDefaults parameters = new ExceptionDefaults
             {
-                Error = error;
+                Token = "Test-Token",
+                RemoteLogUri = "http://localhost:11079/error/log"
+            };
+
+            bool completed = false;
+            TestableExceptionWritter writter = new TestableExceptionWritter();
+            writter.Completed += (s, e) =>
+            {
+                completed = true;
+            };
+
+            ExceptionHandler.Configure(writter, parameters);
+
+            // Act
+            ExceptionHandler.Report(new Exception(), null);
+
+            // Assert
+            Assert.True(completed);
+        }
+
+        [Fact]
+        public void AllAppenders_Test()
+        {
+            // Act
+            var appenders = ExceptionHandler.AllAppenders();
+
+            // Assert
+            Assert.True(appenders.Count() == 5);
+        }
+
+        class TestableExceptionWritter : HttpExceptionWritter
+        {
+            public string Error;
+            public Exception SetExcption;
+
+            protected override void WriteInternal(string data)
+            {
+                Error = data;
+                Exception = SetExcption;
             }
         }
     }

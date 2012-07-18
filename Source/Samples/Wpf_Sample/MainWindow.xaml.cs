@@ -13,6 +13,8 @@ namespace Wpf_Sample
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            // Make an exception
+
             int i = 0;
             int result = 10 / i;
         }

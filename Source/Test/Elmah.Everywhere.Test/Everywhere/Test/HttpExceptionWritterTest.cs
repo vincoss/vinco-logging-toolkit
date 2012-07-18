@@ -1,25 +1,13 @@
 ﻿using System;
 using Xunit;
 using System.Web;
+using System.Net;
 
 
 namespace Elmah.Everywhere.Test
 {
     public class HttpExceptionWritterTest
     {
-        [Fact]
-        public void FormData_Test()
-        {
-            // Arrange
-            var entity = new { first = "value 1", second = "value 2" };
-
-            // Act
-            string data = HttpExceptionWritterBase.FormData(entity, HttpUtility.UrlEncode);
-
-            // Assert
-            Assert.Equal("first=value+1&second=value+2", data);
-        }
-
         [Fact]
         public void Write_Throws_If_Token_Is_Null_Test()
         {
@@ -72,9 +60,8 @@ namespace Elmah.Everywhere.Test
         [Fact]
         public void Write_Exception_Not_Null_If_Error_Occurs_Test()
         {
-            TestableHttpExceptionWritter writter = new TestableHttpExceptionWritter();
+            HttpExceptionWritter writter = new HttpExceptionWritter();
             ErrorInfo info = new ErrorInfo(new Exception("Test Exception"));
-            writter.Throw = true;
 
             // Act
             writter.Write("Test-Token", info);
@@ -83,10 +70,31 @@ namespace Elmah.Everywhere.Test
             Assert.NotNull(writter.Exception);
         }
 
+        [Fact]
+        public void CanCreateWebClient_Test()
+        {
+            // Arrange
+            TestableHttpExceptionWritter writter = new TestableHttpExceptionWritter();
+
+            WebClient client = writter.GetClient();
+
+            // Assert
+            Assert.Equal("application/x-www-form-urlencoded", client.Headers["Content-Type"]);
+        }
+
         class TestableHttpExceptionWritter : HttpExceptionWritter
         {
-            public bool Throw { get; set; }
             public string Data { get; private set; }
+
+            protected override void WriteInternal(string data)
+            {
+                this.Data = data;
+            }
+
+            public WebClient GetClient()
+            {
+                return CreateWebClient();
+            }
         }
     }
 }
