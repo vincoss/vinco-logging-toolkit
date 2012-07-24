@@ -46,12 +46,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Elmah, Version=1.2.13605.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
+    <Reference Include="Elmah, Version=1.2.14318.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
       <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -80,9 +79,9 @@
     <Compile Include="Everywhere\Appenders\PropertiesAppender.cs" />
     <Compile Include="Everywhere\Configuration\EverywhereConfigurationSection.cs" />
     <Compile Include="Everywhere\Constants.cs" />
-    <Compile Include="Everywhere\Controllers\AccountController.cs" />
-    <Compile Include="Everywhere\Controllers\ElmahController.cs" />
-    <Compile Include="Everywhere\Controllers\ErrorController.cs" />
+    <Compile Include="Everywhere\Web\Controllers\AccountController.cs" />
+    <Compile Include="Everywhere\Web\Controllers\ElmahController.cs" />
+    <Compile Include="Everywhere\Web\Controllers\ErrorController.cs" />
     <Compile Include="Everywhere\Diagnostics\ExceptionHandler.cs" />
     <Compile Include="Everywhere\ElmahErrorHelper.cs" />
     <Compile Include="Everywhere\ErrorInfo.cs" />
@@ -136,10 +135,13 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UpdateAssemblyVersion="False" BuildVersion_BuildVersioningStyle="Increment.Increment.Increment.TimeStamp" />
+      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.TimeStamp.Increment" BuildVersion_IncrementBeforeBuild="False" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

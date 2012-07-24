@@ -68,15 +68,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ASPNETDB.MDF" />
-    <Content Include="App_Data\ASPNETDB_log.ldf">
-      <DependentUpon>ASPNETDB.MDF</DependentUpon>
+    <Content Include="App_Data\Elmah.Everywhere.mdf" />
+    <Content Include="App_Data\Elmah.Everywhere_log.ldf">
+      <DependentUpon>Elmah.Everywhere.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Data\ElmahErrorDb.mdf" />
-    <Content Include="App_Data\ElmahErrorDb.sql" />
-    <Content Include="App_Data\ElmahErrorDb_log.ldf">
-      <DependentUpon>ElmahErrorDb.mdf</DependentUpon>
-    </Content>
+    <Content Include="App_Data\Elmah.sql" />
     <Content Include="clientaccesspolicy.xml" />
     <Content Include="crossdomain.xml" />
     <Content Include="Global.asax" />

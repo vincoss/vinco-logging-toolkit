@@ -21,7 +21,7 @@ namespace WebSite
             routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
 
             routes.MapRoute(
-                "Default", // Route name
+                "Elmah", // Route name
                 "{controller}/{action}/{type}", // URL with parameters
                 new { controller = "Elmah", action = "Index", type = UrlParameter.Optional }, // Parameter defaults
                 null,

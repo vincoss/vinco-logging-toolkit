@@ -34,7 +34,7 @@ namespace Silverlight_Sample
             Uri uri = Application.Current.Host.Source;
             var defaults = new ExceptionDefaults
             {
-                Token = "Test-Token",
+                Token = "Silverlight-Test-Token",
                 ApplicationName = "Silverlight-Sample",
                 Host = string.Format("{0}{1}{2}:{3}", uri.Scheme, Uri.SchemeDelimiter, uri.Host, uri.Port)
             };

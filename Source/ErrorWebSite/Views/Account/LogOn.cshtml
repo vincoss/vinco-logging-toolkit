@@ -1,6 +1,7 @@
 ﻿@model Elmah.Everywhere.Models.LogOnModel
 @{
     ViewBag.Title = "Elmah Everywhere (Log On)";
+    ViewBag.Version = new System.Reflection.AssemblyName(typeof (Elmah.Everywhere.Diagnostics.ExceptionHandler).Assembly.FullName).Version.ToString();
 }
 <!DOCTYPE html>
 <html>
@@ -154,7 +155,8 @@
             <div id="footer-container">
                 <p>
                     Copyright &copy; @DateTime.Now.Year Ferdinand Lukasak. All Rights Reserved.
-                    Powered by <a href="https://github.com/vincoss/vinco-logging-toolkit/">Elmah Everywhere</a>
+                    Powered by <a href="https://github.com/vincoss/vinco-logging-toolkit/">Elmah Everywhere</a>.
+                    Version @ViewBag.Version
                 </p>
             </div>
         </div>

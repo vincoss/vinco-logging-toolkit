@@ -1,13 +1,9 @@
-﻿using System;
+﻿using System.Web;
 using System.Web.Mvc;
-using Elmah;
-using System.Web;
 
 
 namespace Elmah.Everywhere.Web
 {
-    // TODO:
-
     public class ElmahResult : ActionResult
     {
         private readonly string _resouceType;
@@ -19,33 +15,43 @@ namespace Elmah.Everywhere.Web
 
         public override void ExecuteResult(ControllerContext context)
         {
-            var httpHandlerFactory = new ErrorLogPageFactory();
+            var httpContext = context.HttpContext;
+            var request = httpContext.Request;
+            var path = request.Path;
+            var queryString = request.QueryString.ToString();
 
             if (string.IsNullOrWhiteSpace(_resouceType) == false)
             {
-                string resourcePath = GetResourcePath(context);
+                string resourcePath = GetResourcePath(httpContext);
                 string pathInfo = string.Format("/{0}", _resouceType);
-                context.HttpContext.RewritePath(resourcePath, pathInfo, context.HttpContext.Request.QueryString.ToString());
-            }
-            
-            var application = (HttpApplication)context.HttpContext.GetService(typeof(HttpApplication));
-            var httpContext = application.Context;
-
-            var httpHandler = httpHandlerFactory.GetHandler(httpContext, null, null, null);
-            if (httpHandler is IHttpAsyncHandler)
-            {
-                var asyncHttpHandler = (IHttpAsyncHandler)httpHandler;
-                asyncHttpHandler.BeginProcessRequest(httpContext, (x) => { }, null);
+                httpContext.RewritePath(resourcePath, pathInfo, queryString);
             }
             else
             {
-                httpHandler.ProcessRequest(httpContext);
+                if (path.EndsWith("/"))
+                {
+                    const string CON = "elmah";
+                    var newPath = path.Remove(path.Length - 1);
+                    if(newPath.EndsWith(CON) == false)
+                    {
+                        newPath = CON;
+                    }
+                    httpContext.RewritePath(newPath, null, queryString);
+                }
             }
+            ProcessRequest(httpContext);
         }
 
-        private string GetResourcePath(ControllerContext context)
+        protected virtual void ProcessRequest(HttpContextBase httpContext)
         {
-            return _resouceType != "stylesheet" ? context.HttpContext.Request.Path.Replace(string.Format("/{0}", _resouceType), string.Empty) : context.HttpContext.Request.Path;
+            var unwrappedHttpContext = httpContext.ApplicationInstance.Context;
+            var handler = new ErrorLogPageFactory().GetHandler(unwrappedHttpContext, null, null, null);
+            handler.ProcessRequest(unwrappedHttpContext);
+        }
+
+        private string GetResourcePath(HttpContextBase httpContext)
+        {
+            return _resouceType != "stylesheet" ? httpContext.Request.Path.Replace(string.Format("/{0}", _resouceType), string.Empty) : httpContext.Request.Path;
         }
     }
 }
