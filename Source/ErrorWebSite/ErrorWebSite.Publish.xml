@@ -1,26 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
   <publishProfile publishUrl="E:\_Sites\Elmah.Everywhere" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
-    <file relUrl="Web.config" publishTime="07/24/2012 23:03:39" />
+    <file relUrl="Web.config" publishTime="07/25/2012 18:13:57" />
     <file relUrl="bin/Elmah.dll" publishTime="01/06/2012 13:00:07" />
+    <file relUrl="App_Data/Elmah.Everywhere_log.ldf" publishTime="07/24/2012 23:07:45" />
     <file relUrl="packages.config" publishTime="06/30/2012 16:19:18" />
-    <file relUrl="bin/WebSite.pdb" publishTime="07/24/2012 23:03:38" />
-    <file relUrl="Scripts/jquery-1.5.1.min.js" publishTime="01/24/2012 02:11:10" />
-    <file relUrl="App_Data/ElmahErrorDb.mdf" publishTime="06/27/2012 22:05:44" />
-    <file relUrl="bin/Elmah.Everywhere.dll" publishTime="07/24/2012 23:03:36" />
-    <file relUrl="Scripts/jquery.validate.min.js" publishTime="01/24/2012 02:11:10" />
-    <file relUrl="App_Data/ASPNETDB_log.ldf" publishTime="07/19/2012 06:59:52" />
-    <file relUrl="Views/Web.config" publishTime="07/16/2012 22:16:40" />
-    <file relUrl="App_Data/ElmahErrorDb.sql" publishTime="06/27/2012 07:36:58" />
-    <file relUrl="clientaccesspolicy.xml" publishTime="01/24/2012 02:11:10" />
-    <file relUrl="bin/WebSite.dll" publishTime="07/24/2012 23:03:38" />
-    <file relUrl="Views/Account/LogOn.cshtml" publishTime="07/24/2012 23:03:17" />
+    <file relUrl="bin/WebSite.pdb" publishTime="07/25/2012 18:13:56" />
+    <file relUrl="App_Data/Elmah.Everywhere.mdf" publishTime="07/24/2012 23:07:45" />
     <file relUrl="crossdomain.xml" publishTime="01/24/2012 02:11:10" />
-    <file relUrl="App_Data/ASPNETDB.MDF" publishTime="07/19/2012 06:59:52" />
+    <file relUrl="Scripts/jquery-1.5.1.min.js" publishTime="01/24/2012 02:11:10" />
+    <file relUrl="bin/Elmah.Everywhere.dll" publishTime="07/25/2012 18:13:54" />
+    <file relUrl="Scripts/jquery.validate.min.js" publishTime="01/24/2012 02:11:10" />
+    <file relUrl="clientaccesspolicy.xml" publishTime="01/24/2012 02:11:10" />
+    <file relUrl="Views/Web.config" publishTime="07/16/2012 22:16:40" />
+    <file relUrl="Views/Account/LogOn.cshtml" publishTime="07/24/2012 23:03:17" />
+    <file relUrl="bin/WebSite.dll" publishTime="07/25/2012 18:13:56" />
     <file relUrl="Global.asax" publishTime="01/24/2012 02:11:10" />
-    <file relUrl="App_Data/ElmahErrorDb_log.ldf" publishTime="06/27/2012 22:05:44" />
+    <file relUrl="App_Data/Elmah.sql" publishTime="07/24/2012 23:06:51" />
     <file relUrl="MvcDiagnostics.aspx" publishTime="06/30/2012 06:20:58" />
     <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="01/24/2012 02:11:10" />
-    <file relUrl="bin/Elmah.Everywhere.pdb" publishTime="07/24/2012 23:03:36" />
+    <file relUrl="bin/Elmah.Everywhere.pdb" publishTime="07/25/2012 18:13:54" />
   </publishProfile>
 </publishData>

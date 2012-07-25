@@ -1,11 +1,20 @@
 Elmah Everywhere Documentation
 Elmah Everywhere is an exception logging library for .NET, Silverlight, WPF, ASP.NET MVC and WCF that uses an ELMAH (Error Logging Modules and Handlers for ASP.NET).
 For more detailed information how to configure and use Elmah Everywhere see source code and samples at https://github.com/vincoss/vinco-logging-toolkit.
+
+Error Database
+Error database is located on project directory. “Vinco.Elmah.Everywhere\Source\ErrorWebSite\App_Data”
+
+Error web site
 Error website default login details
+You can access sample error web site at http://localhost:11079/.
 •	UserName : administrator
 •	Password: p@ssword
+
+Configuration
 Silverlight configuration
-To configure Silverlight exception logging you must add a reference to Elmah.Everywhere.Silverlight.dll and configure exception handler.
+You can configure error logging as indicated in the following example.
+
 private static void SetUpExceptionHandler()
 {
 // Configure
@@ -37,7 +46,8 @@ private void Application_UnhandledException(object sender, ApplicationUnhandledE
     ExceptionHandler.Report(e.ExceptionObject, null);
 }
 WPF configuration
-To configure WPF exception logging you must add a reference to Elmah.Everywhere.dll and configure exception handler.
+You can configure error logging as indicated in the following example.
+
 In Application constructor call handler setup method.
 public App()
 {
@@ -73,11 +83,8 @@ Configuration details in App.config file
               host="Wpf-Sample"
               applicationName="Exceptions-Handler"/>
 </everywhere>
-
 Code configuration
-To configure exception logic from code you must add a reference to Elmah.Everywhere.Silverlight.dll and configure exception handler.
-
-Configure exception handler
+You can configure error logging in code as indicated in the following example.
 
 static void Main(string[] args)
 {
@@ -95,34 +102,33 @@ Host = Environment.MachineName
 
 ExceptionHandler.Configure(writter, defaults);
 }
-WCF configuration with config file
-To configure WCF exception logging you must add those settings into web.config file.
+WCF configuration with Web.config or App.config file
+To use WCF service error logging, you should configure service behaviour in configuration file or in code. You can configure error logging as indicated in the following example. 
 <system.serviceModel>
-  <serviceHostingEnvironment aspNetCompatibilityEnabled="true" multipleSiteBindingsEnabled="true" />
-  <extensions>
-    <behaviorExtensions>
-      <add name="elmah" type="Elmah.Everywhere.ServiceModel.ErrorBehaviorExtensionElement, Elmah.Everywhere"/>
-    </behaviorExtensions>
-  </extensions>
-  <behaviors>
-    <serviceBehaviors>
-      <behavior>
-        <elmah/>
-      </behavior>
-    </serviceBehaviors>
-  </behaviors>
+    <serviceHostingEnvironment aspNetCompatibilityEnabled="true" multipleSiteBindingsEnabled="true" />
+    <behaviors>
+      <serviceBehaviors>
+        <behavior name="">
+          <ElmahErrorLog />
+        </behavior>
+      </serviceBehaviors>
+    </behaviors>
+    <extensions>
+      <behaviorExtensions>
+        <add name="ElmahErrorLog" type="Elmah.Everywhere.ServiceModel.ErrorBehaviorExtensionElement, Elmah.Everywhere"/>
+      </behaviorExtensions>
+    </extensions>
 </system.serviceModel>
-
-WCF configuration with behaviour attribute
-Decorate your WCF or WCF RIA services with ServiceHttpErrorBehaviour attribute.
+WCF configuration with behaviour attribute from code
+You can configure error logging as indicated in the following example. 
 [ServiceHttpErrorBehavior(typeof(HttpErrorHandler))]
-public class UserRegistrationService : DomainService
+public class MyService : IMyService
 {
-}
 
 
+Tracing
 Trace diagnostics configuration
-Configure trace to log errors into a file. Trace log can be also used to diagnose issues with Elmah.Everywhere error log.
+Elmah.Everywhere tracing is built on top of System.Diagnostics. To use tracing, you should define trace sources in configuration file or in code. You can configure trace logging as indicated in the following example. 
 <configuration>
   <system.diagnostics>
     <trace autoflush="true">

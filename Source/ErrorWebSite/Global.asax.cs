@@ -24,8 +24,8 @@ namespace WebSite
                 "Elmah", // Route name
                 "{controller}/{action}/{type}", // URL with parameters
                 new { controller = "Elmah", action = "Index", type = UrlParameter.Optional }, // Parameter defaults
-                null,
-                new[] { "Elmah.Everywhere.Controllers" });
+                null, // Constraints
+                new[] { "Elmah.Everywhere.Controllers" }); // Namespaces
         }
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

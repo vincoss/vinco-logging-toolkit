@@ -174,6 +174,8 @@ span.Heading2Char
 	font-family:"Cambria","serif";
 	color:#4F81BD;
 	font-weight:bold;}
+.MsoChpDefault
+	{font-family:"Calibri","sans-serif";}
 .MsoPapDefault
 	{margin-bottom:10.0pt;
 	line-height:115%;}
@@ -210,7 +212,27 @@ and Handlers for ASP.NET).</p>
 Everywhere see source code and samples at <a
 href="https://github.com/vincoss/vinco-logging-toolkit">https://github.com/vincoss/vinco-logging-toolkit</a>.</p>
 
+<p class=MsoNormal>&nbsp;</p>
+
+<div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
+
+<p class=MsoTitle>Error Database</p>
+
+</div>
+
+<p class=MsoNormal>Error database is located on project directory. “Vinco.Elmah.Everywhere\Source\ErrorWebSite\App_Data”</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
+
+<p class=MsoTitle>Error web site</p>
+
+</div>
+
 <h1>Error website default login details</h1>
+
+<p class=MsoNormal>You can access sample error web site at http://localhost:11079/.</p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
 style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -220,10 +242,21 @@ style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nb
 style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span>Password: p@ssword</p>
 
+<p class=MsoNormal>&nbsp;</p>
+
+<div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
+
+<p class=MsoTitle>Configuration</p>
+
+</div>
+
 <h1>Silverlight configuration</h1>
 
-<p class=MsoNormal>To configure Silverlight exception logging you must add a reference
-to Elmah.Everywhere.Silverlight.dll and configure exception handler.</p>
+<p class=MsoNoSpacing>You can configure error logging as indicated in the following
+example.</p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'>&nbsp;</p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
@@ -335,7 +368,8 @@ SetUpExceptionHandler();</span></p>
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas'>}</span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas'>&nbsp;</span></p>
 
 <p class=MsoNormal><b>Add handler log into Application_UnhandledException
 method</b></p>
@@ -360,8 +394,10 @@ normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas'>}
 
 <h1>WPF configuration</h1>
 
-<p class=MsoNormal>To configure WPF exception logging you must add a reference
-to Elmah.Everywhere.dll and configure exception handler.</p>
+<p class=MsoNoSpacing>You can configure error logging as indicated in the following
+example.</p>
+
+<p class=MsoNoSpacing>&nbsp;</p>
 
 <p class=MsoNormal><b>In Application constructor call handler setup method.</b></p>
 
@@ -515,17 +551,10 @@ color:blue'>&lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
 color:#A31515'>everywhere</span><span style='font-size:9.5pt;font-family:Consolas;
 color:blue'>&gt;</span></p>
 
-<p class=MsoNoSpacing>&nbsp;</p>
-
 <h1>Code configuration</h1>
 
-<p class=MsoNoSpacing><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'>To
-configure exception logic from code you must add a reference to
-Elmah.Everywhere.Silverlight.dll and configure exception handler.</span></p>
-
-<p class=MsoNoSpacing>&nbsp;</p>
-
-<p class=MsoNoSpacing><b>Configure exception handler</b></p>
+<p class=MsoNoSpacing>You can configure error logging in code as indicated in
+the following example.</p>
 
 <p class=MsoNoSpacing>&nbsp;</p>
 
@@ -602,149 +631,154 @@ style='font-size:9.5pt;font-family:Consolas'>.Configure(writter, defaults);</spa
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;text-autospace:none'>}</p>
 
-<h1>WCF configuration with config file</h1>
+<h1>WCF configuration with Web.config or App.config file</h1>
 
-<p class=MsoNormal>To configure WCF exception logging you must add those
-settings into web.config file.</p>
+<p class=MsoNormal>To use WCF service error logging, you should configure
+service behaviour in configuration file or in code. You can configure error
+logging as indicated in the following example. </p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>&lt;</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>system.serviceModel</span><span style='font-size:9.0pt;
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>system.serviceModel</span><span style='font-size:9.5pt;
 font-family:Consolas;color:blue'>&gt;</span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>  &lt;</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>serviceHostingEnvironment</span><span style='font-size:9.0pt;
-font-family:Consolas;color:blue'> </span><span style='font-size:9.0pt;
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>    &lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>serviceHostingEnvironment</span><span style='font-size:9.5pt;
+font-family:Consolas;color:blue'> </span><span style='font-size:9.5pt;
 font-family:Consolas;color:red'>aspNetCompatibilityEnabled</span><span
-style='font-size:9.0pt;font-family:Consolas;color:blue'>=</span><span
-style='font-size:9.0pt;font-family:Consolas'>&quot;<span style='color:blue'>true</span>&quot;<span
+style='font-size:9.5pt;font-family:Consolas;color:blue'>=</span><span
+style='font-size:9.5pt;font-family:Consolas'>&quot;<span style='color:blue'>true</span>&quot;<span
 style='color:blue'> </span><span style='color:red'>multipleSiteBindingsEnabled</span><span
 style='color:blue'>=</span>&quot;<span style='color:blue'>true</span>&quot;<span
 style='color:blue'> /&gt;</span></span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>  &lt;</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>extensions</span><span style='font-size:9.0pt;font-family:Consolas;
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>    &lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>behaviors</span><span style='font-size:9.5pt;font-family:Consolas;
 color:blue'>&gt;</span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>    &lt;</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>behaviorExtensions</span><span style='font-size:9.0pt;
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>      &lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>serviceBehaviors</span><span style='font-size:9.5pt;font-family:
+Consolas;color:blue'>&gt;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>        &lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>behavior</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'> </span><span style='font-size:9.5pt;font-family:Consolas;
+color:red'>name</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>=</span><span style='font-size:9.5pt;font-family:Consolas'>&quot;&quot;<span
+style='color:blue'>&gt;</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>          &lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>ElmahErrorLog</span><span style='font-size:9.5pt;font-family:
+Consolas;color:blue'> /&gt;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>        &lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>behavior</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&gt;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>      &lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>serviceBehaviors</span><span style='font-size:9.5pt;font-family:
+Consolas;color:blue'>&gt;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>    &lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>behaviors</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&gt;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>    &lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>extensions</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&gt;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>      &lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>behaviorExtensions</span><span style='font-size:9.5pt;
 font-family:Consolas;color:blue'>&gt;</span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>      &lt;</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>add</span><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'> </span><span style='font-size:9.0pt;font-family:Consolas;
-color:red'>name</span><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>=</span><span style='font-size:9.0pt;font-family:Consolas'>&quot;<span
-style='color:blue'>elmah</span>&quot;<span style='color:blue'> </span><span
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>        &lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>add</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'> </span><span style='font-size:9.5pt;font-family:Consolas;
+color:red'>name</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>=</span><span style='font-size:9.5pt;font-family:Consolas'>&quot;<span
+style='color:blue'>ElmahErrorLog</span>&quot;<span style='color:blue'> </span><span
 style='color:red'>type</span><span style='color:blue'>=</span>&quot;<span
 style='color:blue'>Elmah.Everywhere.ServiceModel.ErrorBehaviorExtensionElement,
 Elmah.Everywhere</span>&quot;<span style='color:blue'>/&gt;</span></span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>    &lt;/</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>behaviorExtensions</span><span style='font-size:9.0pt;
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>      &lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>behaviorExtensions</span><span style='font-size:9.5pt;
 font-family:Consolas;color:blue'>&gt;</span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>  &lt;/</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>extensions</span><span style='font-size:9.0pt;font-family:Consolas;
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>    &lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>extensions</span><span style='font-size:9.5pt;font-family:Consolas;
 color:blue'>&gt;</span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>  &lt;</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>behaviors</span><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>    &lt;</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>serviceBehaviors</span><span style='font-size:9.0pt;font-family:
-Consolas;color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>      &lt;</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>behavior</span><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>        &lt;</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>elmah</span><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>/&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>      &lt;/</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>behavior</span><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>    &lt;/</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>serviceBehaviors</span><span style='font-size:9.0pt;font-family:
-Consolas;color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>  &lt;/</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>behaviors</span><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>&lt;/</span><span style='font-size:9.0pt;font-family:Consolas;
-color:#A31515'>system.serviceModel</span><span style='font-size:9.0pt;
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>system.serviceModel</span><span style='font-size:9.5pt;
 font-family:Consolas;color:blue'>&gt;</span></p>
 
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>&nbsp;</span></p>
+<h1>WCF configuration with behaviour attribute from code</h1>
 
-<h1>WCF configuration with behaviour attribute</h1>
-
-<p class=MsoNormal>Decorate your WCF or WCF RIA services with ServiceHttpErrorBehaviour
-attribute.</p>
+<p class=MsoNormal>You can configure error logging as indicated in the following
+example. </p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas'>[<span
-style='color:red'>ServiceHttpErrorBehavior</span>(<span style='color:blue'>typeof</span>(<span
-style='color:red'>HttpErrorHandler</span>))]</span></p>
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>[<span
+style='color:#2B91AF'>ServiceHttpErrorBehavior</span>(<span style='color:blue'>typeof</span>(<span
+style='color:#2B91AF'>HttpErrorHandler</span>))]</span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas;
-color:blue'>public</span><span style='font-size:9.0pt;font-family:Consolas'> <span
-style='color:blue'>class</span> <span style='color:#2B91AF'>UserRegistrationService</span>
-: <span style='color:red'>DomainService</span></span></p>
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>public</span><span style='font-size:9.5pt;font-family:Consolas'> <span
+style='color:blue'>class</span> <span style='color:#2B91AF'>MyService</span> : <span
+style='color:#2B91AF'>IMyService</span></span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas'>{</span></p>
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>{</span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas'>}</span></p>
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>&nbsp;</span></p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas'>&nbsp;</span></p>
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>&nbsp;</span></p>
 
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas'>&nbsp;</span></p>
+<div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
+
+<p class=MsoTitle>Tracing</p>
+
+</div>
 
 <h1>Trace diagnostics configuration</h1>
 
-<p class=MsoNormal>Configure trace to log errors into a file. Trace log can be
-also used to diagnose issues with Elmah.Everywhere error log.</p>
+<p class=MsoNormal>Elmah.Everywhere tracing is built on top of
+System.Diagnostics. To use tracing, you should define trace sources in
+configuration file or in code. You can configure trace logging as indicated in
+the following example. </p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
@@ -816,12 +850,6 @@ normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
 color:blue'>&lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
 color:#A31515'>configuration</span><span style='font-size:9.5pt;font-family:
 Consolas;color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'>&nbsp;</p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas'>}</span></p>
 
 </div>
 
