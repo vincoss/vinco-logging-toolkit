@@ -22,7 +22,7 @@ namespace Elmah.Everywhere.Appenders
 
             pairs.Add("User", string.Format(@"{0}\{1}", Environment.UserDomainName, Environment.UserName).Trim('\\'));
             pairs.Add("Machine Name", Environment.MachineName);
-            pairs.Add("App Start Time", Process.GetCurrentProcess().StartTime.ToLocalTime().ToString());
+            pairs.Add("App Start Time", Process.GetCurrentProcess().StartTime.ToLocalTime().ToString(CultureInfo.InvariantCulture));
             pairs.Add("App Up Time", (DateTime.Now - Process.GetCurrentProcess().StartTime.ToLocalTime()).ToString());
             pairs.Add("Worker process", GetWorkerProcess());
             pairs.Add("AppDomain", IsAppDomainHomogenous(AppDomain.CurrentDomain));

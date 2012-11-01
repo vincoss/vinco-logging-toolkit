@@ -72,8 +72,8 @@ namespace Elmah.Everywhere.ServiceModel
             var dataContractSerializer = new DataContractSerializer(typeof(T));
 
             using (var writer = new StringWriter(sb))
-            using (var xmlWriter = XmlWriter.Create(writer))
             {
+                var xmlWriter = XmlWriter.Create(writer);
                 dataContractSerializer.WriteObject(xmlWriter, faultExceptionWithDetail.Detail);
             }
         } 

@@ -24,6 +24,9 @@ namespace Silverlight_Sample
 
         private static void SetUpExceptionHandler()
         {
+            Uri uri = Application.Current.Host.Source;
+            string currentHost = string.Format("{0}{1}{2}:{3}", uri.Scheme, Uri.SchemeDelimiter, uri.Host, uri.Port);
+
             // Configure
             var writter = new ClientHttpExceptionWritter
             {
@@ -31,12 +34,11 @@ namespace Silverlight_Sample
                 RequestUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
             };
 
-            Uri uri = Application.Current.Host.Source;
             var defaults = new ExceptionDefaults
             {
-                Token = "Silverlight-Test-Token",
-                ApplicationName = "Silverlight-Sample",
-                Host = string.Format("{0}{1}{2}:{3}", uri.Scheme, Uri.SchemeDelimiter, uri.Host, uri.Port)
+                Token = "Test-Token",
+                ApplicationName = "Sample",
+                Host = currentHost
             };
             ExceptionHandler.Configure(writter, defaults);
         }

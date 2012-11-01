@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using Elmah.Everywhere.Utils;
-using System.Diagnostics;
 
 
 #if SILVERLIGHT
 using System.Windows.Browser;
 #else
 using System.Web;
+using System.Diagnostics.CodeAnalysis;
 #endif
 
 namespace Elmah.Everywhere

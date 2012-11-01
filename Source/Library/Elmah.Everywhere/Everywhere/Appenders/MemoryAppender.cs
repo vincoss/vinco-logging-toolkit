@@ -9,7 +9,7 @@ namespace Elmah.Everywhere.Appenders
         public override void Append(ErrorInfo error)
         {
             var memorystatusex = new MemoryStatusEx();
-            if (GlobalMemoryStatusEx(memorystatusex))
+            if (NativeMethods.GlobalMemoryStatusEx(memorystatusex))
             {
                 error.AddDetail(this.Name, "Total Memory", string.Format(CultureInfo.InvariantCulture, "{0} MB", memorystatusex.ullTotalPhys / (1024 * 1024)));
                 error.AddDetail(this.Name, "Available Memory", string.Format(CultureInfo.InvariantCulture, "{0} MB", memorystatusex.ullAvailPhys / (1024 * 1024)));
@@ -18,9 +18,12 @@ namespace Elmah.Everywhere.Appenders
 
         #region Nested types
 
-        [return: MarshalAs(UnmanagedType.Bool)]
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern bool GlobalMemoryStatusEx([In, Out] MemoryStatusEx lpBuffer);
+        private static class NativeMethods
+        {
+            [return: MarshalAs(UnmanagedType.Bool)]
+            [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern bool GlobalMemoryStatusEx([In, Out] MemoryStatusEx lpBuffer);    
+        }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         private class MemoryStatusEx

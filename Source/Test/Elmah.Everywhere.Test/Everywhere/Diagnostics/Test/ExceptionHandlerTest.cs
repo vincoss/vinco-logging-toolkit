@@ -161,7 +161,7 @@ namespace Elmah.Everywhere.Diagnostics.Test
         class TestableExceptionWritter : HttpExceptionWritter
         {
             public string Error;
-            public Exception SetExcption;
+            public Exception SetExcption = null;
 
             protected override void WriteInternal(string data)
             {

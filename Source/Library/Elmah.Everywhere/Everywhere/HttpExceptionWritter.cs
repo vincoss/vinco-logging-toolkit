@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 
 namespace Elmah.Everywhere
@@ -31,8 +32,10 @@ namespace Elmah.Everywhere
 
         protected virtual void WriteInternal(string data)
         {
-            var webClient = CreateWebClient();
-            webClient.UploadString(RequestUri, "POST", data);
+            using (var webClient = CreateWebClient())
+            {
+                webClient.UploadString(RequestUri, "POST", data);
+            }
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Elmah.Everywhere
                 throw new ArgumentNullException("context");
             }
             var args = new ExceptionFilterEventArgs(exception, context);
-            this.OnFiltering(args);
+            this.OnFiltering(this, args);
             if (args.Dismissed)
             {
                 return;
@@ -56,26 +56,26 @@ namespace Elmah.Everywhere
             {
                 if (entry != null)
                 {
-                    this.OnLogged(new ErrorLoggedEventArgs(entry));
+                    this.OnLogged(this, new ErrorLoggedEventArgs(entry));
                 }
             }
         }
 
-        protected void OnFiltering(ExceptionFilterEventArgs args)
+        protected void OnFiltering(object sender, EventArgs e)
         {
             ExceptionFilterEventHandler filtering = this.Filtering;
             if (filtering != null)
             {
-                filtering.Invoke(this, args);
+                filtering.Invoke(this, (ExceptionFilterEventArgs)e);
             }
         }
 
-        protected void OnLogged(ErrorLoggedEventArgs args)
+        protected void OnLogged(object sender, EventArgs e)
         {
             ErrorLoggedEventHandler logged = this.Logged;
             if (logged != null)
             {
-                logged.Invoke(this, args);
+                logged.Invoke(this, (ErrorLoggedEventArgs)e);
             }
         }
 

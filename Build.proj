@@ -1,47 +1,54 @@
-<Project InitialTargets="BuildAll" DefaultTargets="AfterBuild" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<PropertyGroup>
-		<DestFolder>Deploy\</DestFolder>
-		<Configuration>Debug</Configuration>
-	</PropertyGroup>
-	
-	<ItemGroup>
-		<ProjectsToBuild Include="**\*proj" Exclude="$(MSBuildProjectFile)"/>
-	</ItemGroup>
-	
-	<PropertyGroup>
-		<BuildAllDependsOn>CleanAll;CoreBuild;CopyFiles</BuildAllDependsOn>
-	</PropertyGroup>
+<Project InitialTargets="BuildAll" DefaultTargets="AfterBuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-	<Target Name="BuildAll" DependsOnTargets="$(BuildAllDependsOn)"/>
+  <PropertyGroup>
+    <Configuration>Debug</Configuration>
+  </PropertyGroup>
 
-	<Target Name="CoreBuild">
-		<MSBuild Projects ="@(ProjectsToBuild)"
-						 ContinueOnError ="false"
-						 Properties="Configuration=$(Configuration)">
-			<Output ItemName="OutputFiles" TaskParameter="TargetOutputs"/>
-		</MSBuild>
-	</Target>
+  <ItemGroup>
+    <ProjectsToBuild Include="**\*sln" Exclude="$(MSBuildProjectFile)"/>
+  </ItemGroup>
 
-	<Target Name="CopyFiles">
-		<Copy SourceFiles="@(OutputFiles)"
-					DestinationFiles="@(OutputFiles->'$(DestFolder)%(RecursiveDir)%(Filename)%(Extension)')" />
-	</Target>
+  <PropertyGroup>
+    <BuildAllDependsOn>CleanAll;CoreBuild;RunTests</BuildAllDependsOn>
+  </PropertyGroup>
 
-	<Target Name="CleanAll">
-		<!-- Delete any files this process may have created from a previous execution -->
-		<CreateItem Include="$(DestFolder)\**\*exe;$(DestFolder)\**\*dll">
-			<Output ItemName="GeneratedFiles" TaskParameter="Include"/>
-		</CreateItem>
-		<Delete Files="@(GeneratedFiles)"/>
-		<MSBuild Projects="@(ProjectsToBuild)" Targets="Clean" Properties="Configuration=$(Configuration);"/>
-	</Target>
-	
-	<Target Name="PrintAll">
-		<Message Text="Project files:%0d%0a@(ProjectsToBuild,'%0d%0a')" Importance="high"/>
-	</Target>
-	
-	<Target Name="AfterBuild">
-		<Message Text="Elmah build complete" />
-	</Target>
-	
+  <Target Name="BuildAll" DependsOnTargets="$(BuildAllDependsOn)"/>
+
+  <Target Name="CoreBuild">
+    <MSBuild Projects ="@(ProjectsToBuild)" ContinueOnError ="false" Properties="Configuration=$(Configuration)">
+      <Output ItemName="OutputFiles" TaskParameter="TargetOutputs"/>
+    </MSBuild>
+  </Target>
+
+  <!-- Tests -->
+  <UsingTask AssemblyFile="$(MSBuildProjectDirectory)\assemblies\xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit"/>
+
+  <Target Name="RunTests">
+    <xunit Assembly="Source\Test\Elmah.Everywhere.Test\Bin\$(BinDir)$(Configuration)\Elmah.Everywhere.Test.dll" />
+  </Target>
+
+  <!-- Will simply print all of the project files to be built -->
+
+  <Target Name="PrintAll">
+    <Message Text="Project files:%0d%0a@(Projects,'%0d%0a')" Importance="high"/>
+  </Target>
+
+  <!-- Clean -->
+
+  <Target Name="CleanAll" Condition="Exists('$(CompileRoot)')">
+    <Delete Files="@(GeneratedFiles)"/>
+    <MSBuild Projects="@(ProjectsToBuild)" Targets="Clean" Properties="Configuration=$(Configuration);"/>
+
+    <Message Text="Deleting Build Files: $(BuildFiles)" Importance="high"/>
+    <Delete Files="@(BuildFiles)" />
+    <RemoveDir Directories="$(CompileRoot)"/>
+
+  </Target>
+
+  <!-- Completed -->
+
+  <Target Name="AfterBuild">
+    <Message Text="Elmah build complete" />
+  </Target>
+
 </Project>
