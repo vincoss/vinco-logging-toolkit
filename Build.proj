@@ -24,7 +24,9 @@
   <UsingTask AssemblyFile="$(MSBuildProjectDirectory)\assemblies\xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit"/>
 
   <Target Name="RunTests">
-    <xunit Assembly="Source\Test\Elmah.Everywhere.Test\Bin\$(BinDir)$(Configuration)\Elmah.Everywhere.Test.dll" />
+    <xunit Verbose="True"
+           Html="Test-Result.htm"
+           Assembly="Source\Test\Elmah.Everywhere.Test\Bin\$(BinDir)$(Configuration)\Elmah.Everywhere.Test.dll" />
   </Target>
 
   <!-- Will simply print all of the project files to be built -->
