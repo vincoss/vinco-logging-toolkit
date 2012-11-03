@@ -4,16 +4,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Error Maker</title>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
         <h3>Home page</h3>
-        <asp:Button ID="btnMessage" runat="server" Text="Message" 
-            onclick="btnMessage_Click" />
-        <asp:Button ID="btnError" runat="server" Text="Make an Error" 
-            onclick="btnError_Click" />
+        <asp:Button ID="btnMessage" runat="server" Text="Message" onclick="btnMessage_Click" />
+        <asp:Button ID="btnError" runat="server" Text="Make an Error" onclick="btnError_Click" />
         <asp:Literal ID="litMessage" runat="server"></asp:Literal>
     </div>
     </form>

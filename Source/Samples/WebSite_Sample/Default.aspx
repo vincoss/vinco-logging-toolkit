@@ -12,6 +12,7 @@
     <img src="/content/missing.jpg"/>
     <div>
         <h3>Elmah.Everywhere test site</h3>
+        <asp:Button ID="btnMakeException" runat="server" Text="Make Exception" onclick="btnMakeException_Click" />
     </div>
     </form>
 </body>

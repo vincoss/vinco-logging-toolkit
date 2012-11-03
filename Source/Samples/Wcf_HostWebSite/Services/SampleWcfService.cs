@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 
 
 namespace Wcf_HostWebSite.Services
@@ -13,11 +14,12 @@ namespace Wcf_HostWebSite.Services
         void MakeError();
     }
 
+    //[ServiceHttpErrorBehavior(typeof(HttpErrorHandler))]
     public class SampleWcfService : ISampleWcfService
     {
         public string GetMessage(string key)
         {
-            return "Hello " + key;
+            return "Hello " + key + " " + DateTime.Now;
         }
 
         public void MakeError()

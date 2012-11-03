@@ -24,10 +24,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.Everywhere.Test", "So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wcf_HostWebSite", "Source\Samples\Wcf_HostWebSite\Wcf_HostWebSite.csproj", "{2C85174F-6BF8-49AE-9553-48B566225DA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfRia_HostWebSite", "Source\Samples\WcfRia_HostWebSite\WcfRia_HostWebSite.csproj", "{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight_HostWebSite", "Source\Samples\WcfRia_HostWebSite\Silverlight_HostWebSite.csproj", "{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight_Sample", "Source\Samples\Silverlight_Sample\Silverlight_Sample.csproj", "{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}"
 	ProjectSection(ProjectDependencies) = postProject
+		{2C85174F-6BF8-49AE-9553-48B566225DA0} = {2C85174F-6BF8-49AE-9553-48B566225DA0}
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C} = {94BBB2DE-F21A-4124-ACE6-93D842B1F33C}
 		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C} = {94BBB2DE-F21A-4124-ACE6-93D842B1F33C}
 		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C} = {94BBB2DE-F21A-4124-ACE6-93D842B1F33C}
 	EndProjectSection

@@ -13,5 +13,13 @@ namespace WebSite_Sample
         {
 
         }
+
+        protected void btnMakeException_Click(object sender, EventArgs e)
+        {
+            // Make an exception
+
+            int i = 0;
+            int result = 10 / i;
+        }
     }
 }
