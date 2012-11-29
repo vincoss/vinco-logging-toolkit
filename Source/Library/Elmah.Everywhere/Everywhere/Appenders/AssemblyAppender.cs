@@ -8,7 +8,7 @@ namespace Elmah.Everywhere.Appenders
 {
     public class AssemblyAppender : BaseAppender
     {
-        public override void Append(ErrorInfo error)
+        public override void Append(ErrorInfo errorInfo)
         {
             var sb = new StringBuilder();
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -40,7 +40,7 @@ namespace Elmah.Everywhere.Appenders
                 }
                 sb.AppendLine();
             }
-            error.AddDetail(this.Name, "Assemblies", sb.ToString());
+            errorInfo.AddDetail(this.Name, "Assemblies", sb.ToString());
         }
 
         public override int Order

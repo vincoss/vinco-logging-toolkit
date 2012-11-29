@@ -6,13 +6,13 @@ namespace Elmah.Everywhere.Appenders
 {
     public class MemoryAppender : BaseAppender
     {
-        public override void Append(ErrorInfo error)
+        public override void Append(ErrorInfo errorInfo)
         {
             var memorystatusex = new MemoryStatusEx();
             if (NativeMethods.GlobalMemoryStatusEx(memorystatusex))
             {
-                error.AddDetail(this.Name, "Total Memory", string.Format(CultureInfo.InvariantCulture, "{0} MB", memorystatusex.ullTotalPhys / (1024 * 1024)));
-                error.AddDetail(this.Name, "Available Memory", string.Format(CultureInfo.InvariantCulture, "{0} MB", memorystatusex.ullAvailPhys / (1024 * 1024)));
+                errorInfo.AddDetail(this.Name, "Total Memory", string.Format(CultureInfo.InvariantCulture, "{0} MB", memorystatusex.ullTotalPhys / (1024 * 1024)));
+                errorInfo.AddDetail(this.Name, "Available Memory", string.Format(CultureInfo.InvariantCulture, "{0} MB", memorystatusex.ullAvailPhys / (1024 * 1024)));
             }
         }
 

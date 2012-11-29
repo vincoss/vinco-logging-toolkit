@@ -9,7 +9,7 @@ namespace Elmah.Everywhere.Appenders
         {
         }
 
-        public abstract void Append(ErrorInfo error);
+        public abstract void Append(ErrorInfo errorInfo);
 
         public abstract string Name { get; }
 

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Collections.Specialized;
 using System.Security.Principal;
+using System.Globalization;
 
 
 namespace Elmah.Everywhere.Appenders
 {
     public class HttpAppender : BaseAppender
     {
-        public override void Append(ErrorInfo error)
+        public override void Append(ErrorInfo errorInfo)
         {
             HttpContextBase httpContext = GetContext();
 
@@ -21,31 +22,31 @@ namespace Elmah.Everywhere.Appenders
                 pairs.Add("Web server", GetWebServer());
                 pairs.Add("Integrated pipeline", HttpRuntime.UsingIntegratedPipeline.ToString());
 
-                error.AddDetail(this.Name, pairs);
+                errorInfo.AddDetail(this.Name, pairs);
 
                 HttpRequestBase httpRequest = httpContext.Request;
 
-                error.AddDetail("ServerVariables", ToDictionary(httpRequest.ServerVariables));
-                error.AddDetail("QueryString", ToDictionary(httpRequest.QueryString));
-                error.AddDetail("Form", ToDictionary(httpRequest.ServerVariables));
-                error.AddDetail("Cookies", ToDictionary(CopyCollection(httpRequest.Cookies)));
+                errorInfo.AddDetail("ServerVariables", ToDictionary(httpRequest.ServerVariables));
+                errorInfo.AddDetail("QueryString", ToDictionary(httpRequest.QueryString));
+                errorInfo.AddDetail("Form", ToDictionary(httpRequest.ServerVariables));
+                errorInfo.AddDetail("Cookies", ToDictionary(CopyCollection(httpRequest.Cookies)));
 
-                HttpException httpException = error.Exception as HttpException;
+                HttpException httpException = errorInfo.Exception as HttpException;
                 if (httpException != null)
                 {
-                    error.StatusCode = httpException.GetHttpCode();
+                    errorInfo.StatusCode = httpException.GetHttpCode();
                 }
 
                 IPrincipal webUser = httpContext.User;
                 if (webUser != null && webUser.Identity.Name.Length > 0)
                 {
-                    error.User = webUser.Identity.Name;
+                    errorInfo.User = webUser.Identity.Name;
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(error.User))
+            if (string.IsNullOrWhiteSpace(errorInfo.User))
             {
-                error.User = string.Format(@"{0}\{1}", Environment.UserDomainName, Environment.UserName).Trim('\\');
+                errorInfo.User = string.Format(CultureInfo.InvariantCulture, @"{0}\{1}", Environment.UserDomainName, Environment.UserName).Trim('\\');
             }
         }
 

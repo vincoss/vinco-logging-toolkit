@@ -5,16 +5,16 @@ namespace Elmah.Everywhere.Appenders
 {
     public class PropertiesAppender : BaseAppender
     {
-        public override void Append(ErrorInfo error)
+        public override void Append(ErrorInfo errorInfo)
         {
-            if (error.Properties != null && error.Properties.Count > 0)
+            if (errorInfo.Properties != null && errorInfo.Properties.Count > 0)
             {
                 var pairs = new Dictionary<string, string>();
-                foreach (var key in error.Properties.Keys)
+                foreach (var key in errorInfo.Properties.Keys)
                 {
-                    pairs.Add(key, error.Properties[key].ToString());
+                    pairs.Add(key, errorInfo.Properties[key].ToString());
                 }
-                error.AddDetail(this.Name, pairs);
+                errorInfo.AddDetail(this.Name, pairs);
             }
         }
 

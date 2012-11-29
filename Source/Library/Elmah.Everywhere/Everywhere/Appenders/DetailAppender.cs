@@ -10,9 +10,9 @@ namespace Elmah.Everywhere.Appenders
 {
     public class DetailAppender : BaseAppender
     {
-        public override void Append(ErrorInfo error)
+        public override void Append(ErrorInfo errorInfo)
         {
-            Assembly assembly = error.GetType().Assembly;
+            Assembly assembly = errorInfo.GetType().Assembly;
            
             var pairs = new Dictionary<string, string>();
             pairs.Add("Date", DateTime.Now.ToString());
@@ -35,7 +35,7 @@ namespace Elmah.Everywhere.Appenders
             pairs.Add("Common Language Runtime Version", Environment.Version.ToString());
             pairs.Add("Elmah.Everywhere Version", new AssemblyName(typeof(Diagnostics.ExceptionHandler).Assembly.FullName).Version.ToString());
 
-            error.AddDetail(this.Name, pairs);
+            errorInfo.AddDetail(this.Name, pairs);
         }
 
 #if !SILVERLIGHT

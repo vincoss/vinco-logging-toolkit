@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 
 
-namespace WebSite
+namespace Elmah.Everywhere
 {
     public class MvcApplication : HttpApplication
     {
