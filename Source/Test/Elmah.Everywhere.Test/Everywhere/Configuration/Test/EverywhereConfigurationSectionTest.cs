@@ -6,10 +6,10 @@ namespace Elmah.Everywhere.Configuration.Test
     public class EverywhereConfigurationSectionTest
     {
         [Fact]
-        public void SECTION_KEY_Test()
+        public void SectionKey_Test()
         {
             // Assert
-            Assert.Equal("everywhere/settings", EverywhereConfigurationSection.SECTION_KEY);
+            Assert.Equal("everywhere/settings", EverywhereConfigurationSection.SectionKey);
         }
 
         [Fact]

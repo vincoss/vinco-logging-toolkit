@@ -2,6 +2,7 @@
 using System.Web.Security;
 using Elmah.Everywhere.Models;
 using Elmah.Everywhere.Web;
+using System;
 
 
 namespace Elmah.Everywhere.Controllers
@@ -45,7 +46,10 @@ namespace Elmah.Everywhere.Controllers
             {
                 return false;
             }
-            return Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/") && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\");
+            return Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && 
+                                                returnUrl.StartsWith("/", StringComparison.OrdinalIgnoreCase) && !
+                                                returnUrl.StartsWith("//", StringComparison.OrdinalIgnoreCase) &&
+                                                returnUrl.StartsWith("/\\", StringComparison.OrdinalIgnoreCase) == false;
         }
 
         protected virtual void SignOutInternal()

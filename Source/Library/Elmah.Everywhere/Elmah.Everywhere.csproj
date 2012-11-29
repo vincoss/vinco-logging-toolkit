@@ -78,6 +78,7 @@
     <Compile Include="Everywhere\Appenders\PropertiesAppender.cs" />
     <Compile Include="Everywhere\Configuration\EverywhereConfigurationSection.cs" />
     <Compile Include="Everywhere\Constants.cs" />
+    <Compile Include="Everywhere\DetailInfo.cs" />
     <Compile Include="Everywhere\Web\Controllers\AccountController.cs" />
     <Compile Include="Everywhere\Web\Controllers\ElmahController.cs" />
     <Compile Include="Everywhere\Web\Controllers\ErrorController.cs" />

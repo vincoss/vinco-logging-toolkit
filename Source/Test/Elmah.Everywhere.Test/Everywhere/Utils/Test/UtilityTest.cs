@@ -44,7 +44,7 @@ namespace Elmah.Everywhere.Utils.Test
             // Assert
             Assert.Equal(expected.ApplicationName, actual.ApplicationName);
             Assert.Equal(expected.Host, actual.Host);
-            Assert.Equal(expected.Type, actual.Type);
+            Assert.Equal(expected.ErrorType, actual.ErrorType);
             Assert.Equal(expected.Source, actual.Source);
             Assert.Equal(expected.Message, actual.Message);
             Assert.Equal(expected.Detail, actual.Detail);
@@ -81,7 +81,7 @@ namespace Elmah.Everywhere.Utils.Test
             {
                 ApplicationName = "ApplicationName",
                 Host = "Host",
-                Type = "Type",
+                ErrorType = "ErrorType",
                 Source = "Source",
                 Message = "Message",
                 Detail = "Detail",

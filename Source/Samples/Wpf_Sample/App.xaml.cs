@@ -11,7 +11,7 @@ namespace Wpf_Sample
         public App()
         {
             // Configure error handler from configuration file
-            ExceptionHandler.ConfigureFromConfigurationFile(new HttpExceptionWritter());
+            ExceptionHandler.ConfigureFromConfigurationFile(new HttpExceptionWritter(), null);
         }
 
         protected override void OnStartup(StartupEventArgs e)

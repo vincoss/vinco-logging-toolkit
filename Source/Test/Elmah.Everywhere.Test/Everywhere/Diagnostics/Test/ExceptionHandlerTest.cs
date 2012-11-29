@@ -37,7 +37,7 @@ namespace Elmah.Everywhere.Diagnostics.Test
             TestableExceptionWritter writter = new TestableExceptionWritter();
 
             // Act
-            ExceptionHandler.ConfigureFromConfigurationFile(writter);
+            ExceptionHandler.ConfigureFromConfigurationFile(writter, null);
            
             // Assert
             Assert.Equal("http://localhost:11079/error/log", writter.RequestUri.ToString());
@@ -49,7 +49,7 @@ namespace Elmah.Everywhere.Diagnostics.Test
             EverywhereConfigurationSection section = null;
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => { ExceptionHandler.Configure(null, section); });
+            Assert.Throws<ArgumentNullException>(() => { ExceptionHandler.Configure(null, section, null); });
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace Elmah.Everywhere.Diagnostics.Test
             ExceptionDefaults defaults = new ExceptionDefaults();
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => { ExceptionHandler.Configure(writter, defaults); });
+            Assert.Throws<ArgumentNullException>(() => { ExceptionHandler.Configure(writter, defaults, null); });
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace Elmah.Everywhere.Diagnostics.Test
             ExceptionDefaults defaults = null;
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => { ExceptionHandler.Configure(writter, defaults); });
+            Assert.Throws<ArgumentNullException>(() => { ExceptionHandler.Configure(writter, defaults, null); });
         }
 
         [Fact]
@@ -85,12 +85,12 @@ namespace Elmah.Everywhere.Diagnostics.Test
             // Arrange
             ExceptionDefaults parameters = new ExceptionDefaults
                                                {
-                                                   RemoteLogUri = "http://localhost:11079/error/log"
+                                                   RemoteLogUri = new Uri("http://localhost:11079/error/log")
                                                };
             TestableExceptionWritter writter = new TestableExceptionWritter();
 
             ExceptionHandler.IsEnabled = false;
-            ExceptionHandler.Configure(writter, parameters);
+            ExceptionHandler.Configure(writter, parameters, null);
 
             // Act
             ExceptionHandler.Report(new Exception(), null);
@@ -109,11 +109,11 @@ namespace Elmah.Everywhere.Diagnostics.Test
             ExceptionDefaults parameters = new ExceptionDefaults
                                                {
                                                    Token = "Test-Token",
-                                                   RemoteLogUri = "http://localhost:11079/error/log"
+                                                   RemoteLogUri = new Uri("http://localhost:11079/error/log")
                                                };
             TestableExceptionWritter writter = new TestableExceptionWritter();
 
-            ExceptionHandler.Configure(writter, parameters);
+            ExceptionHandler.Configure(writter, parameters, null);
 
             // Act
             ExceptionHandler.Report(new Exception(), null);
@@ -129,7 +129,7 @@ namespace Elmah.Everywhere.Diagnostics.Test
             ExceptionDefaults parameters = new ExceptionDefaults
             {
                 Token = "Test-Token",
-                RemoteLogUri = "http://localhost:11079/error/log"
+                RemoteLogUri = new Uri("http://localhost:11079/error/log")
             };
 
             bool completed = false;
@@ -139,7 +139,7 @@ namespace Elmah.Everywhere.Diagnostics.Test
                 completed = true;
             };
 
-            ExceptionHandler.Configure(writter, parameters);
+            ExceptionHandler.Configure(writter, parameters, null);
 
             // Act
             ExceptionHandler.Report(new Exception(), null);

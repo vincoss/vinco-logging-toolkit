@@ -5,7 +5,7 @@ namespace Elmah.Everywhere.Configuration
 {
     public class EverywhereConfigurationSection : ConfigurationSection
     {
-        public const string SECTION_KEY = "everywhere/settings";
+        public static string SectionKey = "everywhere/settings";
 
         static EverywhereConfigurationSection()
         {

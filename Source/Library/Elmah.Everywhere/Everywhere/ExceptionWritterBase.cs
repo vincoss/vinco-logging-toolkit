@@ -7,7 +7,7 @@ namespace Elmah.Everywhere
     {
         public event EventHandler<WritterEventArgs> Completed;
 
-        public abstract void Write(string token, ErrorInfo error);
+        public abstract void Write(string token, ErrorInfo errorInfo);
 
         protected void OnCompleted(WritterEventArgs e)
         {

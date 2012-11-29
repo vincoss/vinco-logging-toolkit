@@ -20,7 +20,7 @@ namespace Elmah.Everywhere.Appenders
 
 #if !SILVERLIGHT
 
-            pairs.Add("User", string.Format(@"{0}\{1}", Environment.UserDomainName, Environment.UserName).Trim('\\'));
+            pairs.Add("User", string.Format(CultureInfo.InvariantCulture, @"{0}\{1}", Environment.UserDomainName, Environment.UserName).Trim('\\'));
             pairs.Add("Machine Name", Environment.MachineName);
             pairs.Add("App Start Time", Process.GetCurrentProcess().StartTime.ToLocalTime().ToString(CultureInfo.InvariantCulture));
             pairs.Add("App Up Time", (DateTime.Now - Process.GetCurrentProcess().StartTime.ToLocalTime()).ToString());
@@ -47,21 +47,15 @@ namespace Elmah.Everywhere.Appenders
             {
                 return "unknown";
             }
-            return Convert.ToString(((Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), appDomain, propertyInfo.GetGetMethod()))());
+            return Convert.ToString(((Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), appDomain, propertyInfo.GetGetMethod())), CultureInfo.InvariantCulture);
         }
 
         internal static string GetWorkerProcess()
         {
             string processName = "Unknown";
-            try
-            {
-                object currentProcess = typeof(Process).GetMethod("GetCurrentProcess", Type.EmptyTypes).Invoke(null, null);
-                object processModule = typeof(Process).GetProperty("MainModule").GetValue(currentProcess, null);
-                processName = (string)typeof(ProcessModule).GetProperty("ModuleName").GetValue(processModule, null);
-            }
-            catch
-            {
-            }
+            object currentProcess = typeof(Process).GetMethod("GetCurrentProcess", Type.EmptyTypes).Invoke(null, null);
+            object processModule = typeof(Process).GetProperty("MainModule").GetValue(currentProcess, null);
+            processName = (string)typeof(ProcessModule).GetProperty("ModuleName").GetValue(processModule, null);
             return processName;
         }
 

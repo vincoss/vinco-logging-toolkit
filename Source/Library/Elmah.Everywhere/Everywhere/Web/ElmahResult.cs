@@ -1,5 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using System.Globalization;
+using System;
 
 
 namespace Elmah.Everywhere.Web
@@ -23,16 +25,16 @@ namespace Elmah.Everywhere.Web
             if (string.IsNullOrWhiteSpace(_resouceType) == false)
             {
                 string resourcePath = GetResourcePath(httpContext);
-                string pathInfo = string.Format("/{0}", _resouceType);
+                string pathInfo = string.Format(CultureInfo.InvariantCulture, "/{0}", _resouceType);
                 httpContext.RewritePath(resourcePath, pathInfo, queryString);
             }
             else
             {
-                if (path.EndsWith("/"))
+                if (path.EndsWith("/", StringComparison.OrdinalIgnoreCase))
                 {
                     const string CON = "elmah";
                     var newPath = path.Remove(path.Length - 1);
-                    if(newPath.EndsWith(CON) == false)
+                    if(newPath.EndsWith(CON, StringComparison.OrdinalIgnoreCase) == false)
                     {
                         newPath = CON;
                     }
@@ -51,7 +53,7 @@ namespace Elmah.Everywhere.Web
 
         private string GetResourcePath(HttpContextBase httpContext)
         {
-            return _resouceType != "stylesheet" ? httpContext.Request.Path.Replace(string.Format("/{0}", _resouceType), string.Empty) : httpContext.Request.Path;
+            return _resouceType != "stylesheet" ? httpContext.Request.Path.Replace(string.Format(CultureInfo.InvariantCulture, "/{0}", _resouceType), string.Empty) : httpContext.Request.Path;
         }
     }
 }

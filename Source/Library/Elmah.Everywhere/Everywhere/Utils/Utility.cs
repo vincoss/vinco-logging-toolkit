@@ -19,7 +19,7 @@ namespace Elmah.Everywhere.Utils
             XElement element = new XElement("Error");
             element.Add(CreateAttribute("Id", info.Id));
             element.Add(CreateAttribute("Host",  info.Host));
-            element.Add(CreateAttribute("Type", info.Type));
+            element.Add(CreateAttribute("Type", info.ErrorType));
             element.Add(CreateAttribute("Source", info.Source));
             element.Add(CreateAttribute("Message", info.Message));
             element.Add(CreateAttribute("Detail", info.Detail));
@@ -44,14 +44,14 @@ namespace Elmah.Everywhere.Utils
             ErrorInfo info = new ErrorInfo();
             info.Id = GetAttributeValue(element, "Id");
             info.Host = GetAttributeValue(element, "Host");
-            info.Type = GetAttributeValue(element, "Type");
+            info.ErrorType = GetAttributeValue(element, "Type");
             info.Source = GetAttributeValue(element, "Source");
             info.Message = GetAttributeValue(element, "Message");
             info.Detail = GetAttributeValue(element, "Detail");
             info.ApplicationName = GetAttributeValue(element, "ApplicationName");
             info.User = GetAttributeValue(element, "User");
-            info.StatusCode = Int32.Parse(GetAttributeValue(element, "StatusCode"));
-            info.Date = DateTime.Parse(GetAttributeValue(element, "Date"));
+            info.StatusCode = Int32.Parse(GetAttributeValue(element, "StatusCode"), CultureInfo.InvariantCulture);
+            info.Date = DateTime.Parse(GetAttributeValue(element, "Date"), CultureInfo.InvariantCulture);
 
             DeserializeXmlToDetail(info, element.Element("Details"));
 
@@ -113,7 +113,7 @@ namespace Elmah.Everywhere.Utils
             }
         }
 
-        private static void SerializeDetailToXml(XElement parent, IEnumerable<ErrorInfo.DetailInfo> items)
+        private static void SerializeDetailToXml(XElement parent, IEnumerable<DetailInfo> items)
         {
             var element = new XElement("Details");
             foreach (var item in items)

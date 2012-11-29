@@ -8,7 +8,8 @@ using System.ServiceModel.Dispatcher;
 
 namespace Elmah.Everywhere.ServiceModel
 {
-    public class ServiceHttpErrorBehaviorAttribute : Attribute, IServiceBehavior
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    public sealed class ServiceHttpErrorBehaviorAttribute : Attribute, IServiceBehavior
     {
         private readonly Type _errorHandlerType;
 
@@ -29,7 +30,7 @@ namespace Elmah.Everywhere.ServiceModel
 
         public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
-            IErrorHandler errorHandler = (IErrorHandler)Activator.CreateInstance(_errorHandlerType);
+            IErrorHandler errorHandler = (IErrorHandler)Activator.CreateInstance(ErrorHandlerType);
             foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers)
             {
                 ChannelDispatcher caDispatcher = cdb as ChannelDispatcher;
@@ -44,5 +45,10 @@ namespace Elmah.Everywhere.ServiceModel
         {
         }
         #endregion
+
+        public Type ErrorHandlerType
+        {
+            get { return _errorHandlerType; }
+        }
     }
 }

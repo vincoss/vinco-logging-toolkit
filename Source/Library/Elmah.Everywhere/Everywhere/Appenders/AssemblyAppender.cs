@@ -2,6 +2,7 @@
 using System.Text;
 using System.Reflection;
 using System.Diagnostics;
+using System.IO;
 
 
 namespace Elmah.Everywhere.Appenders
@@ -31,8 +32,8 @@ namespace Elmah.Everywhere.Appenders
                         flag = true;
                     }
                 }
-                catch
-                {
+                catch(Exception)
+                { 
                 }
                 if (!flag)
                 {

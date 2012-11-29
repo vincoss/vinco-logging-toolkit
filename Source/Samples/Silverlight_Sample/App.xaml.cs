@@ -40,7 +40,7 @@ namespace Silverlight_Sample
                 ApplicationName = "Sample",
                 Host = currentHost
             };
-            ExceptionHandler.Configure(writter, defaults);
+            ExceptionHandler.Configure(writter, defaults, null);
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

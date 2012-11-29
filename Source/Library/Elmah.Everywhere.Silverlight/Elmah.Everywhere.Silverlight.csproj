@@ -87,6 +87,9 @@
     <Compile Include="..\Elmah.Everywhere\Everywhere\Constants.cs">
       <Link>Everywhere\Constants.cs</Link>
     </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\DetailInfo.cs">
+      <Link>Everywhere\DetailInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Elmah.Everywhere\Everywhere\Diagnostics\ExceptionHandler.cs">
       <Link>Everywhere\Diagnostics\ExceptionHandler.cs</Link>
     </Compile>
@@ -136,15 +139,13 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
-
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
         <SilverlightProjectProperties />
       </FlavorProperties>
-      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.TimeStamp.Increment" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.TimeStamp.Increment" BuildVersion_UpdateFileVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

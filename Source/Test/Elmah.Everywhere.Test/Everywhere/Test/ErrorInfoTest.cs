@@ -37,7 +37,7 @@ namespace Elmah.Everywhere.Test
             // Assert
             Assert.NotNull(error.Id);
             Assert.Null(error.Host);
-            Assert.Equal(exception.GetType().FullName, error.Type);
+            Assert.Equal(exception.GetType().FullName, error.ErrorType);
             Assert.Equal(error.Source, exception.Source);
             Assert.Equal(exception.Message, error.Message);
             Assert.NotNull(error.Detail);
@@ -122,7 +122,7 @@ namespace Elmah.Everywhere.Test
         public void DetailInfo_Test()
         {
             // Arrange
-            ErrorInfo.DetailInfo detail = new ErrorInfo.DetailInfo("Test", new List<KeyValuePair<string, string>>());
+            DetailInfo detail = new DetailInfo("Test", new List<KeyValuePair<string, string>>());
 
             // Assert
             Assert.Equal("Test", detail.Name);
@@ -138,7 +138,7 @@ namespace Elmah.Everywhere.Test
             error.AddDetail("Test", "Key", "Value");
 
             // Act
-            ErrorInfo.DetailInfo detail = error.ErrorDetails.First();
+            DetailInfo detail = error.ErrorDetails.First();
 
             // Assert
             Assert.Equal("Test", detail.Name);

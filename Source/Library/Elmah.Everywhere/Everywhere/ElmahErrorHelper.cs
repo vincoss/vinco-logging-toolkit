@@ -9,34 +9,34 @@ namespace Elmah.Everywhere
 {
     public class ElmahErrorHelper
     {
-        public void LogException(ErrorInfo info)
+        public void LogException(ErrorInfo errorInfo)
         {
-            if (info == null)
+            if (errorInfo == null)
             {
-                throw new ArgumentNullException("info");
+                throw new ArgumentNullException("errorInfo");
             }
-            Error error = ToError(info);
+            Error error = ToError(errorInfo);
             LogInternal(error, null);
         }
 
-        public void LogException(Exception exception, HttpContext context)
+        public void LogException(Exception exception, HttpContext httpContext)
         {
             if (exception == null)
             {
                 throw new ArgumentNullException("exception");
             }
-            if(context == null)
+            if (httpContext == null)
             {
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException("httpContext");
             }
-            var args = new ExceptionFilterEventArgs(exception, context);
+            var args = new ExceptionFilterEventArgs(exception, httpContext);
             this.OnFiltering(this, args);
             if (args.Dismissed)
             {
                 return;
             }
-            var error = new Error(exception, context);
-            LogInternal(error, context);
+            var error = new Error(exception, httpContext);
+            LogInternal(error, httpContext);
         }
 
         protected virtual void LogInternal(Error error, object context)
@@ -61,7 +61,7 @@ namespace Elmah.Everywhere
             }
         }
 
-        protected void OnFiltering(object sender, EventArgs e)
+        private void OnFiltering(object sender, EventArgs e)
         {
             ExceptionFilterEventHandler filtering = this.Filtering;
             if (filtering != null)
@@ -70,7 +70,7 @@ namespace Elmah.Everywhere
             }
         }
 
-        protected void OnLogged(object sender, EventArgs e)
+        private void OnLogged(object sender, EventArgs e)
         {
             ErrorLoggedEventHandler logged = this.Logged;
             if (logged != null)
@@ -79,32 +79,32 @@ namespace Elmah.Everywhere
             }
         }
 
-        public static Error ToError(ErrorInfo info)
+        public static Error ToError(ErrorInfo errorInfo)
         {
             var error = new Error
             {
-                ApplicationName = info.ApplicationName,
-                HostName = info.Host,
-                Type = info.Type,
-                Source = info.Source,
-                Message = info.Message,
-                Detail = info.BuildMessage(),
-                Time = info.Date,
-                User = info.User,
-                StatusCode = info.StatusCode
+                ApplicationName = errorInfo.ApplicationName,
+                HostName = errorInfo.Host,
+                Type = errorInfo.ErrorType,
+                Source = errorInfo.Source,
+                Message = errorInfo.Message,
+                Detail = errorInfo.BuildMessage(),
+                Time = errorInfo.Date,
+                User = errorInfo.User,
+                StatusCode = errorInfo.StatusCode
             };
 
-            CopyToCollections(info, error.Cookies, "Cookies");
-            CopyToCollections(info, error.Form, "Form");
-            CopyToCollections(info, error.QueryString, "QueryString");
-            CopyToCollections(info, error.ServerVariables, "ServerVariables");
+            CopyToCollections(errorInfo, error.Cookies, "Cookies");
+            CopyToCollections(errorInfo, error.Form, "Form");
+            CopyToCollections(errorInfo, error.QueryString, "QueryString");
+            CopyToCollections(errorInfo, error.ServerVariables, "ServerVariables");
 
             return error;
         }
 
-        private static void CopyToCollections(ErrorInfo info, NameValueCollection collection, string collectionName)
+        private static void CopyToCollections(ErrorInfo errorInfo, NameValueCollection collection, string collectionName)
         {
-            var detail = info.ErrorDetails.SingleOrDefault(x => x.Name == collectionName);
+            var detail = errorInfo.ErrorDetails.SingleOrDefault(x => x.Name == collectionName);
             if(detail != null)
             {
                 foreach (var pair in detail.Items)

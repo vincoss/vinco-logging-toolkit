@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 
 namespace Elmah.Everywhere
 {
@@ -22,6 +23,6 @@ namespace Elmah.Everywhere
         /// <summary>
         /// Remote web site url to log an error.
         /// </summary>
-        public string RemoteLogUri { get; set; }
+        public Uri RemoteLogUri { get; set; }
     }
 }

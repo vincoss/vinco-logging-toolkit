@@ -6,19 +6,19 @@ namespace Elmah.Everywhere
 {
     public class HttpExceptionWritter : HttpExceptionWritterBase
     {
-        public override void Write(string token, ErrorInfo error)
+        public override void Write(string token, ErrorInfo errorInfo)
         {
             if(string.IsNullOrWhiteSpace(token))
             {
                 throw new ArgumentNullException("token");
             }
-            if (error == null)
+            if (errorInfo == null)
             {
-                throw new ArgumentNullException("error");
+                throw new ArgumentNullException("errorInfo");
             }
             try
             {
-                WriteInternal(CreatePostData(token, error));
+                WriteInternal(CreatePostData(token, errorInfo));
             }
             catch (Exception exception)
             {
@@ -26,7 +26,7 @@ namespace Elmah.Everywhere
             }
             finally
             {
-                OnCompleted(new WritterEventArgs(error));
+                OnCompleted(new WritterEventArgs(errorInfo));
             }
         }
 

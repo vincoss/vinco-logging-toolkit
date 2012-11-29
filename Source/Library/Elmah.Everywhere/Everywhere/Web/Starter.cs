@@ -11,7 +11,7 @@ namespace Elmah.Everywhere.Web
         public static void Start()
         {
             // Configure error handler from configuration file
-            ExceptionHandler.ConfigureFromConfigurationFile(new HttpExceptionWritter());
+            ExceptionHandler.ConfigureFromConfigurationFile(new HttpExceptionWritter(), null);
         }
     }
 }

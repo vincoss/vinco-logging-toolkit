@@ -51,11 +51,11 @@ namespace Elmah.Everywhere.Test
                                                    ApplicationName = "Test-Application",
                                                    Host = "HttpErrorLogTest",
                                                    Token = "Test-Token",
-                                                   RemoteLogUri = "http://www.faulthub.org/"
+                                                   RemoteLogUri = new Uri("http://www.faulthub.org/")
                                                    
                                                };
             TestableHttpExceptionWritter writter = new TestableHttpExceptionWritter();
-            ExceptionHandler.Configure(writter, parameters);
+            ExceptionHandler.Configure(writter, parameters, null);
             HttpErrorLog log = new HttpErrorLog(new HybridDictionary());
 
             // Act

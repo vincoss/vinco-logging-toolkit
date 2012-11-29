@@ -4,6 +4,7 @@ using Elmah.Everywhere.Appenders;
 
 #if !SILVERLIGHT
 using Elmah.Everywhere.Configuration;
+using System.Globalization;
 #endif
 
 
@@ -20,19 +21,23 @@ namespace Elmah.Everywhere.Diagnostics
             IsEnabled = true;
         }
 
+        private ExceptionHandler()
+        {
+        }
+
         #if !SILVERLIGHT
 
-        public static void ConfigureFromConfigurationFile(ExceptionWritterBase writter, IEnumerable<Type> appenders = null)
+        public static void ConfigureFromConfigurationFile(ExceptionWritterBase writter, IEnumerable<Type> appenders)
         {
-            var configuration = (EverywhereConfigurationSection)System.Configuration.ConfigurationManager.GetSection(EverywhereConfigurationSection.SECTION_KEY);
+            var configuration = (EverywhereConfigurationSection)System.Configuration.ConfigurationManager.GetSection(EverywhereConfigurationSection.SectionKey);
             if (configuration == null)
             {
-                throw new InvalidOperationException(string.Format("Could not find [{0}] configuration section.", EverywhereConfigurationSection.SECTION_KEY));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture ,"Could not find [{0}] configuration section.", EverywhereConfigurationSection.SectionKey));
             }
             Configure(writter, configuration, appenders);
         }
 
-        public static void Configure(ExceptionWritterBase writter, EverywhereConfigurationSection section, IEnumerable<Type> appenders = null)
+        public static void Configure(ExceptionWritterBase writter, EverywhereConfigurationSection section, IEnumerable<Type> appenders)
         {
             if (section == null)
             {
@@ -43,13 +48,13 @@ namespace Elmah.Everywhere.Diagnostics
                 ApplicationName = section.ApplicationName,
                 Host = section.Host,
                 Token = section.Token,
-                RemoteLogUri = section.RemoteLogUri
+                RemoteLogUri = new Uri(section.RemoteLogUri)
             };
             Configure(writter, parameters, appenders);
         }
 #endif
 
-        public static void Configure(ExceptionWritterBase writter, ExceptionDefaults parameters, IEnumerable<Type> appenders = null)
+        public static void Configure(ExceptionWritterBase writter, ExceptionDefaults parameters, IEnumerable<Type> appenders)
         {
             if (writter == null)
             {
@@ -67,7 +72,7 @@ namespace Elmah.Everywhere.Diagnostics
             var httpWriter = writter as HttpExceptionWritterBase;
             if (httpWriter != null && httpWriter.RequestUri == null)
             {
-                httpWriter.RequestUri = new Uri(parameters.RemoteLogUri, UriKind.Absolute);
+                httpWriter.RequestUri = parameters.RemoteLogUri;
             }
             _writter = writter;
             _parameters = parameters;

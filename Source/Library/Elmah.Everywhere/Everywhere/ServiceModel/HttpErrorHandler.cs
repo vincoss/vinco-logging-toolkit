@@ -9,6 +9,7 @@ using System.Xml;
 using System.Reflection;
 using System.Xml.Linq;
 using Elmah.Everywhere.Diagnostics;
+using System.Globalization;
 
 
 namespace Elmah.Everywhere.ServiceModel
@@ -55,13 +56,13 @@ namespace Elmah.Everywhere.ServiceModel
                 sb.AppendLine();
                 foreach (XElement node in element.Nodes())
                 {
-                    sb.AppendLine(string.Format("{0} : {1}", node.Name.LocalName, node.Value));
+                    sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0} : {1}", node.Name.LocalName, node.Value));
                 }
                 exception.Data[exception.GetType()] = sb.ToString();
             }
             catch (Exception ex)
             {
-                sb.AppendLine(string.Format("Get_FaultException_Detail_Fail : {0}", ex.ToString()));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "Get_FaultException_Detail_Fail : {0}", ex));
             }
         }
 
@@ -71,7 +72,7 @@ namespace Elmah.Everywhere.ServiceModel
 
             var dataContractSerializer = new DataContractSerializer(typeof(T));
 
-            using (var writer = new StringWriter(sb))
+            using (var writer = new StringWriter(sb, CultureInfo.InvariantCulture))
             {
                 var xmlWriter = XmlWriter.Create(writer);
                 dataContractSerializer.WriteObject(xmlWriter, faultExceptionWithDetail.Detail);

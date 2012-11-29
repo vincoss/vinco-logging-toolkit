@@ -36,7 +36,7 @@ namespace Elmah.Everywhere.Test
             // Assert
             Assert.Equal(info.ApplicationName, error.ApplicationName);
             Assert.Equal(info.Host, error.HostName);
-            Assert.Equal(info.Type, error.Type);
+            Assert.Equal(info.ErrorType, error.Type);
             Assert.Equal(info.Source, error.Source);
             Assert.Equal(info.Message, error.Message);
             Assert.Equal(info.BuildMessage(), error.Detail);
@@ -67,7 +67,7 @@ namespace Elmah.Everywhere.Test
                        {
                            ApplicationName = "ApplicationName",
                            Host = "Host",
-                           Type = "Type",
+                           ErrorType = "ErrorType",
                            Source = "Source",
                            Message = "Message",
                            Detail = "Detail",
