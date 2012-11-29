@@ -5,7 +5,7 @@ using Elmah.Everywhere.Web;
 namespace Elmah.Everywhere.Controllers
 {
     [CustomRequireHttps]
-    [Authorize(Roles = "Administrator")]
+    [CustomAuthorize(Roles = "Administrator")]
     public class ElmahController : Controller
     {
         public ActionResult Index()

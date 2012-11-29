@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -18,6 +19,7 @@ using System.Runtime.InteropServices;
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
+[assembly: CLSCompliant(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("409cbe90-5d9a-4653-ace6-f666e9d6ce4f")]
@@ -31,7 +33,7 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.2.2351.513")]
-[assembly: AssemblyVersion("1.2.2351.513")]
-[assembly: AssemblyFileVersion("1.2.2351.513")]
+// [assembly: AssemblyVersion("1.2.1908.520")]
+[assembly: AssemblyVersion("1.2.1908.520")]
+[assembly: AssemblyFileVersion("1.2.1908.520")]
 
