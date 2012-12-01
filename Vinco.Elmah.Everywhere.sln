@@ -22,8 +22,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.Everywhere.Test", "So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wcf_HostWebSite", "Source\Samples\Wcf_HostWebSite\Wcf_HostWebSite.csproj", "{2C85174F-6BF8-49AE-9553-48B566225DA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight_HostWebSite", "Source\Samples\WcfRia_HostWebSite\Silverlight_HostWebSite.csproj", "{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight_Sample", "Source\Samples\Silverlight_Sample\Silverlight_Sample.csproj", "{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2C85174F-6BF8-49AE-9553-48B566225DA0} = {2C85174F-6BF8-49AE-9553-48B566225DA0}
@@ -35,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSite_Sample", "Source\Samples\WebSite_Sample\WebSite_Sample.csproj", "{F391DAFB-5A9F-46C0-8409-1B67BD2359F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmah.Everywhere.WebSite", "Source\Elmah.Everywhere.WebSite\Elmah.Everywhere.WebSite.csproj", "{D04513C2-30FC-4F44-A367-CB65D6371642}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight_HostWebSite", "Source\Samples\Silverlight_HostWebSite\Silverlight_HostWebSite.csproj", "{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,16 +106,6 @@ Global
 		{2C85174F-6BF8-49AE-9553-48B566225DA0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2C85174F-6BF8-49AE-9553-48B566225DA0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2C85174F-6BF8-49AE-9553-48B566225DA0}.Release|x86.ActiveCfg = Release|Any CPU
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Release|x86.ActiveCfg = Release|Any CPU
 		{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -146,6 +136,16 @@ Global
 		{D04513C2-30FC-4F44-A367-CB65D6371642}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D04513C2-30FC-4F44-A367-CB65D6371642}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D04513C2-30FC-4F44-A367-CB65D6371642}.Release|x86.ActiveCfg = Release|Any CPU
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -154,16 +154,16 @@ Global
 		{09D10792-6BAA-4A44-9508-850035D0F83C} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
 		{436CD003-3447-42F1-AA10-66E16CE1FD15} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
 		{2C85174F-6BF8-49AE-9553-48B566225DA0} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
-		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
 		{D18A4F3F-3F81-42B1-BADE-875DE3E2A742} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
 		{F391DAFB-5A9F-46C0-8409-1B67BD2359F6} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
 		{319DD6E1-E5EB-4896-9055-BF486FC9C0EF} = {B9C2B82C-F879-42CE-9F56-CE42E48EAC9D}
 		{128D46AE-97A3-4A95-8ACA-B4C9BB473FAC} = {B9C2B82C-F879-42CE-9F56-CE42E48EAC9D}
 		{BBDDB842-F323-4C51-9A6D-6589D3C03F61} = {73C52C63-BDF4-4F31-A2F7-7DB71444CD66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_IncrementBeforeBuild = False
-		BuildVersion_BuildVersioningStyle = None.None.None.None
 		BuildVersion_UpdateAssemblyVersion = False
+		BuildVersion_BuildVersioningStyle = None.None.None.None
+		BuildVersion_IncrementBeforeBuild = False
 	EndGlobalSection
 EndGlobal
