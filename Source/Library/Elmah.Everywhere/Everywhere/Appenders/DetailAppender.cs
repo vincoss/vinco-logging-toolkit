@@ -25,11 +25,11 @@ namespace Elmah.Everywhere.Appenders
             pairs.Add("App Start Time", Process.GetCurrentProcess().StartTime.ToLocalTime().ToString(CultureInfo.InvariantCulture));
             pairs.Add("App Up Time", (DateTime.Now - Process.GetCurrentProcess().StartTime.ToLocalTime()).ToString());
             pairs.Add("Worker process", GetWorkerProcess());
-            pairs.Add("AppDomain", IsAppDomainHomogenous(AppDomain.CurrentDomain));
+            pairs.Add("AppDomain", AppDomainDetail(AppDomain.CurrentDomain));
             pairs.Add("Deployment", (assembly.GlobalAssemblyCache) ? "GAC" : "bin");
 
 #endif
-            pairs.Add("Assembly Version", new AssemblyName(assembly.FullName).Version.ToString());
+            pairs.Add("Thread Id", Thread.CurrentThread.ManagedThreadId.ToString());
             pairs.Add("Full Name", new AssemblyName(assembly.FullName).FullName);
             pairs.Add("Operating System Version", Environment.OSVersion.ToString());
             pairs.Add("Common Language Runtime Version", Environment.Version.ToString());
@@ -40,14 +40,16 @@ namespace Elmah.Everywhere.Appenders
 
 #if !SILVERLIGHT
 
-        private static string IsAppDomainHomogenous(AppDomain appDomain)
+        private static string AppDomainDetail(AppDomain appDomain)
         {
-            PropertyInfo propertyInfo = typeof(AppDomain).GetProperty("IsHomogenous");
-            if (propertyInfo == null)
+            PropertyInfo propertyInfoHomogenous = typeof(AppDomain).GetProperty("IsHomogenous");
+            if (propertyInfoHomogenous == null)
             {
                 return "unknown";
             }
-            return Convert.ToString(((Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), appDomain, propertyInfo.GetGetMethod())), CultureInfo.InvariantCulture);
+            var de = (Func<bool>) Delegate.CreateDelegate(typeof (Func<bool>), appDomain, propertyInfoHomogenous.GetGetMethod());
+            string str = string.Format("Homogenous = {0}", de());
+            return Convert.ToString(str, CultureInfo.InvariantCulture);
         }
 
         internal static string GetWorkerProcess()
