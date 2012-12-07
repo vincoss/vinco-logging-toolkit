@@ -29,7 +29,7 @@ namespace Elmah.Everywhere.Appenders
             pairs.Add("Deployment", (assembly.GlobalAssemblyCache) ? "GAC" : "bin");
 
 #endif
-            pairs.Add("Thread Id", Thread.CurrentThread.ManagedThreadId.ToString());
+            pairs.Add("Thread Id", Thread.CurrentThread.ManagedThreadId.ToString(CultureInfo.InvariantCulture));
             pairs.Add("Full Name", new AssemblyName(assembly.FullName).FullName);
             pairs.Add("Operating System Version", Environment.OSVersion.ToString());
             pairs.Add("Common Language Runtime Version", Environment.Version.ToString());
@@ -48,8 +48,8 @@ namespace Elmah.Everywhere.Appenders
                 return "unknown";
             }
             var de = (Func<bool>) Delegate.CreateDelegate(typeof (Func<bool>), appDomain, propertyInfoHomogenous.GetGetMethod());
-            string str = string.Format("Homogenous = {0}", de());
-            return Convert.ToString(str, CultureInfo.InvariantCulture);
+            string str = string.Format(CultureInfo.InvariantCulture, "Homogenous = {0}", de());
+            return str;
         }
 
         internal static string GetWorkerProcess()
