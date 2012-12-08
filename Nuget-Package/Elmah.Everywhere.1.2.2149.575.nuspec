@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <version>1.2.0643.0</version>
+    <version>1.2.2149.575</version>
     <authors>Ferdinand Lukasak</authors>
     <owners>Vincoss</owners>
     <licenseUrl>https://github.com/vincoss/vinco-logging-toolkit/blob/master/License.txt</licenseUrl>
@@ -19,8 +19,7 @@
     <tags>Elmah Error Logging ASP.NET MVC WPF WCF Silverlight .NET</tags>
   </metadata>
   <files>
-    <file src="content\Elman.Everywhere Documentation.docx" target="content\Elman.Everywhere Documentation.docx" />
-    <file src="content\Web.config" target="content\Web.config" />
+    <file src="content\Readme.docx" target="content\Elman.Everywhere Documentation.docx" />
     <file src="E:\_VS2010Projects\Projects\Web\Vinco.Elmah.Everywhere\Source\Library\Elmah.Everywhere\bin\Release\Elmah.Everywhere.dll" target="lib\Net40\Elmah.Everywhere.dll" />
     <file src="E:\_VS2010Projects\Projects\Web\Vinco.Elmah.Everywhere\Source\Library\Elmah.Everywhere.Silverlight\Bin\Release\Elmah.Everywhere.Silverlight.dll" target="lib\SL40\Elmah.Everywhere.Silverlight.dll" />
   </files>
