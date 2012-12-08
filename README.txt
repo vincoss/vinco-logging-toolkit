@@ -1,15 +1,18 @@
 Elmah Everywhere Documentation
 Elmah Everywhere is an exception logging library for .NET, Silverlight, WPF, ASP.NET MVC and WCF that uses an ELMAH (Error Logging Modules and Handlers for ASP.NET).
 For more detailed information how to configure and use Elmah Everywhere see source code and samples at https://github.com/vincoss/vinco-logging-toolkit.
-
+Minimum Requirements
+* .NET Framework 4.0
+* ASP.NET MVC 3
+* SQL SERVER 2000
 Error Database
-Error database is located on project directory. “Vinco.Elmah.Everywhere\Source\ErrorWebSite\App_Data”
+Error database is located on project directory. “Vinco.Elmah.Everywhere\Source\Elmah.Everywhere.WebSite\App_Data”
 
 Error web site
 Error website default login details
-You can access sample error web site at http://localhost:11079/.
-•	UserName : administrator
-•	Password: p@ssword
+You can access sample error web site at http://localhost:11079/
+* UserName : administrator
+* Password: p@ssword
 
 Configuration
 Silverlight configuration
@@ -125,6 +128,20 @@ You can configure error logging as indicated in the following example.
 public class MyService : IMyService
 {
 
+
+Security
+Enable or Disable Security
+You can enable or disable security for error viewing website by editing Web.config file in Elmah.Everywhere.WebSite. To enable security set roleManager enabled to “true” and authentication mode to “Forms”. To disable security set roleManager enabled to “false” and authentication mode to “None”.
+<roleManager enabled="True">
+  <providers>
+    <clear/>
+   <add connectionStringName="Elmah.Everywhere" name="AspNetSqlRoleProvider" type="System.Web.Security.SqlRoleProvider" applicationName="/"/>
+  </providers>
+</roleManager>
+
+<authentication mode="Forms">
+  <forms loginUrl="~/Account/LogOn" timeout="2880"/>
+</authentication>
 
 Tracing
 Trace diagnostics configuration

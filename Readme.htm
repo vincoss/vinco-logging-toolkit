@@ -212,7 +212,19 @@ and Handlers for ASP.NET).</p>
 Everywhere see source code and samples at <a
 href="https://github.com/vincoss/vinco-logging-toolkit">https://github.com/vincoss/vinco-logging-toolkit</a>.</p>
 
-<p class=MsoNormal>&nbsp;</p>
+<h1>Minimum Requirements</h1>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>.NET Framework 4.0</p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>ASP.NET MVC 3</p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>SQL SERVER 2000</p>
 
 <div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
 
@@ -220,7 +232,7 @@ href="https://github.com/vincoss/vinco-logging-toolkit">https://github.com/vinco
 
 </div>
 
-<p class=MsoNormal>Error database is located on project directory. “Vinco.Elmah.Everywhere\Source\ErrorWebSite\App_Data”</p>
+<p class=MsoNormal>Error database is located on project directory. “Vinco.Elmah.Everywhere\Source\Elmah.Everywhere.WebSite\App_Data”</p>
 
 <p class=MsoNormal>&nbsp;</p>
 
@@ -232,17 +244,17 @@ href="https://github.com/vincoss/vinco-logging-toolkit">https://github.com/vinco
 
 <h1>Error website default login details</h1>
 
-<p class=MsoNormal>You can access sample error web site at http://localhost:11079/.</p>
+<p class=MsoNormal>You can access sample error web site at http://localhost:11079/</p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
 style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span>UserName : administrator</p>
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
 style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span>Password: p@ssword</p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoListParagraphCxSpLast>&nbsp;</p>
 
 <div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
 
@@ -252,8 +264,8 @@ style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nb
 
 <h1>Silverlight configuration</h1>
 
-<p class=MsoNoSpacing>You can configure error logging as indicated in the following
-example.</p>
+<p class=MsoNoSpacing>You can configure error logging as indicated in the
+following example.</p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;text-autospace:none'>&nbsp;</p>
@@ -394,8 +406,8 @@ normal;text-autospace:none'><span style='font-size:9.0pt;font-family:Consolas'>}
 
 <h1>WPF configuration</h1>
 
-<p class=MsoNoSpacing>You can configure error logging as indicated in the following
-example.</p>
+<p class=MsoNoSpacing>You can configure error logging as indicated in the
+following example.</p>
 
 <p class=MsoNoSpacing>&nbsp;</p>
 
@@ -744,8 +756,8 @@ font-family:Consolas;color:blue'>&gt;</span></p>
 
 <h1>WCF configuration with behaviour attribute from code</h1>
 
-<p class=MsoNormal>You can configure error logging as indicated in the following
-example. </p>
+<p class=MsoNormal>You can configure error logging as indicated in the
+following example. </p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>[<span
@@ -766,6 +778,100 @@ normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>&
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>&nbsp;</span></p>
+
+<div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
+
+<p class=MsoTitle>Security</p>
+
+</div>
+
+<h1>Enable or Disable Security</h1>
+
+<p class=MsoNormal>You can enable or disable security for error viewing website
+by editing Web.config file in Elmah.Everywhere.WebSite. To enable security set
+roleManager enabled to “true” and authentication mode to “Forms”. To disable
+security set roleManager enabled to “false” and authentication mode to “None”.</p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>roleManager</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'> </span><span style='font-size:9.5pt;font-family:Consolas;
+color:red;background:yellow'>enabled</span><span style='font-size:9.5pt;
+font-family:Consolas;color:blue;background:yellow'>=</span><span
+style='font-size:9.5pt;font-family:Consolas;background:yellow'>&quot;<span
+style='color:blue'>True</span>&quot;</span><span style='font-size:9.5pt;
+font-family:Consolas;color:blue'>&gt;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'> 
+<span style='color:blue'>&lt;</span><span style='color:#A31515'>providers</span><span
+style='color:blue'>&gt;</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>   
+<span style='color:blue'>&lt;</span><span style='color:#A31515'>clear</span><span
+style='color:blue'>/&gt;</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>   &lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>add</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'> </span><span style='font-size:9.5pt;font-family:Consolas;
+color:red'>connectionStringName</span><span style='font-size:9.5pt;font-family:
+Consolas;color:blue'>=</span><span style='font-size:9.5pt;font-family:Consolas'>&quot;<span
+style='color:blue'>Elmah.Everywhere</span>&quot;<span style='color:blue'> </span><span
+style='color:red'>name</span><span style='color:blue'>=</span>&quot;<span
+style='color:blue'>AspNetSqlRoleProvider</span>&quot; <span style='color:red'>type</span><span
+style='color:blue'>=</span>&quot;<span style='color:blue'>System.Web.Security.SqlRoleProvider</span>&quot;<span
+style='color:blue'> </span><span style='color:red'>applicationName</span><span
+style='color:blue'>=</span>&quot;<span style='color:blue'>/</span>&quot;<span
+style='color:blue'>/&gt;</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>  &lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>providers</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&gt;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>roleManager</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&gt;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>authentication</span><span style='font-size:9.5pt;font-family:
+Consolas;color:blue'> </span><span style='font-size:9.5pt;font-family:Consolas;
+color:red;background:yellow'>mode</span><span style='font-size:9.5pt;
+font-family:Consolas;color:blue;background:yellow'>=</span><span
+style='font-size:9.5pt;font-family:Consolas;background:yellow'>&quot;<span
+style='color:blue'>Forms</span>&quot;<span style='color:blue'>&gt;</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'> 
+<span style='color:blue'>&lt;</span><span style='color:#A31515'>forms</span><span
+style='color:blue'> </span><span style='color:red'>loginUrl</span><span
+style='color:blue'>=</span>&quot;<span style='color:blue'>~/Account/LogOn</span>&quot;<span
+style='color:blue'> </span><span style='color:red'>timeout</span><span
+style='color:blue'>=</span>&quot;<span style='color:blue'>2880</span>&quot;<span
+style='color:blue'>/&gt;</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>authentication</span><span style='font-size:9.5pt;font-family:
+Consolas;color:blue'>&gt;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&nbsp;</span></p>
 
 <div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
 
