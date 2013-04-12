@@ -32,7 +32,8 @@ namespace Elmah.Everywhere.Diagnostics
             var configuration = (EverywhereConfigurationSection)System.Configuration.ConfigurationManager.GetSection(EverywhereConfigurationSection.SectionKey);
             if (configuration == null)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture ,"Could not find [{0}] configuration section.", EverywhereConfigurationSection.SectionKey));
+                // If section is not configured use build in section.
+                configuration = GetBuildInSection();
             }
             Configure(writter, configuration, appenders);
         }
@@ -164,6 +165,20 @@ namespace Elmah.Everywhere.Diagnostics
         {
             Report((Exception) args.ExceptionObject, null);
         }
+
+#if !SILVERLIGHT
+
+        private static EverywhereConfigurationSection GetBuildInSection()
+        {
+            var section = new EverywhereConfigurationSection();
+            section.ApplicationName = "Exceptions-Handler";
+            section.Host = "Exceptions-Handler";
+            section.Token = "Exceptions-Handler";
+            section.RemoteLogUri = "http://localhost:11079/error/log";
+            return section;
+        }
+
+#endif
 
         #endregion
 
