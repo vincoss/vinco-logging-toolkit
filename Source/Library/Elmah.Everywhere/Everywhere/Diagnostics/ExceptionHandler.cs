@@ -171,9 +171,9 @@ namespace Elmah.Everywhere.Diagnostics
         private static EverywhereConfigurationSection GetBuildInSection()
         {
             var section = new EverywhereConfigurationSection();
-            section.ApplicationName = "Exceptions-Handler";
-            section.Host = "Exceptions-Handler";
-            section.Token = "Exceptions-Handler";
+            section.ApplicationName = "Default-Handler";
+            section.Host = "Default-Handler";
+            section.Token = "Default-Handler";
             section.RemoteLogUri = "http://localhost:11079/error/log";
             return section;
         }
