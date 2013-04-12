@@ -93,10 +93,10 @@
       <DependentUpon>Elmah.Everywhere.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\Elmah.sql" />
-    <Content Include="clientaccesspolicy.xml" />
+    <Content Include="ClientAccessPolicy.xml" />
     <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Images\favicon.png" />
-    <Content Include="crossdomain.xml" />
+    <Content Include="CrossDomain.xml" />
     <Content Include="Global.asax" />
     <Content Include="MvcDiagnostics.aspx" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />

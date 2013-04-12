@@ -75,7 +75,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Elmah.Everywhere.Silverlight">
+    <Reference Include="Elmah.Everywhere.Silverlight, Version=1.2.2154.575, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Bin\Silverlight\Elmah.Everywhere.Silverlight.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
@@ -87,6 +87,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

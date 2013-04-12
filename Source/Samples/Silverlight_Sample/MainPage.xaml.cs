@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System;
+using Elmah.Everywhere.Diagnostics;
 
 
 namespace Silverlight_Sample
@@ -55,8 +57,16 @@ namespace Silverlight_Sample
 
         private void btnClientError_Click(object sender, RoutedEventArgs e)
         {
-            int i = 0;
-            int result = 10 / i;
+            try
+            {
+                int i = 0;
+                int result = 10 / i;
+            }
+            catch (Exception ex)
+            {
+                tblMessage.Text = "10 / 0";
+                ExceptionHandler.Report(ex, null);
+            }
         }
     }
 }
