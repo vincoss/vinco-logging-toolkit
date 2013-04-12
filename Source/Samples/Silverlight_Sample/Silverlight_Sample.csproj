@@ -75,6 +75,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Elmah.Everywhere.Silverlight">
+      <HintPath>..\..\..\Bin\Silverlight\Elmah.Everywhere.Silverlight.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -131,12 +134,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Library\Elmah.Everywhere.Silverlight\Elmah.Everywhere.Silverlight.csproj">
-      <Project>{128D46AE-97A3-4A95-8ACA-B4C9BB473FAC}</Project>
-      <Name>Elmah.Everywhere.Silverlight</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

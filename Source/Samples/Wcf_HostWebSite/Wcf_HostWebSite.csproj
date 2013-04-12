@@ -37,7 +37,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
-    <Reference Include="Elmah.Everywhere">
+    <Reference Include="Elmah.Everywhere, Version=1.2.2151.576, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Bin\Elmah.Everywhere.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
