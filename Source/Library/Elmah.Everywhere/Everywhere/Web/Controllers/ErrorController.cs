@@ -6,7 +6,7 @@ using Elmah.Everywhere.Web;
 
 namespace Elmah.Everywhere.Controllers
 {
-    [CustomRequireHttps]
+    //[CustomRequireHttps]
     public class ErrorController : Controller
     {
         private readonly IErrorService _errorService;

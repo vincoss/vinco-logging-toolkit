@@ -4,7 +4,7 @@ using Elmah.Everywhere.Web;
 
 namespace Elmah.Everywhere.Controllers
 {
-    [CustomRequireHttps]
+    //[CustomRequireHttps]
     [CustomAuthorize(Roles = "Administrator")]
     public class ElmahController : Controller
     {
