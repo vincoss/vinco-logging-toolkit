@@ -3,6 +3,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.Web;
 using System.Collections.Specialized;
+using System.Reflection;
 
 
 namespace Elmah.Everywhere
@@ -46,6 +47,7 @@ namespace Elmah.Everywhere
             {
                 var errorLog = ErrorLog.GetDefault((HttpContext)context); 
                 string errorId = errorLog.Log(error);
+                EmailHandler(error);
                 entry = new ErrorLogEntry(errorLog, errorId, error);
             }
             catch (Exception ex)
@@ -118,5 +120,22 @@ namespace Elmah.Everywhere
 
         public event ExceptionFilterEventHandler Filtering;
 
+        protected virtual void EmailHandler(Error error)
+        {
+            var httpContext = HttpContext.Current;
+            if (httpContext == null)
+            {
+                return;
+            }
+            object module = httpContext.ApplicationInstance.Modules["ErrorMail"];
+            if (module != null)
+            {
+                var method = module.GetType().GetMethod("ReportError", BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(Error) }, null);
+                if (method != null)
+                {
+                    method.Invoke(module, new[] { error });
+                }
+            }
+        }
     }
 }
