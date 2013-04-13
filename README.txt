@@ -1,18 +1,22 @@
 Elmah Everywhere Documentation
 Elmah Everywhere is an exception logging library for .NET, Silverlight, WPF, ASP.NET MVC and WCF that uses an ELMAH (Error Logging Modules and Handlers for ASP.NET).
 For more detailed information how to configure and use Elmah Everywhere see source code and samples at https://github.com/vincoss/vinco-logging-toolkit.
-Minimum Requirements
-* .NET Framework 4.0
-* ASP.NET MVC 3
-* SQL SERVER 2000
+
 Error Database
-Error database is located on project directory. “Vinco.Elmah.Everywhere\Source\Elmah.Everywhere.WebSite\App_Data”
+Error database is located on project directory. “Vinco.Elmah.Everywhere\Source\ErrorWebSite\App_Data”
 
 Error web site
 Error website default login details
-You can access sample error web site at http://localhost:11079/
+You can access sample error web site at http://localhost:11079/.
 * UserName : administrator
 * Password: p@ssword
+Email
+Email settings
+Current settings are configured as local only to “C:\inetpub\mailroot\pickup” folder. For more information about email configuration see Elmah documentation.
+<smtp deliveryMethod="SpecifiedPickupDirectory" from="info@yoursite.com">
+        <network host="localhost" port="25" defaultCredentials="true"/>
+        <specifiedPickupDirectory pickupDirectoryLocation="C:\inetpub\mailroot\pickup"/>
+</smtp>
 
 Configuration
 Silverlight configuration
@@ -86,6 +90,12 @@ Configuration details in App.config file
               host="Wpf-Sample"
               applicationName="Exceptions-Handler"/>
 </everywhere>
+Default configuration settings
+You can configure error logging without “everywhere” configuration section and following default configuration settings will be used.
+* ApplicationName: Default-Handler
+* Host: Default-Handler
+* Token: Default-Handler
+* RemoteLogUri: http://localhost:11079/error/log
 Code configuration
 You can configure error logging in code as indicated in the following example.
 
@@ -104,6 +114,13 @@ Host = Environment.MachineName
 };
 
 ExceptionHandler.Configure(writter, defaults);
+}
+
+Code short configuration, default configuration settings will be used.
+
+static void Main(string[] args)
+{
+        ExceptionHandler.ConfigureFromConfigurationFile(new HttpExceptionWritter(), null);
 }
 WCF configuration with Web.config or App.config file
 To use WCF service error logging, you should configure service behaviour in configuration file or in code. You can configure error logging as indicated in the following example. 
@@ -128,20 +145,6 @@ You can configure error logging as indicated in the following example.
 public class MyService : IMyService
 {
 
-
-Security
-Enable or Disable Security
-You can enable or disable security for error viewing website by editing Web.config file in Elmah.Everywhere.WebSite. To enable security set roleManager enabled to “true” and authentication mode to “Forms”. To disable security set roleManager enabled to “false” and authentication mode to “None”.
-<roleManager enabled="True">
-  <providers>
-    <clear/>
-   <add connectionStringName="Elmah.Everywhere" name="AspNetSqlRoleProvider" type="System.Web.Security.SqlRoleProvider" applicationName="/"/>
-  </providers>
-</roleManager>
-
-<authentication mode="Forms">
-  <forms loginUrl="~/Account/LogOn" timeout="2880"/>
-</authentication>
 
 Tracing
 Trace diagnostics configuration

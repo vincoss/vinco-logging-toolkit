@@ -107,6 +107,12 @@ a:link, span.MsoHyperlink
 a:visited, span.MsoHyperlinkFollowed
 	{color:purple;
 	text-decoration:underline;}
+p.MsoDocumentMap, li.MsoDocumentMap, div.MsoDocumentMap
+	{mso-style-link:"Document Map Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
 p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
 	{mso-style-link:"Balloon Text Char";
 	margin:0cm;
@@ -174,6 +180,10 @@ span.Heading2Char
 	font-family:"Cambria","serif";
 	color:#4F81BD;
 	font-weight:bold;}
+span.DocumentMapChar
+	{mso-style-name:"Document Map Char";
+	mso-style-link:"Document Map";
+	font-family:"Tahoma","sans-serif";}
 .MsoChpDefault
 	{font-family:"Calibri","sans-serif";}
 .MsoPapDefault
@@ -212,19 +222,7 @@ and Handlers for ASP.NET).</p>
 Everywhere see source code and samples at <a
 href="https://github.com/vincoss/vinco-logging-toolkit">https://github.com/vincoss/vinco-logging-toolkit</a>.</p>
 
-<h1>Minimum Requirements</h1>
-
-<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>.NET Framework 4.0</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>ASP.NET MVC 3</p>
-
-<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>SQL SERVER 2000</p>
+<p class=MsoNormal>&nbsp;</p>
 
 <div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
 
@@ -232,7 +230,7 @@ style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nb
 
 </div>
 
-<p class=MsoNormal>Error database is located on project directory. “Vinco.Elmah.Everywhere\Source\Elmah.Everywhere.WebSite\App_Data”</p>
+<p class=MsoNormal>Error database is located on project directory. “Vinco.Elmah.Everywhere\Source\ErrorWebSite\App_Data”</p>
 
 <p class=MsoNormal>&nbsp;</p>
 
@@ -244,17 +242,70 @@ style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nb
 
 <h1>Error website default login details</h1>
 
-<p class=MsoNormal>You can access sample error web site at http://localhost:11079/</p>
+<p class=MsoNormal>You can access sample error web site at http://localhost:11079/.</p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
 style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span>UserName : administrator</p>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span
 style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span>Password: p@ssword</p>
 
-<p class=MsoListParagraphCxSpLast>&nbsp;</p>
+<div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
+
+<p class=MsoTitle>Email</p>
+
+</div>
+
+<h1>Email settings</h1>
+
+<p class=MsoNormal>Current settings are configured as local only to “<span
+style='font-size:9.5pt;line-height:115%;font-family:Consolas;color:blue'>C:\inetpub\mailroot\pickup</span>”
+folder. For more information about email configuration see Elmah documentation.</p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&lt;</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>smtp</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'> </span><span style='font-size:9.5pt;font-family:Consolas;
+color:red'>deliveryMethod</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>=</span><span style='font-size:9.5pt;font-family:Consolas'>&quot;<span
+style='color:blue'>SpecifiedPickupDirectory</span>&quot;<span style='color:
+blue'> </span><span style='color:red'>from</span><span style='color:blue'>=</span>&quot;<span
+style='color:blue'>info@yoursite.com</span>&quot;<span style='color:blue'>&gt;</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-indent:
+36.0pt;line-height:normal;text-autospace:none'><span style='font-size:9.5pt;
+font-family:Consolas;color:blue'>&lt;</span><span style='font-size:9.5pt;
+font-family:Consolas;color:#A31515'>network</span><span style='font-size:9.5pt;
+font-family:Consolas;color:blue'> </span><span style='font-size:9.5pt;
+font-family:Consolas;color:red'>host</span><span style='font-size:9.5pt;
+font-family:Consolas;color:blue'>=</span><span style='font-size:9.5pt;
+font-family:Consolas'>&quot;<span style='color:blue'>localhost</span>&quot;<span
+style='color:blue'> </span><span style='color:red'>port</span><span
+style='color:blue'>=</span>&quot;<span style='color:blue'>25</span>&quot;<span
+style='color:blue'> </span><span style='color:red'>defaultCredentials</span><span
+style='color:blue'>=</span>&quot;<span style='color:blue'>true</span>&quot;<span
+style='color:blue'>/&gt;</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-indent:
+36.0pt;line-height:normal;text-autospace:none'><span style='font-size:9.5pt;
+font-family:Consolas;color:blue'>&lt;</span><span style='font-size:9.5pt;
+font-family:Consolas;color:#A31515'>specifiedPickupDirectory</span><span
+style='font-size:9.5pt;font-family:Consolas;color:blue'> </span><span
+style='font-size:9.5pt;font-family:Consolas;color:red'>pickupDirectoryLocation</span><span
+style='font-size:9.5pt;font-family:Consolas;color:blue'>=</span><span
+style='font-size:9.5pt;font-family:Consolas'>&quot;<span style='color:blue'>C:\inetpub\mailroot\pickup</span>&quot;<span
+style='color:blue'>/&gt;</span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
+color:#A31515'>smtp</span><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>&gt;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
 
 <div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
 
@@ -281,8 +332,7 @@ normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>{
 
 <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
 margin-left:36.0pt;margin-bottom:.0001pt;line-height:normal;text-autospace:
-none'><span style='font-size:9.5pt;font-family:Consolas;color:green'>//
-Configure</span></p>
+none'><span style='font-size:9.5pt;font-family:Consolas;color:green'>// Configure</span></p>
 
 <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
 margin-left:36.0pt;margin-bottom:.0001pt;line-height:normal;text-autospace:
@@ -563,6 +613,28 @@ color:blue'>&lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
 color:#A31515'>everywhere</span><span style='font-size:9.5pt;font-family:Consolas;
 color:blue'>&gt;</span></p>
 
+<h1>Default configuration settings</h1>
+
+<p class=MsoNormal>You can configure error logging without “everywhere”
+configuration section and following default configuration settings will be
+used.</p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>ApplicationName: Default-Handler</p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Host: Default-Handler</p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Token: Default-Handler</p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>RemoteLogUri: <a href="http://localhost:11079/error/log">http://localhost:11079/error/log</a></p>
+
 <h1>Code configuration</h1>
 
 <p class=MsoNoSpacing>You can configure error logging in code as indicated in
@@ -643,11 +715,40 @@ style='font-size:9.5pt;font-family:Consolas'>.Configure(writter, defaults);</spa
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;text-autospace:none'>}</p>
 
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'>Code short configuration, default configuration
+settings will be used.</p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
+color:blue'>static</span><span style='font-size:9.5pt;font-family:Consolas'> <span
+style='color:blue'>void</span> Main(<span style='color:blue'>string</span>[]
+args)</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>{</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-indent:
+36.0pt;line-height:normal;text-autospace:none'><span style='font-size:9.0pt;
+font-family:Consolas;color:#2B91AF'>ExceptionHandler</span><span
+style='font-size:9.0pt;font-family:Consolas'>.ConfigureFromConfigurationFile(<span
+style='color:blue'>new</span> <span style='color:#2B91AF'>HttpExceptionWritter</span>(),
+<span style='color:blue'>null</span>);</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>}</span></p>
+
 <h1>WCF configuration with Web.config or App.config file</h1>
 
 <p class=MsoNormal>To use WCF service error logging, you should configure
-service behaviour in configuration file or in code. You can configure error
-logging as indicated in the following example. </p>
+service behaviour in configuration file or in code. You can configure error logging
+as indicated in the following example. </p>
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
@@ -778,100 +879,6 @@ normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>&
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>&nbsp;</span></p>
-
-<div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
-
-<p class=MsoTitle>Security</p>
-
-</div>
-
-<h1>Enable or Disable Security</h1>
-
-<p class=MsoNormal>You can enable or disable security for error viewing website
-by editing Web.config file in Elmah.Everywhere.WebSite. To enable security set
-roleManager enabled to “true” and authentication mode to “Forms”. To disable
-security set roleManager enabled to “false” and authentication mode to “None”.</p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'>&lt;</span><span style='font-size:9.5pt;font-family:Consolas;
-color:#A31515'>roleManager</span><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'> </span><span style='font-size:9.5pt;font-family:Consolas;
-color:red;background:yellow'>enabled</span><span style='font-size:9.5pt;
-font-family:Consolas;color:blue;background:yellow'>=</span><span
-style='font-size:9.5pt;font-family:Consolas;background:yellow'>&quot;<span
-style='color:blue'>True</span>&quot;</span><span style='font-size:9.5pt;
-font-family:Consolas;color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'> 
-<span style='color:blue'>&lt;</span><span style='color:#A31515'>providers</span><span
-style='color:blue'>&gt;</span></span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'>   
-<span style='color:blue'>&lt;</span><span style='color:#A31515'>clear</span><span
-style='color:blue'>/&gt;</span></span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'>   &lt;</span><span style='font-size:9.5pt;font-family:Consolas;
-color:#A31515'>add</span><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'> </span><span style='font-size:9.5pt;font-family:Consolas;
-color:red'>connectionStringName</span><span style='font-size:9.5pt;font-family:
-Consolas;color:blue'>=</span><span style='font-size:9.5pt;font-family:Consolas'>&quot;<span
-style='color:blue'>Elmah.Everywhere</span>&quot;<span style='color:blue'> </span><span
-style='color:red'>name</span><span style='color:blue'>=</span>&quot;<span
-style='color:blue'>AspNetSqlRoleProvider</span>&quot; <span style='color:red'>type</span><span
-style='color:blue'>=</span>&quot;<span style='color:blue'>System.Web.Security.SqlRoleProvider</span>&quot;<span
-style='color:blue'> </span><span style='color:red'>applicationName</span><span
-style='color:blue'>=</span>&quot;<span style='color:blue'>/</span>&quot;<span
-style='color:blue'>/&gt;</span></span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'>  &lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
-color:#A31515'>providers</span><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'>&lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
-color:#A31515'>roleManager</span><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'>&lt;</span><span style='font-size:9.5pt;font-family:Consolas;
-color:#A31515'>authentication</span><span style='font-size:9.5pt;font-family:
-Consolas;color:blue'> </span><span style='font-size:9.5pt;font-family:Consolas;
-color:red;background:yellow'>mode</span><span style='font-size:9.5pt;
-font-family:Consolas;color:blue;background:yellow'>=</span><span
-style='font-size:9.5pt;font-family:Consolas;background:yellow'>&quot;<span
-style='color:blue'>Forms</span>&quot;<span style='color:blue'>&gt;</span></span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas'> 
-<span style='color:blue'>&lt;</span><span style='color:#A31515'>forms</span><span
-style='color:blue'> </span><span style='color:red'>loginUrl</span><span
-style='color:blue'>=</span>&quot;<span style='color:blue'>~/Account/LogOn</span>&quot;<span
-style='color:blue'> </span><span style='color:red'>timeout</span><span
-style='color:blue'>=</span>&quot;<span style='color:blue'>2880</span>&quot;<span
-style='color:blue'>/&gt;</span></span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'>&lt;/</span><span style='font-size:9.5pt;font-family:Consolas;
-color:#A31515'>authentication</span><span style='font-size:9.5pt;font-family:
-Consolas;color:blue'>&gt;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-normal;text-autospace:none'><span style='font-size:9.5pt;font-family:Consolas;
-color:blue'>&nbsp;</span></p>
 
 <div style='border:none;border-bottom:solid #4F81BD 1.0pt;padding:0cm 0cm 4.0pt 0cm'>
 
