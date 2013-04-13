@@ -147,6 +147,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties BuildVersion_IncrementBeforeBuild="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
