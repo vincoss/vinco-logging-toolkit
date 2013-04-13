@@ -13,15 +13,15 @@ namespace Elmah.Everywhere.Controllers.Test
 {
     public class ErrorControllerTest
     {
-        [Fact]
-        public void Has_RequireHttpsAttribute_Test()
-        {
-            // Act
-            var attributes = typeof(ErrorController).GetCustomAttributes(typeof(CustomRequireHttpsAttribute), false);
+        //[Fact]
+        //public void Has_RequireHttpsAttribute_Test()
+        //{
+        //    // Act
+        //    var attributes = typeof(ErrorController).GetCustomAttributes(typeof(CustomRequireHttpsAttribute), false);
 
-            // Assert
-            Assert.True(attributes.Any());
-        }
+        //    // Assert
+        //    Assert.True(attributes.Any());
+        //}
 
         [Fact]
         public void Log_Has_HttpPostAttribute_Test()
