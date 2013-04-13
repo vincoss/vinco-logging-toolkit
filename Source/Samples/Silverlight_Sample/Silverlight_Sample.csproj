@@ -75,7 +75,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Elmah.Everywhere.Silverlight, Version=1.2.2154.575, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Elmah.Everywhere.Silverlight">
       <HintPath>..\..\..\Bin\Silverlight\Elmah.Everywhere.Silverlight.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />

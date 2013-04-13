@@ -162,8 +162,8 @@ Global
 		{BBDDB842-F323-4C51-9A6D-6589D3C03F61} = {73C52C63-BDF4-4F31-A2F7-7DB71444CD66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateAssemblyVersion = False
+		BuildVersion_IncrementBeforeBuild = True
 		BuildVersion_BuildVersioningStyle = None.None.None.None
-		BuildVersion_IncrementBeforeBuild = False
+		BuildVersion_UpdateAssemblyVersion = False
 	EndGlobalSection
 EndGlobal

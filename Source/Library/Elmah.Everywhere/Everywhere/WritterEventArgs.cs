@@ -17,3 +17,4 @@ namespace Elmah.Everywhere
         public ErrorInfo Error { get; private set; }
     }
 }
+
