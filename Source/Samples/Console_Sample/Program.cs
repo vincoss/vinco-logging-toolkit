@@ -19,26 +19,22 @@ namespace Console_Sample
 
             // Manual report exception
             ExceptionHandler.Report(exception, properties);
-
+            
             Console.WriteLine("Done...");
             Console.Read();
         }
 
         private static void CodeSetupExceptionHandler()
         {
-            var writter = new HttpExceptionWritter
-            {
-                RequestUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
-            };
-
             var defaults = new ExceptionDefaults
             {
                 Token = "Test-Token",
                 ApplicationName = "Console-Sample",
-                Host = Environment.MachineName
+                Host = Environment.MachineName,
+                RemoteLogUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
             };
 
-            ExceptionHandler.Configure(writter, defaults, null);
+            ExceptionHandler.Configure(new HttpExceptionWritter(), defaults, null);
         }
 
         private static Exception CreateSampleException()
