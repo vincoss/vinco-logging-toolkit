@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using System.ServiceModel.DomainServices.Client;
+using System.Windows;
 using System.Windows.Controls;
 using System;
 using Elmah.Everywhere.Diagnostics;
+using WcfRia_HostWebSite.Services;
 
 
 namespace Silverlight_Sample
@@ -13,13 +15,15 @@ namespace Silverlight_Sample
             InitializeComponent();
         }
 
-        private void btnMessage_Click(object sender, RoutedEventArgs e)
+        #region WCF
+
+        private void wcfButtonMessage_Click(object sender, RoutedEventArgs e)
         {
             var client = new WcfSample.SampleWcfServiceClient();
 
             client.GetMessageCompleted += GetMessageCompleted;
 
-            client.GetMessageAsync("World!!!");
+            client.GetMessageAsync("WCF World!!!");
         }
 
         private void GetMessageCompleted(object sender, WcfSample.GetMessageCompletedEventArgs e)
@@ -33,10 +37,10 @@ namespace Silverlight_Sample
             {
                 message = e.Result;
             }
-            tblMessage.Text = message;
+            wcfTextBlockMessage.Text = message;
         }
 
-        private void btnError_Click(object sender, RoutedEventArgs e)
+        private void wcfButtonError_Click(object sender, RoutedEventArgs e)
         {
             var client = new WcfSample.SampleWcfServiceClient();
 
@@ -52,10 +56,60 @@ namespace Silverlight_Sample
             {
                 message = e.Error.ToString();
             }
-            tblMessage.Text = message;
+            wcfTextBlockMessage.Text = message;
         }
 
-        private void btnClientError_Click(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region WCF RIA
+
+        private void wcfRiaButtonMessage_Click(object sender, RoutedEventArgs e)
+        {
+            var client = new SampleWcfRiaContext(new Uri("http://localhost:62162/services/WcfRia_HostWebSite-Services-SampleWcfRiaService.svc"));
+
+            var operation = client.GetMessage("WCF RIA world!!!");
+            operation.Completed += GetMessageCompleted;
+        }
+
+        private void GetMessageCompleted(object sender, EventArgs e)
+        {
+            var oparation = (InvokeOperation)sender;
+
+            string message = null;
+            if (oparation.HasError && oparation.Error != null)
+            {
+                message = oparation.Error.ToString();
+            }
+            else
+            {
+                message = oparation.Value == null ? "" : oparation.Value.ToString();
+            }
+            wcfRiaTextBlockMessage.Text = message;
+        }
+
+        private void wcfRiaButtonClientError_Click(object sender, RoutedEventArgs e)
+        {
+            var client = new SampleWcfRiaContext(new Uri("http://localhost:62162/services/WcfRia_HostWebSite-Services-SampleWcfRiaService.svc"));
+
+            var operation = client.MakeError();
+            operation.Completed += MakeErrorCompleted;
+        }
+
+        private void MakeErrorCompleted(object sender, EventArgs e)
+        {
+            var oparation = (InvokeOperation)sender;
+
+            string message = "All good!!!";
+            if (oparation.HasError && oparation.Error != null)
+            {
+                message = oparation.Error.ToString();
+            }
+            wcfRiaTextBlockMessage.Text = message;
+        }
+
+        #endregion
+
+        private void buttonClientError_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -64,9 +118,10 @@ namespace Silverlight_Sample
             }
             catch (Exception ex)
             {
-                tblMessage.Text = "10 / 0";
+                TextBlock_ClientMessage.Text = "10 / 0";
                 ExceptionHandler.Report(ex, null);
             }
-        }
+        } 
+
     }
 }

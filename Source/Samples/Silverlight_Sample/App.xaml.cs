@@ -27,20 +27,16 @@ namespace Silverlight_Sample
             Uri uri = Application.Current.Host.Source;
             string currentHost = string.Format("{0}{1}{2}:{3}", uri.Scheme, Uri.SchemeDelimiter, uri.Host, uri.Port);
 
-            // Configure
-            var writter = new ClientHttpExceptionWritter
-            {
-                // NOTE: Possible to pass URI by startup arguments.
-                RequestUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
-            };
-
             var defaults = new ExceptionDefaults
             {
                 Token = "Test-Token",
                 ApplicationName = "Sample",
-                Host = currentHost
+                Host = currentHost,
+
+                // NOTE: Possible to pass URI by startup arguments.
+                RemoteLogUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
             };
-            ExceptionHandler.Configure(writter, defaults, null);
+            ExceptionHandler.Configure(new ClientHttpExceptionWritter(), defaults, null);
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
