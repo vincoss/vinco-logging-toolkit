@@ -36,7 +36,9 @@ namespace Elmah.Everywhere
             Source = baseException.Source;
 #endif
             Detail = exception.GetExceptionString();
-            Message = baseException.Message;
+
+            // Sometimes the message is empty string
+            Message = string.IsNullOrWhiteSpace(baseException.Message) ? baseException.GetType().ToString() : baseException.Message;
             Date = DateTime.Now;
         }
 

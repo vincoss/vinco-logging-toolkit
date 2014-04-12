@@ -34,7 +34,7 @@ namespace Elmah.Everywhere
         {
             using (var webClient = CreateWebClient())
             {
-                webClient.UploadString(RequestUri, "POST", data);
+               var r = webClient.UploadString(RequestUri, "POST", data);
             }
         }
     }

@@ -65,6 +65,7 @@ namespace Elmah.Everywhere.Diagnostics
             {
                 throw new ArgumentNullException("parameters");
             }
+            ValidateParameters(parameters);
             _appenders = appenders;
             if (_appenders == null)
             {
@@ -78,6 +79,22 @@ namespace Elmah.Everywhere.Diagnostics
             _writter = writter;
             _parameters = parameters;
             _writter.Completed += Writter_Completed;
+        }
+
+        private static void ValidateParameters(ExceptionDefaults parameters)
+        {
+            if (parameters.RemoteLogUri == null)
+            {
+                throw new ArgumentNullException("parameters", "RemoteLogUri is required");
+            }
+            if (string.IsNullOrWhiteSpace(parameters.ApplicationName))
+            {
+                parameters.ApplicationName = "NOT-SET";
+            }
+            if (string.IsNullOrWhiteSpace(parameters.Host))
+            {
+                parameters.Host = "NOT_SET";
+            }
         }
 
         public static ErrorInfo Report(Exception exception)
@@ -129,6 +146,17 @@ namespace Elmah.Everywhere.Diagnostics
             {
                 throw new ArgumentNullException("domain");
             }
+
+            // Fires on any unhandled exception on any threrad. Forces application to shut down after event handler completes.
+
+            // To prevent shutdown use this configuration.
+
+            //<configuration>
+            //    <runtime>
+            //        <legacyUnhandledExceptionPolicy enabled="1" />
+            //    </runtime>
+            //</configuration>
+
             domain.UnhandledException += AppDomain_UnhandledException;
         }
 

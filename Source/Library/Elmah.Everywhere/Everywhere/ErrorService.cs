@@ -24,20 +24,8 @@ namespace Elmah.Everywhere
 
         public bool ValidateErrorInfo(ErrorInfo model)
         {
-            bool valid = !string.IsNullOrWhiteSpace(model.ApplicationName);
-            if(string.IsNullOrWhiteSpace(model.Host))
-            {
-                valid = false;
-            }
-            if (string.IsNullOrWhiteSpace(model.Message))
-            {
-                valid = false;
-            }
-            if (string.IsNullOrWhiteSpace(model.Detail))
-            {
-                valid = false;
-            }
-            return valid;
+            // TODO: For now we dont validate these details
+            return true;
         }
     }
 }

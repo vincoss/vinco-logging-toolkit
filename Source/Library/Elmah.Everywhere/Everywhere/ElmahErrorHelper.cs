@@ -65,7 +65,7 @@ namespace Elmah.Everywhere
 
         private void OnFiltering(object sender, EventArgs e)
         {
-            ExceptionFilterEventHandler filtering = this.Filtering;
+            ExceptionFilterEventHandler filtering = this.FilteringEventArgs;
             if (filtering != null)
             {
                 filtering.Invoke(this, (ExceptionFilterEventArgs)e);
@@ -74,7 +74,7 @@ namespace Elmah.Everywhere
 
         private void OnLogged(object sender, EventArgs e)
         {
-            ErrorLoggedEventHandler logged = this.Logged;
+            ErrorLoggedEventHandler logged = this.LoggedEventArgs;
             if (logged != null)
             {
                 logged.Invoke(this, (ErrorLoggedEventArgs)e);
@@ -116,9 +116,9 @@ namespace Elmah.Everywhere
             }
         }
 
-        public event ErrorLoggedEventHandler Logged;
+        public event ErrorLoggedEventHandler LoggedEventArgs;
 
-        public event ExceptionFilterEventHandler Filtering;
+        public event ExceptionFilterEventHandler FilteringEventArgs;
 
         protected virtual void EmailHandler(Error error)
         {
