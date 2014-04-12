@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Elmah.Everywhere.Utils;
+using System;
+using System.Text;
+using System.Windows.Browser;
 
 
 namespace Elmah.Everywhere
@@ -34,6 +37,13 @@ namespace Elmah.Everywhere
                 Exception = exception;
                 OnCompleted(new WritterEventArgs(error));
             }
+        }
+
+        protected override string CreatePostData(string token, ErrorInfo info)
+        {
+            string xml = Utility.SerializeXml(info);
+            string error = Convert.ToBase64String(Encoding.UTF8.GetBytes(xml));
+            return FormData(new { token, error }, HttpUtility.UrlEncode);
         }
     }
 }

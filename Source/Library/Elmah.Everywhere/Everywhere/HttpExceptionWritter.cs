@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Elmah.Everywhere.Utils;
+using System;
 using System.Net;
+using System.Text;
+using System.Web;
 
 
 namespace Elmah.Everywhere
@@ -36,6 +39,13 @@ namespace Elmah.Everywhere
             {
                var r = webClient.UploadString(RequestUri, "POST", data);
             }
+        }
+
+        protected override string CreatePostData(string token, ErrorInfo info)
+        {
+            string xml = Utility.SerializeXml(info);
+            string error = Convert.ToBase64String(Encoding.UTF8.GetBytes(xml));
+            return FormData(new { token, error }, HttpUtility.UrlEncode);
         }
     }
 }

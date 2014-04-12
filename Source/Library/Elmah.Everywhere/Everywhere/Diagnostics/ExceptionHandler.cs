@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elmah.Everywhere.Appenders;
+using Elmah.Everywhere.Appenders;
 
 #if !SILVERLIGHT
 using Elmah.Everywhere.Configuration;

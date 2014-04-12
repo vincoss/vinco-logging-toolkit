@@ -8,7 +8,7 @@ using Elmah.Everywhere.Utils;
 
 
 #if SILVERLIGHT
-using System.Windows.Browser;
+
 #else
 using System.Web;
 using System.Diagnostics.CodeAnalysis;
@@ -60,12 +60,7 @@ namespace Elmah.Everywhere
             return webClient;
         }
 
-        protected string CreatePostData(string token, ErrorInfo info)
-        {
-            string xml = Utility.SerializeXml(info);
-            string error = Convert.ToBase64String(Encoding.UTF8.GetBytes(xml));
-            return FormData(new { token, error }, HttpUtility.UrlEncode);
-        }
+        protected abstract string CreatePostData(string token, ErrorInfo info);
 
         private static IDictionary<string, object> AnonymousObjectToFormValues(object formValues)
         {
