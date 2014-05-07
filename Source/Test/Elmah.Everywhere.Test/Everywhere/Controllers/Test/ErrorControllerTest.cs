@@ -50,16 +50,17 @@ namespace Elmah.Everywhere.Controllers.Test
 
             ErrorController controller = new ErrorController(helper, service.Object);
 
+            helper.ErrorId = "1";
             ErrorInfo info = new ErrorInfo(new Exception("Test-Exception"));
 
             string xml = Utility.SerializeXml(info);
             string error = Convert.ToBase64String(Encoding.UTF8.GetBytes(xml));
 
             // Act
-            HttpStatusCodeResult result = controller.Log("Test-Token", error) as HttpStatusCodeResult;
+            ContentResult result = controller.Log("Test-Token", error) as ContentResult;
 
             // Assert
-            Assert.Equal(200, result.StatusCode);
+            Assert.Same("1", result.Content);
             Assert.NotNull(helper.Error);
         }
 
@@ -105,10 +106,12 @@ namespace Elmah.Everywhere.Controllers.Test
         class TestableElmahErrorHelper : ElmahErrorHelper
         {
             public Error Error;
+            public string ErrorId;
 
-            protected override void LogInternal(Error error, object context)
+            protected override string LogInternal(Error error, object context)
             {
                 Error = error;
+                return ErrorId;
             }
         }
     }

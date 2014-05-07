@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6c8fb145-8471-4f51-bfca-e55a5bbeaba7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:3853/Services/SampleWcfService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SampleWcfService.xsd" MetadataType="Schema" ID="b7c80a70-6885-4b8a-b026-b3952a50586e" SourceId="1" SourceUrl="http://localhost:3853/Services/SampleWcfService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SampleWcfService.disco" MetadataType="Disco" ID="723f47ff-5247-4590-b4ea-7e1fa1770bbc" SourceId="1" SourceUrl="http://localhost:3853/Services/SampleWcfService.svc?disco" />
+    <MetadataFile FileName="SampleWcfService.wsdl" MetadataType="Wsdl" ID="eb2cf192-ecd4-4a8f-902d-889c86825918" SourceId="1" SourceUrl="http://localhost:3853/Services/SampleWcfService.svc?wsdl" />
+    <MetadataFile FileName="SampleWcfService1.xsd" MetadataType="Schema" ID="4f99960d-5a0c-4589-97d3-ef47dea3a93c" SourceId="1" SourceUrl="http://localhost:3853/Services/SampleWcfService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

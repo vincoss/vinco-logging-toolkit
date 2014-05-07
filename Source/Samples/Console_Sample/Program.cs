@@ -6,54 +6,50 @@ using Elmah.Everywhere;
 
 namespace Console_Sample
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Configure error handler from code
             CodeSetupExceptionHandler();
-            
-            // Create sample exception and properties
-            Exception exception = CreateSampleException();
-            IDictionary<string, object> properties = CreateSampleProperties();
 
-            // Manual report exception
-            ExceptionHandler.Report(exception, properties);
-            
-            Console.WriteLine("Done...");
-            Console.Read();
+            GlobalExceptionReporting();
+            ManualExceptionReporting();
         }
 
         private static void CodeSetupExceptionHandler()
         {
             var defaults = new ExceptionDefaults
-            {
-                Token = "Test-Token",
-                ApplicationName = "Console-Sample",
-                Host = Environment.MachineName,
-                RemoteLogUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
-            };
+                {
+                    Token = "Test-Token",
+                    ApplicationName = "Console-Sample",
+                    Host = Environment.MachineName,
+                    RemoteLogUri = new Uri("http://localhost:11079/error/log", UriKind.Absolute)
+                };
 
             ExceptionHandler.Configure(new HttpExceptionWritter(), defaults, null);
         }
 
-        private static Exception CreateSampleException()
+        private static void ManualExceptionReporting()
         {
-            Exception exception = null;
             try
             {
                 int i = 0;
-                int result = 10 / i;
+                int result = 10/i;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                exception = ex;
+                // Add some exception data.
+                ex.Data.Add("Some-Key", "Some-Value");
+
+                // Add some custom properties.
+                var properties = CreateSampleProperties();
+
+                // Report
+                ExceptionHandler.Report(ex, properties);
+
+                throw;
             }
-
-            // Add some exception data.
-            exception.Data.Add("Some-Key", "Some-Value");
-
-            return exception;
         }
 
         private static IDictionary<string, object> CreateSampleProperties()
@@ -62,6 +58,16 @@ namespace Console_Sample
             properties.Add("Test", "Value 1");
             properties.Add("Key", "Value 1");
             return properties;
+        }
+
+        private static void GlobalExceptionReporting()
+        {
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
+        }
+
+        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
+        {
+            ExceptionHandler.Report((Exception)e.ExceptionObject);
         }
     }
 }

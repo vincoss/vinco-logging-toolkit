@@ -34,6 +34,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSite_Sample", "Source\Sa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight_Sample", "Source\Samples\Silverlight_Sample\Silverlight_Sample.csproj", "{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPhone_Sample", "Source\Samples\WindowsPhone_Sample\WindowsPhone_Sample.csproj", "{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2C85174F-6BF8-49AE-9553-48B566225DA0} = {2C85174F-6BF8-49AE-9553-48B566225DA0}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -224,6 +229,32 @@ Global
 		{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}.Release|x64.ActiveCfg = Release|Any CPU
 		{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}.Release|x86.ActiveCfg = Release|Any CPU
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|ARM.Build.0 = Debug|ARM
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|ARM.Deploy.0 = Debug|ARM
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|x86.ActiveCfg = Debug|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|x86.Build.0 = Debug|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Debug|x86.Deploy.0 = Debug|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|ARM.ActiveCfg = Release|ARM
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|ARM.Build.0 = Release|ARM
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|ARM.Deploy.0 = Release|ARM
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|x64.ActiveCfg = Release|Any CPU
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|x86.ActiveCfg = Release|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|x86.Build.0 = Release|x86
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -236,14 +267,15 @@ Global
 		{535FCBDD-43BF-4835-BCDD-676AE2600B10} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
 		{F391DAFB-5A9F-46C0-8409-1B67BD2359F6} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
 		{D18A4F3F-3F81-42B1-BADE-875DE3E2A742} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
+		{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E} = {6EF94610-0D25-4FE9-A8D1-862D1855C3D9}
 		{319DD6E1-E5EB-4896-9055-BF486FC9C0EF} = {B9C2B82C-F879-42CE-9F56-CE42E48EAC9D}
 		{128D46AE-97A3-4A95-8ACA-B4C9BB473FAC} = {B9C2B82C-F879-42CE-9F56-CE42E48EAC9D}
 		{EFC00D69-E439-4AFE-99C3-451C0C69FE00} = {B9C2B82C-F879-42CE-9F56-CE42E48EAC9D}
 		{BBDDB842-F323-4C51-9A6D-6589D3C03F61} = {73C52C63-BDF4-4F31-A2F7-7DB71444CD66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_IncrementBeforeBuild = False
-		BuildVersion_BuildVersioningStyle = None.None.None.None
 		BuildVersion_UpdateAssemblyVersion = False
+		BuildVersion_BuildVersioningStyle = None.None.None.None
+		BuildVersion_IncrementBeforeBuild = False
 	EndGlobalSection
 EndGlobal

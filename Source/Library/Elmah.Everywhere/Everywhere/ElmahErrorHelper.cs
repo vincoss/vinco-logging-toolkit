@@ -10,14 +10,15 @@ namespace Elmah.Everywhere
 {
     public class ElmahErrorHelper
     {
-        public void LogException(ErrorInfo errorInfo)
+        public string LogException(ErrorInfo errorInfo)
         {
             if (errorInfo == null)
             {
                 throw new ArgumentNullException("errorInfo");
             }
             Error error = ToError(errorInfo);
-            LogInternal(error, null);
+            var errorId = LogInternal(error, null);
+            return errorId;
         }
 
         public void LogException(Exception exception, HttpContext httpContext)
@@ -40,13 +41,14 @@ namespace Elmah.Everywhere
             LogInternal(error, httpContext);
         }
 
-        protected virtual void LogInternal(Error error, object context)
+        protected virtual string LogInternal(Error error, object context)
         {
+            string errorId = null;
             ErrorLogEntry entry = null;
             try
             {
                 var errorLog = ErrorLog.GetDefault((HttpContext)context); 
-                string errorId = errorLog.Log(error);
+                errorId = errorLog.Log(error);
                 EmailHandler(error);
                 entry = new ErrorLogEntry(errorLog, errorId, error);
             }
@@ -61,6 +63,7 @@ namespace Elmah.Everywhere
                     this.OnLogged(this, new ErrorLoggedEventArgs(entry));
                 }
             }
+            return errorId;
         }
 
         private void OnFiltering(object sender, EventArgs e)

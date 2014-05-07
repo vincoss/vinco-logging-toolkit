@@ -1,0 +1,40 @@
+﻿<phone:PhoneApplicationPage x:Class="WindowsPhone_Sample.MainPage"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
+                            Foreground="{StaticResource PhoneForegroundBrush}"
+                            SupportedOrientations="Portrait" Orientation="Portrait"
+                            shell:SystemTray.IsVisible="True">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Background="Wheat" Margin="10">
+            <TextBlock Text="Windows Phone 8 WCF Sample" FontWeight="Bold"/>
+
+            <Button x:Name="wcfButtonMessage" Content="Message" Click="wcfButtonMessage_Click" />
+            <Button x:Name="wcfButtonError" Content="Make Service call Exception" Click="wcfButtonError_Click" />
+
+            <TextBlock Text="Message:"/>
+            <TextBlock x:Name="wcfTextBlockMessage"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Background="LightPink" Margin="10">
+            <TextBlock Text="Windows Phone 8 Client Error" FontWeight="Bold"/>
+
+            <Button x:Name="ButtonClientError" Content="Make client Exception" Click="ButtonClientError_Click" />
+            <TextBlock Text="Message:"/>
+            <TextBlock x:Name="TextBlock_ClientMessage"/>
+
+        </StackPanel>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>

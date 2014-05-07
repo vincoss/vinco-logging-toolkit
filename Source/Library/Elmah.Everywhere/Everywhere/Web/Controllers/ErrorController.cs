@@ -40,8 +40,11 @@ namespace Elmah.Everywhere.Controllers
                 var info = Utils.Utility.DeserializeXml(xml);
                 if (_errorService.ValidateErrorInfo(info))
                 {
-                    _elmahErrorHelper.LogException(info);
-                    return new HttpStatusCodeResult(200);
+                    var errorId = _elmahErrorHelper.LogException(info);
+                    return new ContentResult
+                        {
+                            Content = errorId
+                        };
                 }
                 return new HttpStatusCodeResult(412);
             }

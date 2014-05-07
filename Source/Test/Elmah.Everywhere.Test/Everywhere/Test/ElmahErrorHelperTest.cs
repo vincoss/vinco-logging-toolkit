@@ -87,10 +87,12 @@ namespace Elmah.Everywhere.Test
         class TestableElmahErrorHelper : ElmahErrorHelper
         {
             public Error Error;
+            public string ErrorId;
 
-            protected override void LogInternal(Error error, object context)
+            protected override string LogInternal(Error error, object context)
             {
                 Error = error;
+                return ErrorId;
             }
         }
     }
