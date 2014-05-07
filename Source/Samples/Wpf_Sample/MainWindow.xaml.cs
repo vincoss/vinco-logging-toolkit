@@ -21,13 +21,15 @@ namespace Wpf_Sample
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            WcfSample.SampleWcfServiceClient client = new WcfSample.SampleWcfServiceClient();
+            var client = new WcfSample.SampleWcfServiceClient();
             client.MakeErrorCompleted += (s, args) =>
                                              {
                                                  if(args.Error != null)
                                                  {
                                                      // Manual error log
                                                      ExceptionHandler.Report(args.Error);
+
+                                                     MessageBox.Show(args.Error.Message, "Error");
                                                  }
                                              };
             client.MakeErrorAsync();

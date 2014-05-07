@@ -1,4 +1,5 @@
 ﻿using System;
+using WcfRia_HostWebSite.Services;
 
 
 namespace Wcf_HostWebSite
@@ -11,12 +12,14 @@ namespace Wcf_HostWebSite
 
         protected void btnMessage_Click(object sender, EventArgs e)
         {
-           // litMessage.Text = _client.GetMessage("World!!!");
+            var service = new SampleWcfRiaService();
+            litMessage.Text = service.GetMessage("World!!!");
         }
 
         protected void btnError_Click(object sender, EventArgs e)
         {
-            //_client.MakeError();
+            var service = new SampleWcfRiaService();
+            service.MakeError();
         }
     }
 }
