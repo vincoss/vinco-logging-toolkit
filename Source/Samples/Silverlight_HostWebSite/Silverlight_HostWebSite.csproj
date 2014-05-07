@@ -15,8 +15,7 @@
     <AssemblyName>WcfRia_HostWebSite</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
-    <SilverlightApplicationList>
-    </SilverlightApplicationList>
+    <SilverlightApplicationList>{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}|..\Silverlight_Sample\Silverlight_Sample.csproj|ClientBin|False</SilverlightApplicationList>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>

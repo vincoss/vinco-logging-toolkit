@@ -33,6 +33,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSite_Sample", "Source\Samples\WebSite_Sample\WebSite_Sample.csproj", "{F391DAFB-5A9F-46C0-8409-1B67BD2359F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight_Sample", "Source\Samples\Silverlight_Sample\Silverlight_Sample.csproj", "{D18A4F3F-3F81-42B1-BADE-875DE3E2A742}"
+	ProjectSection(ProjectDependencies) = postProject
+		{535FCBDD-43BF-4835-BCDD-676AE2600B10} = {535FCBDD-43BF-4835-BCDD-676AE2600B10}
+		{94BBB2DE-F21A-4124-ACE6-93D842B1F33C} = {94BBB2DE-F21A-4124-ACE6-93D842B1F33C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPhone_Sample", "Source\Samples\WindowsPhone_Sample\WindowsPhone_Sample.csproj", "{8C67B4FA-C0B3-44F9-BAEF-8581F8E4A55E}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -274,8 +278,8 @@ Global
 		{BBDDB842-F323-4C51-9A6D-6589D3C03F61} = {73C52C63-BDF4-4F31-A2F7-7DB71444CD66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateAssemblyVersion = False
-		BuildVersion_BuildVersioningStyle = None.None.None.None
 		BuildVersion_IncrementBeforeBuild = False
+		BuildVersion_BuildVersioningStyle = None.None.None.None
+		BuildVersion_UpdateAssemblyVersion = False
 	EndGlobalSection
 EndGlobal
