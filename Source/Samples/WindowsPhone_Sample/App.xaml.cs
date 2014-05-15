@@ -8,9 +8,9 @@ using Elmah.Everywhere;
 using Elmah.Everywhere.Diagnostics;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using WindowsPhone_Sample.Resources;
+using WindowsPhone_8_Sample.Resources;
 
-namespace WindowsPhone_Sample
+namespace WindowsPhone_8_Sample
 {
     public partial class App : Application
     {

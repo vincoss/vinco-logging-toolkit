@@ -1,6 +1,6 @@
-﻿using WindowsPhone_Sample.Resources;
+﻿using WindowsPhone_8_Sample.Resources;
 
-namespace WindowsPhone_Sample
+namespace WindowsPhone_8_Sample
 {
     /// <summary>
     /// Provides access to string resources.

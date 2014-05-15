@@ -7,11 +7,11 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using WindowsPhone_Sample.Resources;
+using WindowsPhone_8_Sample.Resources;
 using Elmah.Everywhere.Diagnostics;
 
 
-namespace WindowsPhone_Sample
+namespace WindowsPhone_8_Sample
 {
     public partial class MainPage : PhoneApplicationPage
     {
@@ -19,7 +19,6 @@ namespace WindowsPhone_Sample
         {
             InitializeComponent();
         }
-
 
         #region WCF
 
@@ -61,6 +60,8 @@ namespace WindowsPhone_Sample
             if (e.Error != null)
             {
                 message = e.Error.ToString();
+
+                ExceptionHandler.Report(e.Error);
             }
             wcfTextBlockMessage.Text = message;
         }
