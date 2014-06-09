@@ -1,33 +1,51 @@
 ﻿using System;
-using Elmah.Everywhere.Appenders;
-using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Resources;
-using System.Reflection;
+using System.Collections.Generic;
+using Windows.ApplicationModel;
+using System.Text;
 
 
 namespace Elmah.Everywhere.Appenders
 {
     public class AssemblyAppender : BaseAppender
     {
-        public override void Append(ErrorInfo error)
+        public override void Append(ErrorInfo errorInfo)
         {
-           
-        }
+            var sb = new StringBuilder();
 
-        private static KeyValuePair<string, string> Message(string key, string value)
-        {
-            return new KeyValuePair<string, string>(key, value);
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (Assembly assembly in assemblies)
+            {
+                sb.AppendLine(assembly.GetName().FullName);
+            }
+            sb.AppendLine(); 
+            sb.AppendLine();
+
+            foreach (dynamic assembly in assemblies)
+            {
+                var assemblyName = new AssemblyName(assembly.FullName);
+
+                sb.AppendLine(string.Format("File:                  {0}", assembly.Location));
+                sb.AppendLine(string.Format("FullName:              {0}", assembly.FullName));
+                sb.AppendLine(string.Format("ImageRuntimeVersion:   {0}", assembly.ImageRuntimeVersion));
+                sb.AppendLine(string.Format("IsDynamic:             {0}", assembly.IsDynamic));
+                sb.AppendLine(string.Format("Version:               {0}", assemblyName.Version));
+                sb.AppendLine();
+            }
+            errorInfo.AddDetail(this.Name, "Assemblies", sb.ToString());
         }
 
         public override int Order
         {
-            get { return 2; }
+            get { return 4; }
         }
 
         public override string Name
         {
-            get { return "Assembly Apender"; }
+            get { return "AppDomain Assembly Appender"; }
         }
     }
 }
