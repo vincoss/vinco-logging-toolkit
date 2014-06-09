@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 using System.Globalization;
+using System.Reflection;
+using Elmah.Everywhere.Appenders;
 
 
 namespace Elmah.Everywhere.Utils
@@ -163,5 +166,58 @@ namespace Elmah.Everywhere.Utils
         } 
 
         #endregion
+
+        #region GetTypes methods
+
+        public static IEnumerable<Type> GetTypes(this Assembly assembly, Predicate<Type> typeFilter)
+        {
+            if (assembly == null)
+            {
+                throw new ArgumentNullException("assembly");
+            }
+            if (typeFilter == null)
+            {
+                throw new ArgumentNullException("typeFilter");
+            }
+            Type[] typesInAssembly;
+            try
+            {
+                typesInAssembly = assembly.GetExportedTypes();
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                typesInAssembly = ex.Types;
+            }
+            return typesInAssembly.Where(type => TypeIsPublicClass(type) && typeFilter(type));
+        }
+
+        public static bool IsBaseAppenderAssignableType(Type type)
+        {
+            return typeof(BaseAppender).IsAssignableFrom(type) && type.GetConstructor(Type.EmptyTypes) != null;
+        }
+
+        private static bool TypeIsPublicClass(Type type)
+        {
+            return (type != null && type.IsPublic && type.IsClass && type.IsAbstract == false);
+        } 
+
+        #endregion
+
+        public static string FormatBytes(long bytes)
+        {
+            const int scale = 1024;
+            string[] units = new string[] { "TB", "GB", "MB", "KB", "Bytes" };
+            long max = (long)Math.Pow(scale, units.Length - 1);
+
+            foreach (string order in units)
+            {
+                if (bytes > max)
+                {
+                    return string.Format("{0:0.000} {1}", decimal.Divide(bytes, max), order);
+                }
+                max /= scale;
+            }
+            return "0 Bytes";
+        }
     }
 }
