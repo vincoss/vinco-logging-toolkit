@@ -71,7 +71,6 @@ namespace Elmah.Everywhere
                 if (sb.Length > 0)
                 {
                     sb.Append(Constants.NEW_LINE);
-                    sb.Append(Constants.NEW_LINE);
                 }
 
                 sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}", Constants.HEADER_PREFIX, detail.Name));
@@ -79,7 +78,9 @@ namespace Elmah.Everywhere
 
                 foreach (var pair in detail.Items)
                 {
-                    sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}: {1}", pair.Key, pair.Value));
+                    sb.AppendLine(string.IsNullOrEmpty(pair.Key)
+                                      ? pair.Value
+                                      : string.Format(CultureInfo.InvariantCulture, "{0}: {1}", pair.Key, pair.Value));
                 }
             }
             return sb.ToString();
