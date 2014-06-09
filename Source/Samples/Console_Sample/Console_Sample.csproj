@@ -86,8 +86,7 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Elmah.Everywhere, Version=1.2.2151.576, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Elmah.Everywhere">
       <HintPath>..\..\..\Bin\Elmah.Everywhere.dll</HintPath>
     </Reference>
     <Reference Include="System" />

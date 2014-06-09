@@ -182,7 +182,7 @@ namespace Elmah.Everywhere.Utils
             Type[] typesInAssembly;
             try
             {
-                typesInAssembly = assembly.GetExportedTypes();
+                typesInAssembly = assembly.GetTypes();
             }
             catch (ReflectionTypeLoadException ex)
             {
