@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Elmah.Everywhere.Appenders;
-using Elmah.Everywhere.Appenders;
+using System.Reflection;
+using Elmah.Everywhere.Utils;
 
 #if !SILVERLIGHT
 using Elmah.Everywhere.Configuration;
 using System.Globalization;
+using System.Reflection;
+
 #endif
 
 
@@ -127,16 +131,8 @@ namespace Elmah.Everywhere.Diagnostics
 
         public static IEnumerable<Type> AllAppenders()
         {
-            return new List<Type>
-                       {
-                           typeof (PropertiesAppender),
-                           typeof (DetailAppender),
-                           #if !SILVERLIGHT
-                           typeof (MemoryAppender),
-                           typeof (HttpAppender),
-                           #endif
-                           typeof (AssemblyAppender),
-                       };
+            var types = Utility.GetTypes(typeof (ExceptionHandler).Assembly, Utility.IsBaseAppenderAssignableType);
+            return types;
         }
 
 #if !SILVERLIGHT
