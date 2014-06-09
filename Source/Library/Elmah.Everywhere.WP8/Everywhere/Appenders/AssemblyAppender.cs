@@ -1,10 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
-using System.Windows;
-using System.Windows.Resources;
-using System.Collections.Generic;
-using Windows.ApplicationModel;
 using System.Text;
 
 
@@ -22,7 +17,6 @@ namespace Elmah.Everywhere.Appenders
                 sb.AppendLine(assembly.GetName().FullName);
             }
             sb.AppendLine(); 
-            sb.AppendLine();
 
             foreach (dynamic assembly in assemblies)
             {
@@ -31,11 +25,11 @@ namespace Elmah.Everywhere.Appenders
                 sb.AppendLine(string.Format("File:                  {0}", assembly.Location));
                 sb.AppendLine(string.Format("FullName:              {0}", assembly.FullName));
                 sb.AppendLine(string.Format("ImageRuntimeVersion:   {0}", assembly.ImageRuntimeVersion));
-                sb.AppendLine(string.Format("IsDynamic:             {0}", assembly.IsDynamic));
                 sb.AppendLine(string.Format("Version:               {0}", assemblyName.Version));
+                sb.AppendLine(string.Format("IsDynamic:             {0}", assembly.IsDynamic));
                 sb.AppendLine();
             }
-            errorInfo.AddDetail(this.Name, "Assemblies", sb.ToString());
+            errorInfo.AddDetail(this.Name, "", sb.ToString());
         }
 
         public override int Order
