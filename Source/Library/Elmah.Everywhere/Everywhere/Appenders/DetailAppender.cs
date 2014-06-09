@@ -16,6 +16,7 @@ namespace Elmah.Everywhere.Appenders
            
             var pairs = new Dictionary<string, string>();
             pairs.Add("Date", DateTime.Now.ToString());
+            pairs.Add("DateUtc", DateTime.UtcNow.ToString());
             pairs.Add("Culture", CultureInfo.CurrentCulture.Name);
 
 #if !SILVERLIGHT
