@@ -37,6 +37,8 @@ namespace WindowsPhone_8_Sample
             if (e.Error != null)
             {
                 message = e.Error.ToString();
+
+                ExceptionHandler.Report(e.Error);
             }
             else
             {
