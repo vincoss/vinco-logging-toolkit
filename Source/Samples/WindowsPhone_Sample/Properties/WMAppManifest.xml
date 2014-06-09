@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{8c67b4fa-c0b3-44f9-baef-8581f8e4a55e}" Title="Elmah.Everywhere" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Vincoss" Description="Elmah.Everywhere.WindowsPhone" Publisher="Vincoss" PublisherID="{7ecd87a4-7fb9-46e7-a5b2-7c252a8a8200}">
+  <App xmlns="" ProductID="{8c67b4fa-c0b3-44f9-baef-8581f8e4a55e}" Title="Elmah.Everywhere.Sample" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Vincoss" Description="Elmah.Everywhere.WindowsPhone" Publisher="Vincoss" PublisherID="{7ecd87a4-7fb9-46e7-a5b2-7c252a8a8200}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

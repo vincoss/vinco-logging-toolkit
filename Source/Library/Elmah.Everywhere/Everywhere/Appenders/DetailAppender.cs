@@ -12,7 +12,7 @@ namespace Elmah.Everywhere.Appenders
     {
         public override void Append(ErrorInfo errorInfo)
         {
-            Assembly assembly = Assembly.GetEntryAssembly();
+            Assembly assembly = Assembly.GetCallingAssembly();
            
             var pairs = new Dictionary<string, string>();
             pairs.Add("Date", DateTime.Now.ToString());

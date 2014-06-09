@@ -102,6 +102,8 @@ namespace WindowsPhone_8_Sample
         // Code to execute if a navigation fails
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
+            ExceptionHandler.Report(e.Exception);
+
             if (Debugger.IsAttached)
             {
                 // A navigation has failed; break into the debugger
