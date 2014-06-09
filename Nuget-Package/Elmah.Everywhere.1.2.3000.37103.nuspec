@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Elmah.Everywhere</id>
+        <version>1.2.3000.37103</version>
+        <authors>Ferdinand Lukasak</authors>
+        <owners>Vincoss</owners>
+        <licenseUrl>https://github.com/vincoss/vinco-logging-toolkit/blob/master/License.txt</licenseUrl>
+        <projectUrl>https://github.com/vincoss/vinco-logging-toolkit</projectUrl>
+        <iconUrl>https://github.com/vincoss/vinco-logging-toolkit/blob/master/favicon.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Elmah Everywhere is an exception logging library for .NET, Silverlight, WPF, ASP.NET MVC, WCF and Windows Phone that uses an ELMAH (Error Logging Modules and Handlers for ASP.NET).</description>
+        <summary>Elmah Everywhere is an exception logging library for .NET</summary>
+        <releaseNotes>Updated documentation, added Windows Phone support and bug fixes.</releaseNotes>
+        <copyright>Copyright © Vincoss 2011</copyright>
+        <tags>Elmah Error Logging ASP.NET MVC WPF WCF Silverlight .NE Windows Phone</tags>
+        <dependencies>
+            <dependency id="elmah.corelibrary" version="1.2.2" />
+            <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\Bin\Elmah.Everywhere.dll" target="lib\net40\Elmah.Everywhere.dll" />
+        <file src="..\Bin\Elmah.Everywhere.Silverlight.dll" target="lib\sl50\Elmah.Everywhere.Silverlight.dll" />
+        <file src="..\Bin\Elmah.Everywhere.WP8.dll" target="lib\wp8\Elmah.Everywhere.WP8.dll" />
+    </files>
+</package>
