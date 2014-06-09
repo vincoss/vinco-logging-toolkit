@@ -28,7 +28,6 @@ namespace Elmah.Everywhere.Appenders
                     if (assembly.Location.Length != 0)
                     {
                         sb.Append(FileVersionInfo.GetVersionInfo(assembly.Location).ToString());
-                        sb.AppendLine();
                         flag = true;
                     }
                 }
@@ -41,7 +40,7 @@ namespace Elmah.Everywhere.Appenders
                 }
                 sb.AppendLine();
             }
-            errorInfo.AddDetail(this.Name, "Assemblies", sb.ToString());
+            errorInfo.AddDetail(this.Name, "", sb.ToString());
         }
 
         public override int Order
