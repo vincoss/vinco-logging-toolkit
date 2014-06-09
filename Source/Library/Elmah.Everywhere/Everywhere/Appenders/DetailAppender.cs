@@ -12,7 +12,7 @@ namespace Elmah.Everywhere.Appenders
     {
         public override void Append(ErrorInfo errorInfo)
         {
-            Assembly assembly = errorInfo.GetType().Assembly;
+            Assembly assembly = Assembly.GetEntryAssembly();
            
             var pairs = new Dictionary<string, string>();
             pairs.Add("Date", DateTime.Now.ToString());
@@ -20,19 +20,19 @@ namespace Elmah.Everywhere.Appenders
 
 #if !SILVERLIGHT
 
-            pairs.Add("User", string.Format(CultureInfo.InvariantCulture, @"{0}\{1}", Environment.UserDomainName, Environment.UserName).Trim('\\'));
-            pairs.Add("Machine Name", Environment.MachineName);
-            pairs.Add("App Start Time", Process.GetCurrentProcess().StartTime.ToLocalTime().ToString(CultureInfo.InvariantCulture));
-            pairs.Add("App Up Time", (DateTime.Now - Process.GetCurrentProcess().StartTime.ToLocalTime()).ToString());
-            pairs.Add("Worker process", GetWorkerProcess());
+            pairs.Add("UserName", string.Format(CultureInfo.InvariantCulture, @"{0}\{1}", Environment.UserDomainName, Environment.UserName).Trim('\\'));
+            pairs.Add("MachineName", Environment.MachineName);
+            pairs.Add("AppStartTime", Process.GetCurrentProcess().StartTime.ToLocalTime().ToString(CultureInfo.InvariantCulture));
+            pairs.Add("AppUpTime", (DateTime.Now - Process.GetCurrentProcess().StartTime.ToLocalTime()).ToString());
+            pairs.Add("WorkerProcess", GetWorkerProcess());
             pairs.Add("AppDomain", AppDomainDetail(AppDomain.CurrentDomain));
             pairs.Add("Deployment", (assembly.GlobalAssemblyCache) ? "GAC" : "bin");
 
 #endif
-            pairs.Add("Thread Id", Thread.CurrentThread.ManagedThreadId.ToString(CultureInfo.InvariantCulture));
-            pairs.Add("Full Name", new AssemblyName(assembly.FullName).FullName);
-            pairs.Add("Operating System Version", Environment.OSVersion.ToString());
-            pairs.Add("Common Language Runtime Version", Environment.Version.ToString());
+            pairs.Add("ThreadId", Thread.CurrentThread.ManagedThreadId.ToString(CultureInfo.InvariantCulture));
+            pairs.Add("FullName", new AssemblyName(assembly.FullName).FullName);
+            pairs.Add("OS Version", Environment.OSVersion.ToString());
+            pairs.Add("CLR Version", Environment.Version.ToString());
             pairs.Add("Elmah.Everywhere Version", new AssemblyName(typeof(Diagnostics.ExceptionHandler).Assembly.FullName).Version.ToString());
 
             errorInfo.AddDetail(this.Name, pairs);
