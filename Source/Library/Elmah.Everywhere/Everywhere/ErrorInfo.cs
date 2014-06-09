@@ -7,6 +7,7 @@ using System.Globalization;
 
 using Elmah.Everywhere.Utils;
 using Elmah.Everywhere.Appenders;
+using System.IO;
 
 
 namespace Elmah.Everywhere
@@ -90,11 +91,11 @@ namespace Elmah.Everywhere
             {
                 return;
             }
-            var appenders = (from x in Appenders
-                             let a = Activator.CreateInstance(x) as BaseAppender
-                             where a != null
-                             orderby a.Order
-                             select a).ToList();
+            var appenders = from x in Appenders
+                            let a = Activator.CreateInstance(x) as BaseAppender
+                            where a != null
+                            orderby a.Order
+                            select a;
 
             foreach (var appender in appenders)
             {
@@ -104,9 +105,9 @@ namespace Elmah.Everywhere
                 }
                 catch (Exception ex)
                 {
-#if !SILVERLIGHT
-                    Trace.WriteLine(ex);
-#endif
+                    // If appender fails then add error details and attach the exeption instead.
+                    this.AddDetail(appender.Name, "Message", "Appender failed to load exception details.");
+                    this.AddDetail(appender.Name, "Error", ex.ToString());
                 }
             }
         }
