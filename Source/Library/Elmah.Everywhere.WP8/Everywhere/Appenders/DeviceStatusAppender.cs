@@ -27,6 +27,11 @@ namespace Elmah.Everywhere.Appenders
             errorInfo.AddDetail(this.Name, pairs);
         }
 
+        public override int Order
+        {
+            get { return 2; }
+        }
+
         public override string Name
         {
             get { return "Device Status Appender"; }
