@@ -5,18 +5,25 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{68AADBC3-8A37-417D-928B-522397B5E510}</ProjectGuid>
+    <ProjectGuid>{0B26A0EB-C2C8-471F-A15C-3DA72041FF29}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Elmah.Everywhere.Android</RootNamespace>
-    <AssemblyName>Elmah.Everywhere.Android</AssemblyName>
+    <RootNamespace>Xamarin_Android_Sample</RootNamespace>
+    <AssemblyName>Xamarin_Android_Sample</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>
     </AndroidUseLatestPlatformSdk>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <TargetFrameworkVersion>v4.1</TargetFrameworkVersion>
+    <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <JavaMaximumHeapSize />
+    <JavaOptions />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,6 +33,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,6 +43,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -44,44 +55,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Elmah.Everywhere\Everywhere\Appenders\BaseAppender.cs">
-      <Link>Everywhere\Appenders\BaseAppender.cs</Link>
-    </Compile>
-    <Compile Include="..\Elmah.Everywhere\Everywhere\Appenders\PropertiesAppender.cs">
-      <Link>Everywhere\Appenders\PropertiesAppender.cs</Link>
-    </Compile>
-    <Compile Include="..\Elmah.Everywhere\Everywhere\Constants.cs">
-      <Link>Everywhere\Constants.cs</Link>
-    </Compile>
-    <Compile Include="..\Elmah.Everywhere\Everywhere\DetailInfo.cs">
-      <Link>Everywhere\DetailInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\Elmah.Everywhere\Everywhere\ErrorInfo.cs">
-      <Link>Everywhere\ErrorInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\Elmah.Everywhere\Everywhere\ExceptionDefaults.cs">
-      <Link>Everywhere\ExceptionDefaults.cs</Link>
-    </Compile>
-    <Compile Include="..\Elmah.Everywhere\Everywhere\ExceptionWritterBase.cs">
-      <Link>Everywhere\ExceptionWritterBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Elmah.Everywhere\Everywhere\HttpExceptionWritterBase.cs">
-      <Link>Everywhere\HttpExceptionWritterBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Elmah.Everywhere\Everywhere\Utils\Utility.cs">
-      <Link>Everywhere\Utils\Utility.cs</Link>
-    </Compile>
-    <Compile Include="..\Elmah.Everywhere\Everywhere\WritterEventArgs.cs">
-      <Link>Everywhere\WritterEventArgs.cs</Link>
-    </Compile>
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Everywhere\Diagnostics\" />
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Main.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\Elmah.Everywhere.Android\Elmah.Everywhere.Android.csproj">
+      <Project>{68aadbc3-8a37-417d-928b-522397b5e510}</Project>
+      <Name>Elmah.Everywhere.Android</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
+     Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
