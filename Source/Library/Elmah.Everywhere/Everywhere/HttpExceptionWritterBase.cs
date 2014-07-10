@@ -4,15 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using Elmah.Everywhere.Utils;
 
-
-#if SILVERLIGHT
-
-#else
-using System.Web;
-using System.Diagnostics.CodeAnalysis;
-#endif
 
 namespace Elmah.Everywhere
 {
