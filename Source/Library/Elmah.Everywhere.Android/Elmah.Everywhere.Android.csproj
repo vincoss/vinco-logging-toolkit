@@ -42,7 +42,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\Appenders\BaseAppender.cs">
+      <Link>Everywhere\Appenders\BaseAppender.cs</Link>
+    </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\Appenders\PropertiesAppender.cs">
+      <Link>Everywhere\Appenders\PropertiesAppender.cs</Link>
+    </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\Constants.cs">
+      <Link>Everywhere\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\DetailInfo.cs">
+      <Link>Everywhere\DetailInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\ErrorInfo.cs">
+      <Link>Everywhere\ErrorInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\ExceptionDefaults.cs">
+      <Link>Everywhere\ExceptionDefaults.cs</Link>
+    </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\ExceptionWritterBase.cs">
+      <Link>Everywhere\ExceptionWritterBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\HttpExceptionWritterBase.cs">
+      <Link>Everywhere\HttpExceptionWritterBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\Utils\Utility.cs">
+      <Link>Everywhere\Utils\Utility.cs</Link>
+    </Compile>
+    <Compile Include="..\Elmah.Everywhere\Everywhere\WritterEventArgs.cs">
+      <Link>Everywhere\WritterEventArgs.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Everywhere\Diagnostics\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
