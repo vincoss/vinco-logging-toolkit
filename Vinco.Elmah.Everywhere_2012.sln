@@ -50,6 +50,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin_Android_Sample", "Source\Samples\Xamarin_Android_Sample\Xamarin_Android_Sample.csproj", "{0B26A0EB-C2C8-471F-A15C-3DA72041FF29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsForms_Sample", "Source\Samples\WindowsForms_Sample\WindowsForms_Sample.csproj", "{900E6269-46ED-42C0-AC8A-669066C95C1D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2C85174F-6BF8-49AE-9553-48B566225DA0} = {2C85174F-6BF8-49AE-9553-48B566225DA0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -353,8 +356,8 @@ Global
 		{6B079B30-84B3-41A1-8139-83145DB33145} = {73C52C63-BDF4-4F31-A2F7-7DB71444CD66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_IncrementBeforeBuild = False
-		BuildVersion_BuildVersioningStyle = None.None.None.None
 		BuildVersion_UpdateAssemblyVersion = False
+		BuildVersion_BuildVersioningStyle = None.None.None.None
+		BuildVersion_IncrementBeforeBuild = False
 	EndGlobalSection
 EndGlobal
